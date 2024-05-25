@@ -1,7 +1,7 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { stageActions } from 'src/tidgal/Corestore/stageReducer';
+import { stageActions } from 'src/tidgal/store/stageReducer';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 

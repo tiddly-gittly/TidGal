@@ -1,10 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { resetStageState } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { getStage, resetStageState } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../../util/logger';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { IRunPerform } from 'src/tidgal/Corestore/stageInterface';
+import { IRunPerform } from 'src/tidgal/store/stageInterface';
 
 /**
  * 进行下一句
@@ -46,7 +46,7 @@ export const nextSentence = () => {
     //   WebGAL.backlogManager.isSaveBacklogNext = false;
     // }
     // 清除状态表的演出序列（因为这时候已经准备进行下一句了）
-    const stageState = webgalStore.getState().stage;
+    const stageState = getStage();
     const newStageState = cloneDeep(stageState);
     for (let index = 0; index < newStageState.PerformList.length; index++) {
       const e: IRunPerform = newStageState.PerformList[index];

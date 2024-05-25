@@ -1,9 +1,9 @@
 import localforage from 'localforage';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { saveActions } from 'src/tidgal/Corestore/savesReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { ISaveData } from 'src/tidgal/Corestore/userDataInterface';
+import { saveActions } from 'src/tidgal/store/savesReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { ISaveData } from 'src/tidgal/store/userDataInterface';
 
 export function dumpSavesToStorage(startIndex: number, endIndex: number) {
   for (let index = startIndex; index <= endIndex; index++) {

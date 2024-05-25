@@ -1,5 +1,5 @@
-import { ITransform } from 'src/tidgal/Corestore/stageInterface';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { ITransform } from 'src/tidgal/store/stageInterface';
+import { webgalStore } from 'src/tidgal/store/store';
 
 type AnimationFrame = ITransform & { duration: number };
 type AnimationObject = AnimationFrame[];

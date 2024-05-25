@@ -1,8 +1,8 @@
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
-import { stageActions } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { stageActions } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 获取随机演出名称

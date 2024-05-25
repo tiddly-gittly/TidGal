@@ -1,8 +1,8 @@
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 
 import { dumpSavesToStorage } from 'src/tidgal/Core/controller/storage/savesController';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { saveActions } from 'src/tidgal/Corestore/savesReducer';
+import { saveActions } from 'src/tidgal/store/savesReducer';
 
 /**
  * 保存游戏

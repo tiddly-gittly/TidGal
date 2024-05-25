@@ -4,8 +4,8 @@ import { generateUniversalSoftInAnimationObj } from 'src/tidgal/Core/controller/
 import { generateUniversalSoftOffAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/universalSoftOff';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { baseTransform } from 'src/tidgal/Corestore/stageInterface';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { baseTransform } from 'src/tidgal/store/stageInterface';
+import { webgalStore } from 'src/tidgal/store/store';
 
 export function getAnimationObject(animationName: string, target: string, duration: number) {
   const effect = WebGAL.animationManager.getAnimations().find((ani) => ani.name === animationName);

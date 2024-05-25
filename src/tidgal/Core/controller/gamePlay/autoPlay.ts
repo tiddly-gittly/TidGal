@@ -1,7 +1,7 @@
 // import {logger} from '../../util/logger';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import { webgalStore } from 'src/tidgal/Corestore/store';
 import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
+import { webgalStore } from 'src/tidgal/store/store';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 

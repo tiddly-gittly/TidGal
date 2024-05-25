@@ -2,9 +2,9 @@ import isUndefined from 'lodash/isUndefined';
 import omitBy from 'lodash/omitBy';
 import { animate } from 'popmotion';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { ITransform } from 'src/tidgal/Corestore/stageInterface';
-import { stageActions } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { ITransform } from 'src/tidgal/store/stageInterface';
+import { stageActions } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 动画创建模板

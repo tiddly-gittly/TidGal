@@ -3,7 +3,7 @@ import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performCon
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 进行普通对话的显示

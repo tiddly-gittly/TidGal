@@ -4,9 +4,9 @@ import { WebGALPixiContainer } from 'src/tidgal/Core/controller/stage/pixi/WebGA
 import { isIOS } from 'src/tidgal/Core/initializeScript';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { IEffect, IFigureAssociatedAnimation } from 'src/tidgal/Corestore/stageInterface';
-import { setStage, stageActions } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { IEffect, IFigureAssociatedAnimation } from 'src/tidgal/store/stageInterface';
+import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 import { v4 as uuid } from 'uuid';
 import 'pixi-spine'; // Do this once at the very start of your code. This registers the loader!
 import { Spine } from 'pixi-spine';

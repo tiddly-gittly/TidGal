@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { initState, resetStageState, setStage } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { initState, resetStageState, setStage } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 export const resetStage = (resetBacklog: boolean, resetSceneAndVariable = true) => {
   /**

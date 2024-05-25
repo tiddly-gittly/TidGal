@@ -1,6 +1,6 @@
 import { logger } from 'src/tidgal/Core/util/logger';
-import { setStage } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setStage } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 // /**
 //  * 停止bgm

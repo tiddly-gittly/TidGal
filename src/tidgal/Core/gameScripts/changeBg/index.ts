@@ -4,10 +4,10 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getAnimateDuration } from 'src/tidgal/Core/Modules/animationFunctions';
 import { IUserAnimation } from 'src/tidgal/Core/Modules/animations';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
-import { ITransform } from 'src/tidgal/Corestore/stageInterface';
-import { setStage, stageActions } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { unlockCgInUserData } from 'src/tidgal/Corestore/userDataReducer';
+import { ITransform } from 'src/tidgal/store/stageInterface';
+import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { unlockCgInUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 进行背景图片的切换

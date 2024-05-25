@@ -3,9 +3,9 @@ import { audioContextWrapper, getAudioLevel, performBlinkAnimation, performMouth
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { IStageState } from 'src/tidgal/Corestore/stageInterface';
-import { setStage } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { IStageState } from 'src/tidgal/store/stageInterface';
+import { setStage } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 import { match } from '../../util/match';
 
 /**

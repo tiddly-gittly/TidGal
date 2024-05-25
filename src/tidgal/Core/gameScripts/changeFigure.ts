@@ -6,8 +6,8 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { setStage, stageActions } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 /**
  * 更改立绘
  * @param sentence 语句

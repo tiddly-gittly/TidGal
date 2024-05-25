@@ -4,8 +4,8 @@ import { getFastSaveFromStorage, getSavesFromStorage } from 'src/tidgal/Core/con
 import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
 import { WebgalParser } from 'src/tidgal/Core/parser/sceneParser';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { setGuiAsset, setLogoImage } from 'src/tidgal/Corestore/GUIReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setGuiAsset, setLogoImage } from 'src/tidgal/store/GUIReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 import { getStorage } from '../../controller/storage/storageController';
 import { assetSetter, fileType } from '../gameAssetsAccess/assetSetter';
 import { logger } from '../logger';

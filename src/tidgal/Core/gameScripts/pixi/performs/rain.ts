@@ -9,7 +9,7 @@ const pixiRain = (rainSpeed: number, number: number) => {
   // 设置缩放的系数
   const scalePreset = 0.48;
 
-  const effectsContainer = WebGAL.gameplay.pixiStage!.effectsContainer!;
+  const effectsContainer = WebGAL.gameplay.pixiStage!.effectsContainer;
   const app = WebGAL.gameplay.pixiStage!.currentApp!;
   const container = new PIXI.Container();
   effectsContainer.addChild(container);

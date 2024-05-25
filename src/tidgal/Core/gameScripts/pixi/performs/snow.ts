@@ -9,7 +9,7 @@ const pixiSnow = (snowSpeed: number) => {
   // 设置缩放的系数
   const scalePreset = 0.144;
 
-  const effectsContainer = WebGAL.gameplay.pixiStage!.effectsContainer!;
+  const effectsContainer = WebGAL.gameplay.pixiStage!.effectsContainer;
   const app = WebGAL.gameplay.pixiStage!.currentApp!;
   const container = new PIXI.Container();
   effectsContainer.addChild(container);

@@ -7,8 +7,8 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { baseTransform, ITransform } from 'src/tidgal/Corestore/stageInterface';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { baseTransform, ITransform } from 'src/tidgal/store/stageInterface';
+import { webgalStore } from 'src/tidgal/store/store';
 import { IUserAnimation } from '../Modules/animations';
 
 /**

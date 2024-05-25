@@ -4,9 +4,9 @@ import { generateCurrentStageData } from 'src/tidgal/Core/controller/storage/sav
 import { dumpFastSaveToStorage, getFastSaveFromStorage } from 'src/tidgal/Core/controller/storage/savesController';
 import { getStorageAsync, setStorageAsync } from 'src/tidgal/Core/controller/storage/storageController';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { saveActions } from 'src/tidgal/Corestore/savesReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { ISaveData } from 'src/tidgal/Corestore/userDataInterface';
+import { saveActions } from 'src/tidgal/store/savesReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { ISaveData } from 'src/tidgal/store/userDataInterface';
 
 export let fastSaveGameKey = '';
 export let isFastSaveKey = '';

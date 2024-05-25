@@ -2,9 +2,9 @@
  * 当前的backlog
  */
 import cloneDeep from 'lodash/cloneDeep';
-import { IEffect, IStageState } from 'src/tidgal/Corestore/stageInterface';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { ISaveScene } from 'src/tidgal/Corestore/userDataInterface';
+import { IEffect, IStageState } from 'src/tidgal/store/stageInterface';
+import { webgalStore } from 'src/tidgal/store/store';
+import { ISaveScene } from 'src/tidgal/store/userDataInterface';
 
 import { SceneManager } from 'src/tidgal/Core/Modules/scene';
 import { SYSTEM_CONFIG } from 'src/tidgal/Coreconfig';

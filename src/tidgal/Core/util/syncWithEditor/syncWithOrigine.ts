@@ -3,8 +3,8 @@ import { sceneFetcher } from 'src/tidgal/Core/controller/scene/sceneFetcher';
 import { resetStage } from 'src/tidgal/Core/controller/stage/resetStage';
 import { sceneParser } from 'src/tidgal/Core/parser/sceneParser';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
-import { setVisibility } from 'src/tidgal/Corestore/GUIReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setVisibility } from 'src/tidgal/store/GUIReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../logger';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';

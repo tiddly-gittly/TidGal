@@ -4,7 +4,7 @@ import { IAnimationObject } from 'src/tidgal/Core/controller/stage/pixi/PixiCont
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 

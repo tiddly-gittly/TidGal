@@ -2,8 +2,8 @@ import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { playBgm } from 'src/tidgal/Core/controller/stage/playBgm';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { unlockBgmInUserData } from 'src/tidgal/Corestore/userDataReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { unlockBgmInUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 播放一段bgm

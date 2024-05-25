@@ -7,9 +7,9 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { sceneParser } from 'src/tidgal/Core/parser/sceneParser';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { setVisibility } from 'src/tidgal/Corestore/GUIReducer';
-import { saveActions } from 'src/tidgal/Corestore/savesReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setVisibility } from 'src/tidgal/store/GUIReducer';
+import { saveActions } from 'src/tidgal/store/savesReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 结束游戏

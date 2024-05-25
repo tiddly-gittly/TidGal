@@ -2,7 +2,7 @@ import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 播放一段效果音

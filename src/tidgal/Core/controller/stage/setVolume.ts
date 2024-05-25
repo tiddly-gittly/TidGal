@@ -1,4 +1,4 @@
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../../util/logger';
 
 /**

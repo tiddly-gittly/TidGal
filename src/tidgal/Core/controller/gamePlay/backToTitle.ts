@@ -2,9 +2,9 @@ import { stopAuto } from 'src/tidgal/Core/controller/gamePlay/autoPlay';
 import { stopFast } from 'src/tidgal/Core/controller/gamePlay/fastSkip';
 import { stopAllPerform } from 'src/tidgal/Core/controller/gamePlay/stopAllPerform';
 import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
-import { setVisibility } from 'src/tidgal/Corestore/GUIReducer';
-import { setStage } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { setVisibility } from 'src/tidgal/store/GUIReducer';
+import { setStage } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
 
 export const backToTitle = () => {
   const dispatch = webgalStore.dispatch;

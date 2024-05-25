@@ -2,8 +2,8 @@ import { runScript } from 'src/tidgal/Core/controller/gamePlay/runScript';
 import { WebgalParser } from 'src/tidgal/Core/parser/sceneParser';
 import { syncWithOrigine } from 'src/tidgal/Core/util/syncWithEditor/syncWithOrigine';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { webgalStore } from 'src/tidgal/Corestore/store';
 import { DebugCommand, IDebugMessage } from 'src/tidgal/Coretypes/debugProtocol';
+import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../logger';
 
 export const webSocketFunc = () => {

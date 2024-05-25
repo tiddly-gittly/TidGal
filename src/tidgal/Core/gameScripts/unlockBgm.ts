@@ -2,8 +2,8 @@ import localforage from 'localforage';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { unlockBgmInUserData } from 'src/tidgal/Corestore/userDataReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { unlockBgmInUserData } from 'src/tidgal/store/userDataReducer';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 

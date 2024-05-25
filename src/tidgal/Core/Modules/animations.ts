@@ -1,4 +1,4 @@
-import { ITransform } from 'src/tidgal/Corestore/stageInterface';
+import { ITransform } from 'src/tidgal/store/stageInterface';
 
 export type IUserAnimationEffects = Array<ITransform & { duration: number }>;
 

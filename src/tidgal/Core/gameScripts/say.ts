@@ -4,9 +4,9 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { useTextDelay } from 'src/tidgal/Corehooks/useTextOptions';
-import { setStage } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { textSize, voiceOption } from 'src/tidgal/Corestore/userDataInterface';
+import { setStage } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { textSize, voiceOption } from 'src/tidgal/store/userDataInterface';
 import { playVocal } from './vocal';
 
 /**

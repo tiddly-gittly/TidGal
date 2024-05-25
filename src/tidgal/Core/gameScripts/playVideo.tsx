@@ -3,7 +3,7 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { getRandomPerformName, PerformController } from 'src/tidgal/Core/Modules/perform/performController';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';

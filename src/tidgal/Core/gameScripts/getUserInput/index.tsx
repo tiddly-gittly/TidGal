@@ -5,14 +5,14 @@ import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import styles from './getUserInput.module.scss';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { textFont } from 'src/tidgal/Corestore/userDataInterface';
+import { webgalStore } from 'src/tidgal/store/store';
+import { textFont } from 'src/tidgal/store/userDataInterface';
 import { PerformController } from 'src/tidgal/Core/Modules/perform/performController';
 import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import { setStageVar } from 'src/tidgal/Corestore/stageReducer';
+import { setStageVar } from 'src/tidgal/store/stageReducer';
 
 /**
  * 显示选择枝

@@ -4,10 +4,10 @@ import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { dumpToStorageFast } from 'src/tidgal/Core/controller/storage/storageController';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { ISetGameVar } from 'src/tidgal/Corestore/stageInterface';
-import { setStageVar } from 'src/tidgal/Corestore/stageReducer';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { setGlobalVar } from 'src/tidgal/Corestore/userDataReducer';
+import { ISetGameVar } from 'src/tidgal/store/stageInterface';
+import { setStageVar } from 'src/tidgal/store/stageReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { setGlobalVar } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 设置变量

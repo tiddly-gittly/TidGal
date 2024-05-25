@@ -1,7 +1,7 @@
 import * as localforage from 'localforage';
-import { webgalStore } from 'src/tidgal/Corestore/store';
-import { IUserData } from 'src/tidgal/Corestore/userDataInterface';
-import { initState, resetUserData } from 'src/tidgal/Corestore/userDataReducer';
+import { webgalStore } from 'src/tidgal/store/store';
+import { IUserData } from 'src/tidgal/store/userDataInterface';
+import { initState, resetUserData } from 'src/tidgal/store/userDataReducer';
 import { logger } from '../../util/logger';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';

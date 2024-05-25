@@ -4,7 +4,7 @@ import { commandType, ISentence } from 'src/tidgal/Core/controller/scene/sceneIn
 import { getValueFromState } from 'src/tidgal/Core/gameScripts/setVar';
 import { ISceneEntry } from 'src/tidgal/Core/Modules/scene';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { webgalStore } from 'src/tidgal/Corestore/store';
+import { webgalStore } from 'src/tidgal/store/store';
 import { restoreScene } from '../scene/restoreScene';
 import { runScript } from './runScript';
 
