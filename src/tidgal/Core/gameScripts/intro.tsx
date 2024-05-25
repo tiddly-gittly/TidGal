@@ -1,12 +1,10 @@
-import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import { PerformController } from 'src/tidgal/Core/Modules/perform/performController';
-import { logger } from 'src/tidgal/Core/util/logger';
+import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
+import { IPerform } from '../Modules/perform/performInterface';
 /**
  * 显示一小段黑屏演示
  * @param sentence
@@ -22,18 +20,24 @@ export const intro = (sentence: ISentence): IPerform => {
   let color: any = 'rgba(255, 255, 255, 1)';
   const animationClass: any = (type: string, length = 0) => {
     switch (type) {
-      case 'fadeIn':
+      case 'fadeIn': {
         return styles.fadeIn;
-      case 'slideIn':
+      }
+      case 'slideIn': {
         return styles.slideIn;
-      case 'typingEffect':
+      }
+      case 'typingEffect': {
         return `${styles.typingEffect} ${length}`;
-      case 'pixelateEffect':
+      }
+      case 'pixelateEffect': {
         return styles.pixelateEffect;
-      case 'revealAnimation':
+      }
+      case 'revealAnimation': {
         return styles.revealAnimation;
-      default:
+      }
+      default: {
         return styles.fadeIn;
+      }
     }
   };
   let chosenAnimationClass = styles.fadeIn;
@@ -49,41 +53,42 @@ export const intro = (sentence: ISentence): IPerform => {
     }
     if (e.key === 'fontSize') {
       switch (e.value) {
-        case 'small':
+        case 'small': {
           fontSize = '280%';
           break;
-        case 'medium':
+        }
+        case 'medium': {
           fontSize = '350%';
           break;
-        case 'large':
+        }
+        case 'large': {
           fontSize = '420%';
           break;
+        }
       }
     }
     if (e.key === 'animation') {
       chosenAnimationClass = animationClass(e.value);
     }
     if (e.key === 'delayTime') {
-      const parsedValue = parseInt(e.value.toString(), 10);
+      const parsedValue = Number.parseInt(e.value.toString(), 10);
       delayTime = isNaN(parsedValue) ? delayTime : parsedValue;
     }
-    if (e.key === 'hold') {
-      if (e.value === true) {
-        isHold = true;
-      }
+    if (e.key === 'hold' && e.value === true) {
+      isHold = true;
     }
   }
 
   const introContainerStyle = {
     background: backgroundColor,
-    color: color,
+    color,
     fontSize: fontSize || '350%',
     width: '100%',
     height: '100%',
   };
-  const introArray: Array<string> = sentence.content.split(/\|/);
+  const introArray: string[] = sentence.content.split(/\|/);
 
-  let endWait = 1000;
+  const endWait = 1000;
   let baseDuration = endWait + delayTime * introArray.length;
   const duration = isHold ? 1000 * 60 * 60 * 24 : 1000 + delayTime * introArray.length;
   let isBlocking = true;
@@ -93,7 +98,7 @@ export const intro = (sentence: ISentence): IPerform => {
 
   let timeout = setTimeout(() => {});
   const toNextIntroElement = () => {
-    const introContainer = document.getElementById('introContainer');
+    const introContainer = document.querySelector<HTMLDivElement>('#introContainer');
     // 由于用户操作，相当于时间向前推进，这时候更新这个演出的预计完成时间
     baseDuration -= delayTime;
     clearTimeout(setBlockingStateTimeout);
@@ -146,7 +151,7 @@ export const intro = (sentence: ISentence): IPerform => {
       className={chosenAnimationClass}
     >
       {e}
-      {e === '' ? '\u00a0' : ''}
+      {e === '' ? '\u00A0' : ''}
     </div>
   ));
   const intro = (
@@ -155,8 +160,8 @@ export const intro = (sentence: ISentence): IPerform => {
     </div>
   );
   // eslint-disable-next-line react/no-deprecated
-  ReactDOM.render(intro, document.getElementById('introContainer'));
-  const introContainer = document.getElementById('introContainer');
+  ReactDOM.render(intro, document.querySelector('#introContainer'));
+  const introContainer = document.querySelector('#introContainer');
 
   if (introContainer) {
     introContainer.style.display = 'block';
@@ -167,7 +172,7 @@ export const intro = (sentence: ISentence): IPerform => {
     duration,
     isHoldOn: false,
     stopFunction: () => {
-      const introContainer = document.getElementById('introContainer');
+      const introContainer = document.querySelector('#introContainer');
       if (introContainer) {
         introContainer.style.display = 'none';
       }

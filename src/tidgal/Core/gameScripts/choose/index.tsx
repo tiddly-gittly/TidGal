@@ -7,6 +7,8 @@ import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
 import { textFont } from 'src/tidgal/store/userDataInterface';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
+import { WebGAL } from '../../WebGAL';
 import styles from './choose.module.scss';
 
 class ChooseOption {

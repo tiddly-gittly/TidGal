@@ -1,12 +1,13 @@
-import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import { getRandomPerformName, PerformController } from 'src/tidgal/Core/Modules/perform/performController';
+import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
+import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performController';
+import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
 /**
  * 播放一段视频 * @param sentence
  */
@@ -17,7 +18,7 @@ export const playVideo = (sentence: ISentence): IPerform => {
   const bgmVol = mainVol * 0.01 * userDataState.optionData.bgmVolume * 0.01;
   const performInitName: string = getRandomPerformName();
 
-  let blockingNext = getSentenceArgByKey(sentence, 'skipOff');
+  const blockingNext = getSentenceArgByKey(sentence, 'skipOff');
   let blockingNextFlag = false;
   if (blockingNext) {
     blockingNextFlag = true;
@@ -26,9 +27,9 @@ export const playVideo = (sentence: ISentence): IPerform => {
   // eslint-disable-next-line react/no-deprecated
   ReactDOM.render(
     <div className={styles.videoContainer}>
-      <video className={styles.fullScreen_video} id="playVideoElement" src={sentence.content} autoPlay={true} />
+      <video className={styles.fullScreen_video} id='playVideoElement' src={sentence.content} autoPlay={true} />
     </div>,
-    document.getElementById('videoContainer'),
+    document.querySelector('#videoContainer'),
   );
   let isOver = false;
   return {
@@ -44,7 +45,7 @@ export const playVideo = (sentence: ISentence): IPerform => {
        * 启动视频播放
        */
       setTimeout(() => {
-        let VocalControl: any = document.getElementById('playVideoElement');
+        const VocalControl: any = document.querySelector('#playVideoElement');
         if (VocalControl !== null) {
           VocalControl.currentTime = 0;
           VocalControl.volume = bgmVol;
@@ -74,16 +75,16 @@ export const playVideo = (sentence: ISentence): IPerform => {
               /**
                * 恢复音量
                */
-              const bgmElement: any = document.getElementById('currentBgm');
+              const bgmElement: any = document.querySelector('#currentBgm');
               if (bgmElement) {
                 bgmElement.volume = bgmVol.toString();
               }
-              const vocalElement: any = document.getElementById('currentVocal');
+              const vocalElement: any = document.querySelector('#currentVocal');
               if (bgmElement) {
                 vocalElement.volume = vocalVol.toString();
               }
               // eslint-disable-next-line react/no-deprecated
-              ReactDOM.render(<div />, document.getElementById('videoContainer'));
+              ReactDOM.render(<div />, document.querySelector('#videoContainer'));
             },
             blockingNext: () => blockingNextFlag,
             blockingAuto: () => {
@@ -98,20 +99,20 @@ export const playVideo = (sentence: ISentence): IPerform => {
            */
           const vocalVol2 = 0;
           const bgmVol2 = 0;
-          const bgmElement: any = document.getElementById('currentBgm');
+          const bgmElement: any = document.querySelector('#currentBgm');
           if (bgmElement) {
             bgmElement.volume = bgmVol2.toString();
           }
-          const vocalElement: any = document.getElementById('currentVocal');
+          const vocalElement: any = document.querySelector('#currentVocal');
           if (bgmElement) {
             vocalElement.volume = vocalVol2.toString();
           }
 
           VocalControl?.play();
 
-          VocalControl.onended = () => {
+          VocalControl.addEventListener('ended', () => {
             endPerform();
-          };
+          });
         }
       }, 1);
     }),

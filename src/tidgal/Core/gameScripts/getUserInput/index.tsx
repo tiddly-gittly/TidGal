@@ -13,6 +13,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { stageActions } from 'src/tidgal/store/stageReducer';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 显示选择枝
