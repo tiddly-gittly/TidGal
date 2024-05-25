@@ -9,7 +9,7 @@ import switch_1 from 'src/tidgal/assets/se/switch-1.mp3';
 /**
  * 调用音效
  */
-const useSoundEffect = () => {
+export const getSoundEffect = () => {
   const playSeEnter = () => {
     setStage({ key: 'uiSe', value: mouse_enter });
   };
@@ -39,7 +39,7 @@ const useSoundEffect = () => {
 /**
  * 调用音效（只供 choose.tsx 使用）
  */
-export const useSEByWebgalStore = () => {
+export const getSEByWebgalStore = () => {
   const playSeEnter = () => {
     setStage({ key: 'uiSe', value: mouse_enter });
   };
@@ -51,5 +51,3 @@ export const useSEByWebgalStore = () => {
     playSeClick, // 鼠标点击
   };
 };
-
-export default useSoundEffect;

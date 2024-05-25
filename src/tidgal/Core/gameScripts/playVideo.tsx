@@ -6,7 +6,7 @@ import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performCon
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
+import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
 /**
  * 播放一段视频 * @param sentence

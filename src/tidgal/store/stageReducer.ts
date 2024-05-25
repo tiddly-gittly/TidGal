@@ -8,7 +8,7 @@ import { IEffect, IFreeFigure, ILive2DExpression, ILive2DMotion, IRunPerform, IS
 
 // 初始化舞台数据
 
-export const initState: IStageState = {
+export const initStageState: IStageState = {
   assetBase: '',
   oldBgName: '',
   bgName: '', // 背景文件地址（相对或绝对）
@@ -54,7 +54,7 @@ const stageTempTiddler = '$:/temp/tidgal/default/StageState';
  * 创建舞台的状态管理
  */
 export function setStage(param: ISetStagePayload | Partial<IStageState>) {
-  const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+  const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
   if ('key' in param && 'value' in param) {
     const { key, value } = param;
     $tw.wiki.addTiddler({ title: stageTempTiddler, text: JSON.stringify({ ...prevState, [key]: value } satisfies IStageState) });
@@ -64,7 +64,7 @@ export function setStage(param: ISetStagePayload | Partial<IStageState>) {
 }
 
 export function getStage(): IStageState {
-  return $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+  return $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
 }
 
 export const stageActions = {
@@ -87,12 +87,12 @@ export const stageActions = {
    * @param action 要改变或添加的变量
    */
   setStageVar: (action: ISetGameVar) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const newState = { ...prevState, GameVar: { ...prevState.GameVar, [action.key]: action.value } };
     setStage(newState);
   },
   updateEffect: (action: IEffect) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const { target, transform } = action;
     const effectIndex = prevState.effects.findIndex((e) => e.target === target);
     if (effectIndex >= 0) {
@@ -108,7 +108,7 @@ export const stageActions = {
     setStage(prevState);
   },
   removeEffectByTargetId: (action: string) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const index = prevState.effects.findIndex((e) => e.target === action);
     if (index >= 0) {
       prevState.effects.splice(index, 1);
@@ -116,12 +116,12 @@ export const stageActions = {
     setStage(prevState);
   },
   addPerform: (action: IRunPerform) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     prevState.PerformList.push(action);
     setStage(prevState);
   },
   removePerformByName: (action: string) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     for (let i = 0; i < prevState.PerformList.length; i++) {
       const performItem: IRunPerform = prevState.PerformList[i];
       if (performItem.id === action) {
@@ -132,7 +132,7 @@ export const stageActions = {
     setStage(prevState);
   },
   removeAllPixiPerforms: () => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     for (let i = 0; i < prevState.PerformList.length; i++) {
       const performItem: IRunPerform = prevState.PerformList[i];
       if (performItem.script.command === commandType.pixi) {
@@ -143,7 +143,7 @@ export const stageActions = {
     setStage(prevState);
   },
   setFreeFigureByKey: (action: IFreeFigure) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const currentFreeFigures = prevState.freeFigure;
     const newFigure = action;
     const index = currentFreeFigures.findIndex((figure) => figure.key === newFigure.key);
@@ -157,7 +157,7 @@ export const stageActions = {
     setStage(prevState);
   },
   setLive2dMotion: (action: ILive2DMotion) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const { target, motion } = action;
 
     const index = prevState.live2dMotion.findIndex((e) => e.target === target);
@@ -172,7 +172,7 @@ export const stageActions = {
     setStage(prevState);
   },
   setLive2dExpression: (action: ILive2DExpression) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     const { target, expression } = action;
 
     const index = prevState.live2dExpression.findIndex((e) => e.target === target);
@@ -187,7 +187,7 @@ export const stageActions = {
     setStage(prevState);
   },
   replaceUIlable: (action: [string, string]) => {
-    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initState as IStageState & Record<string, string>);
+    const prevState = $tw.wiki.getTiddlerData(stageTempTiddler, initStageState as IStageState & Record<string, string>);
     prevState.replacedUIlable[action[0]] = action[1];
     setStage(prevState);
   },

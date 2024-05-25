@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
+import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { IPerform } from '../Modules/perform/performInterface';
 /**
  * 显示一小段黑屏演示
@@ -106,7 +106,7 @@ export const intro = (sentence: ISentence): IPerform => {
       isBlocking = false;
     }, baseDuration);
     if (introContainer) {
-      const children = introContainer.childNodes[0].childNodes[0].childNodes as any;
+      const children = introContainer.childNodes[0].childNodes[0].childNodes as unknown as HTMLDivElement[];
       const len = children.length;
       children.forEach((node: HTMLDivElement, index: number) => {
         // 当前语句的延迟显示时间

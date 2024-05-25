@@ -8,7 +8,7 @@ import styles from './getUserInput.module.scss';
 
 import { textFont } from 'src/tidgal/store/userDataInterface';
 import { PerformController } from 'src/tidgal/Core/Modules/perform/performController';
-import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
+import { getSEByWebgalStore } from 'src/tidgal/Corehooks/getSoundEffect';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
@@ -27,7 +27,7 @@ export const getUserInput = (sentence: ISentence): IPerform => {
   const buttonText = (buttonTextFromArgs === 0 ? 'OK' : buttonTextFromArgs) ?? 'OK';
   const fontFamily = getUserData().optionData.textboxFont;
   const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
-  const { playSeEnter, playSeClick } = useSEByWebgalStore();
+  const { playSeEnter, playSeClick } = getSEByWebgalStore();
   const chooseElements = (
     <div style={{ fontFamily: font }} className={styles.glabalDialog_container}>
       <div className={styles.glabalDialog_container_inner}>

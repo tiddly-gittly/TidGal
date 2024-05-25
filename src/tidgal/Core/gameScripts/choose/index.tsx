@@ -5,9 +5,9 @@ import { changeScene } from 'src/tidgal/Core/controller/scene/changeScene';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
-import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
 import { textFont } from 'src/tidgal/store/userDataInterface';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
+import { getSEByWebgalStore } from 'src/tidgal/utils/getSoundEffect';
 import { WebGAL } from '../../WebGAL';
 import styles from './choose.module.scss';
 
@@ -58,7 +58,7 @@ export const choose = (sentence: ISentence): IPerform => {
   const chooseOptions = chooseOptionScripts.map((e) => ChooseOption.parse(e));
   const fontFamily = getUserData().optionData.textboxFont;
   const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
-  const { playSeEnter, playSeClick } = useSEByWebgalStore();
+  const { playSeEnter, playSeClick } = getSEByWebgalStore();
   // 运行时计算JSX.Element[]
   const runtimeBuildList = (chooseListFull: ChooseOption[]) => {
     return chooseListFull
