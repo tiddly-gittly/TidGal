@@ -3,7 +3,7 @@ import { ITransform } from 'src/tidgal/store/stageInterface';
 export type IUserAnimationEffects = Array<ITransform & { duration: number }>;
 
 export interface IUserAnimation {
-  effects: Effects;
+  effects: IUserAnimationEffects;
   name: string;
 }
 

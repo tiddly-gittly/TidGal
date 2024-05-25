@@ -44,8 +44,7 @@ export const initState: IUserData = {
   },
 };
 
-// Helper function to get user data
-const getUserData = () => {
+export const getUserData = () => {
   const userDataTiddler = '$:/temp/tidgal/default/UserData';
   return $tw.wiki.getTiddlerData(userDataTiddler, initState as IUserData & Record<string, any>);
 };
@@ -54,7 +53,7 @@ const getUserData = () => {
  * 设置用户数据
  * @param action
  */
-const setUserData = (newState: IUserData) => {
+export const setUserData = (newState: IUserData) => {
   const userDataTiddler = '$:/temp/tidgal/default/UserData';
   $tw.wiki.addTiddler({ title: userDataTiddler, text: JSON.stringify(newState) });
 };

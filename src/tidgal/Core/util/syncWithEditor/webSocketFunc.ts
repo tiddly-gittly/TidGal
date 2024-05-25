@@ -3,7 +3,6 @@ import { WebgalParser } from 'src/tidgal/Core/parser/sceneParser';
 import { syncWithOrigine } from 'src/tidgal/Core/util/syncWithEditor/syncWithOrigine';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { DebugCommand, IDebugMessage } from 'src/tidgal/Coretypes/debugProtocol';
-import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../logger';
 
 export const webSocketFunc = () => {
@@ -44,7 +43,7 @@ export const webSocketFunc = () => {
         },
       };
       socket.send(JSON.stringify(message));
-      // logger.debug('传送信息', message);
+      // logger.log('传送信息', message);
       setTimeout(sendStageSyncMessage, 1000);
     }
     sendStageSyncMessage();

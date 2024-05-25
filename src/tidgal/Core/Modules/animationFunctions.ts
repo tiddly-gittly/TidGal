@@ -5,7 +5,6 @@ import { generateUniversalSoftOffAnimationObj } from 'src/tidgal/Core/controller
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { baseTransform } from 'src/tidgal/store/stageInterface';
-import { webgalStore } from 'src/tidgal/store/store';
 
 export function getAnimationObject(animationName: string, target: string, duration: number) {
   const effect = WebGAL.animationManager.getAnimations().find((ani) => ani.name === animationName);
@@ -17,7 +16,7 @@ export function getAnimationObject(animationName: string, target: string, durati
       newEffect.duration = effect.duration;
       return newEffect;
     });
-    logger.debug('装载自定义动画', mappedEffects);
+    logger.log('装载自定义动画', mappedEffects);
     return generateTimelineObj(mappedEffects, target, duration);
   }
   return null;
@@ -60,7 +59,7 @@ export function getEnterExitAnimation(
     } | null = generateUniversalSoftInAnimationObj(target, duration);
     const animarionName = WebGAL.animationManager.nextEnterAnimationName.get(target);
     if (animarionName) {
-      logger.debug('取代默认进入动画', target);
+      logger.log('取代默认进入动画', target);
       animation = getAnimationObject(animarionName, target, getAnimateDuration(animarionName));
       duration = getAnimateDuration(animarionName);
       // 用后重置
@@ -80,7 +79,7 @@ export function getEnterExitAnimation(
     } | null = generateUniversalSoftOffAnimationObj(target, duration);
     const animarionName = WebGAL.animationManager.nextExitAnimationName.get(target);
     if (animarionName) {
-      logger.debug('取代默认退出动画', target);
+      logger.log('取代默认退出动画', target);
       animation = getAnimationObject(animarionName, target, getAnimateDuration(animarionName));
       duration = getAnimateDuration(animarionName);
       // 用后重置

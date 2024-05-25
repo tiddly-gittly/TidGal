@@ -1,8 +1,9 @@
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import { IChangedTiddlers } from 'tiddlywiki';
 import './index.css';
+import { initializeScript } from './Core/initializeScript';
 
-class ExampleWidget extends Widget {
+class GalGameWidget extends Widget {
   refresh(_changedTiddlers: IChangedTiddlers) {
     return false;
   }
@@ -11,7 +12,17 @@ class ExampleWidget extends Widget {
     this.parentDomNode = parent;
     this.computeAttributes();
     this.execute();
-    const containerElement = $tw.utils.domMaker('p', {
+    const assetBase = this.getAttribute('assetBase');
+    if (!assetBase) {
+      const containerElement = $tw.utils.domMaker('p', {
+        text: 'No assetBase!',
+      });
+      parent.insertBefore(containerElement, nextSibling);
+      this.domNodes.push(containerElement);
+      return;
+    }
+    initializeScript({ assetBase });
+    const containerElement = $tw.utils.domMaker('div', {
       text: 'This is a widget!',
     });
     parent.insertBefore(containerElement, nextSibling);
@@ -19,11 +30,7 @@ class ExampleWidget extends Widget {
   }
 }
 
-// 此处导出的模块变量名RandomNumber将作为微件（widget）的名称。使用<$RandomNumber/>调用此微件。
-// Widget在tiddlywiki中的条目名、源文件以及源文件.meta文件名和Widget名字可以不一致。
-// 比如Widget条目名可以为My-Widget,源文件以及源文件.meta文件名可以称为index.ts与index.ts.meta。最终的Widget名却是：RandomNumber，且使用<$RandomNumber/>调用此微件。
-// 如果为一个脚本文件添加了 .meta 将会被视为入口文件。
 declare let exports: {
-  RandomNumber: typeof ExampleWidget;
+  galgame: typeof GalGameWidget;
 };
-exports.RandomNumber = ExampleWidget;
+exports.galgame = GalGameWidget;

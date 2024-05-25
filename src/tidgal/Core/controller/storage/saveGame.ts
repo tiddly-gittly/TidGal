@@ -1,8 +1,8 @@
-import { webgalStore } from 'src/tidgal/store/store';
-
-import { dumpSavesToStorage } from 'src/tidgal/Core/controller/storage/savesController';
+import { cloneDeep } from 'lodash';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { saveActions } from 'src/tidgal/store/savesReducer';
+import { getStage } from 'src/tidgal/store/stageReducer';
+import { ISaveData } from 'src/tidgal/store/userDataInterface';
 
 /**
  * 保存游戏
@@ -11,7 +11,6 @@ import { saveActions } from 'src/tidgal/store/savesReducer';
 export const saveGame = (index: number) => {
   const saveData: ISaveData = generateCurrentStageData(index);
   saveActions.saveGame({ index, saveData });
-  dumpSavesToStorage(index, index);
 };
 
 /**

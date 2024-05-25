@@ -1,16 +1,13 @@
-import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
-import { changeScene } from 'src/tidgal/Core/controller/scene/changeScene';
-import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
-import ReactDOM from 'react-dom';
 import React from 'react';
-import styles from './choose.module.scss';
-import { webgalStore } from 'src/tidgal/store/store';
-import { textFont } from 'src/tidgal/store/userDataInterface';
-import { PerformController } from 'src/tidgal/Core/Modules/perform/performController';
-import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
-import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import ReactDOM from 'react-dom';
 import { whenChecker } from 'src/tidgal/Core/controller/gamePlay/scriptExecutor';
+import { changeScene } from 'src/tidgal/Core/controller/scene/changeScene';
+import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
+import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
+import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
+import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
+import { textFont } from 'src/tidgal/store/userDataInterface';
+import styles from './choose.module.scss';
 
 class ChooseOption {
   /**
@@ -29,13 +26,14 @@ class ChooseOption {
       if (showConditionPart) {
         option.showCondition = showConditionPart[1];
       }
-      const enableConditionPart = conditonPart.match(/\[(.*)\]/);
+      const enableConditionPart = conditonPart.match(/\[(.*)]/);
       if (enableConditionPart) {
         option.enableCondition = enableConditionPart[1];
       }
     }
     return option;
   }
+
   public text: string;
   public jump: string;
   public jumpToScene: boolean;
@@ -56,7 +54,7 @@ class ChooseOption {
 export const choose = (sentence: ISentence): IPerform => {
   const chooseOptionScripts = sentence.content.split('|');
   const chooseOptions = chooseOptionScripts.map((e) => ChooseOption.parse(e));
-  const fontFamily = webgalStore.getState().userData.optionData.textboxFont;
+  const fontFamily = getUserData().optionData.textboxFont;
   const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
   const { playSeEnter, playSeClick } = useSEByWebgalStore();
   // 运行时计算JSX.Element[]
@@ -68,14 +66,14 @@ export const choose = (sentence: ISentence): IPerform => {
         const className = enable ? styles.Choose_item : styles.Choose_item_disabled;
         const onClick = enable
           ? () => {
-              playSeClick();
-              if (e.jumpToScene) {
-                changeScene(e.jump, e.text);
-              } else {
-                jmp(e.jump);
-              }
-              WebGAL.gameplay.performController.unmountPerform('choose');
+            playSeClick();
+            if (e.jumpToScene) {
+              changeScene(e.jump, e.text);
+            } else {
+              jmp(e.jump);
             }
+            WebGAL.gameplay.performController.unmountPerform('choose');
+          }
           : () => {};
         return (
           <div
@@ -93,7 +91,7 @@ export const choose = (sentence: ISentence): IPerform => {
   // eslint-disable-next-line react/no-deprecated
   ReactDOM.render(
     <div className={styles.Choose_Main}>{runtimeBuildList(chooseOptions)}</div>,
-    document.getElementById('chooseContainer'),
+    document.querySelector('#chooseContainer'),
   );
   return {
     performName: 'choose',
@@ -101,7 +99,7 @@ export const choose = (sentence: ISentence): IPerform => {
     isHoldOn: false,
     stopFunction: () => {
       // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(<div />, document.getElementById('chooseContainer'));
+      ReactDOM.render(<div />, document.querySelector('#chooseContainer'));
     },
     blockingNext: () => true,
     blockingAuto: () => true,

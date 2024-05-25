@@ -3,7 +3,6 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from 'src/tidgal/CoreStage/FullScreenPerform/fullScreenPerform.module.scss';
-import { webgalStore } from 'src/tidgal/store/store';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { getRandomPerformName, PerformController } from 'src/tidgal/Core/Modules/perform/performController';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
@@ -12,7 +11,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
  * 播放一段视频 * @param sentence
  */
 export const playVideo = (sentence: ISentence): IPerform => {
-  const userDataState = webgalStore.getState().userData;
+  const userDataState = getUserData();
   const mainVol = userDataState.optionData.volumeMain;
   const vocalVol = mainVol * 0.01 * userDataState.optionData.vocalVolume * 0.01;
   const bgmVol = mainVol * 0.01 * userDataState.optionData.bgmVolume * 0.01;

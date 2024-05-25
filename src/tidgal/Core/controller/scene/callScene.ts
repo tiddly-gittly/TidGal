@@ -28,7 +28,7 @@ export const callScene = (sceneUrl: string, sceneName: string) => {
     WebGAL.sceneManager.settledScenes.push(sceneUrl); // 放入已加载场景列表，避免递归加载相同场景
     const subSceneListUniq = uniqWith(subSceneList); // 去重
     scenePrefetcher(subSceneListUniq);
-    logger.debug('现在调用场景，调用结果：', WebGAL.sceneManager.sceneData);
+    logger.log('现在调用场景，调用结果：', WebGAL.sceneManager.sceneData);
     nextSentence();
   });
 };

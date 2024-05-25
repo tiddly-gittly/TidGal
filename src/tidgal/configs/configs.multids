@@ -1,5 +1,4 @@
 title: $:/plugins/linonetwo/tidgal/configs/
 
-xxx: https://tidgi.fun/
-yyy: https://tidgi.fun/
-zzz: https://tidgi.fun/
+FastInterval: 50
+BacklogSize: 200

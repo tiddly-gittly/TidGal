@@ -114,11 +114,18 @@ export function generateTimelineObj(
   }
 
   function getEndStateEffect() {
-    return timeline.at(-1);
+    const endSegment = timeline.at(-1);
+    if (endSegment === undefined) {
+      throw new Error('timeline 为空');
+    }
+    return endSegment;
   }
 
   function getEndFilterEffect() {
     const endSegment = timeline.at(-1);
+    if (endSegment === undefined) {
+      throw new Error('timeline 为空');
+    }
     const { alpha, rotation, blur, duration, scale, position, ...rest } = endSegment;
     return rest;
   }

@@ -4,7 +4,6 @@ import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.modu
 import { stopAuto } from './autoPlay';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { SYSTEM_CONFIG } from 'src/tidgal/Coreconfig';
 
 /**
  * 设置 fast 按钮的激活与否
@@ -45,7 +44,7 @@ export const startFast = () => {
   setButton(true);
   WebGAL.gameplay.fastInterval = setInterval(() => {
     nextSentence();
-  }, SYSTEM_CONFIG.fast_timeout);
+  }, Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tidgal/configs/FastInterval', '50')));
 };
 
 // 判断是否是快进模式

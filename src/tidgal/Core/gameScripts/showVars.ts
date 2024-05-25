@@ -4,6 +4,7 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getStage, setStage } from 'src/tidgal/store/stageReducer';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 进行普通对话的显示
@@ -12,7 +13,7 @@ import { getStage, setStage } from 'src/tidgal/store/stageReducer';
  */
 export const showVars = (sentence: ISentence): IPerform => {
   const stageState = getStage();
-  const userDataState = webgalStore.getState().userData;
+  const userDataState = getUserData();
   // 设置文本显示
   const allVariable = {
     stageGameVar: stageState.GameVar,
@@ -20,7 +21,7 @@ export const showVars = (sentence: ISentence): IPerform => {
   };
   setStage({ key: 'showText', value: JSON.stringify(allVariable) });
   setStage({ key: 'showName', value: '展示变量' });
-  logger.debug('展示变量：', allVariable);
+  logger.log('展示变量：', allVariable);
   setTimeout(() => {
     WebGAL.events.textSettle.emit();
   }, 0);

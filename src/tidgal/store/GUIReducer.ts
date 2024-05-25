@@ -26,13 +26,12 @@ const initState: IGuiState = {
   isShowLogo: true,
 };
 
-const getGuiState = () => {
+export const getGuiState = () => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
   return $tw.wiki.getTiddlerData(guiStateTiddler, initState as IGuiState & Record<string, any>);
 };
 
-// Helper function to set GUI state
-const setGuiState = (newState: IGuiState) => {
+export const setGuiState = (newState: IGuiState) => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
   $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(newState) });
 };

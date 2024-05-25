@@ -5,7 +5,7 @@ import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 //  * 停止bgm
 //  */
 // export const eraseBgm = () => {
-//   logger.debug(`停止bgm`);
+//   logger.log(`停止bgm`);
 //   // 停止之前的bgm
 //   let VocalControl: any = document.getElementById('currentBgm');
 //   if (VocalControl !== null) {

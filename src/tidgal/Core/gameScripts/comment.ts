@@ -7,7 +7,7 @@ import { logger } from 'src/tidgal/Core/util/logger';
  * @param sentence
  */
 export const comment = (sentence: ISentence): IPerform => {
-  logger.debug(`脚本内注释${sentence.content}`);
+  logger.log(`脚本内注释${sentence.content}`);
   return {
     performName: 'none',
     duration: 0,

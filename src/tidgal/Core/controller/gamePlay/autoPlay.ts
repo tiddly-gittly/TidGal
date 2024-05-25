@@ -1,9 +1,9 @@
 // import {logger} from '../../util/logger';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
-import { webgalStore } from 'src/tidgal/store/store';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 设置 autoplay 按钮的激活与否
@@ -58,7 +58,7 @@ export const autoNextSentence = () => {
  * 自动播放的执行函数
  */
 const autoPlay = () => {
-  const delay = webgalStore.getState().userData.optionData.autoSpeed;
+  const delay = getUserData().optionData.autoSpeed;
   const autoPlayDelay = 750 - 250 * delay;
   let isBlockingAuto = false;
   WebGAL.gameplay.performController.performList.forEach((e) => {

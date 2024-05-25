@@ -2,7 +2,7 @@ import { stopAuto } from 'src/tidgal/Core/controller/gamePlay/autoPlay';
 import { stopFast } from 'src/tidgal/Core/controller/gamePlay/fastSkip';
 import { stopAllPerform } from 'src/tidgal/Core/controller/gamePlay/stopAllPerform';
 import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
-import { setVisibility } from 'src/tidgal/store/GUIReducer';
+import { getGuiState, setVisibility } from 'src/tidgal/store/GUIReducer';
 import { setStage } from 'src/tidgal/store/stageReducer';
 
 export const backToTitle = () => {
@@ -16,5 +16,5 @@ export const backToTitle = () => {
   /**
    * 重设为标题背景
    */
-  setEbg(webgalStore.getState().GUI.titleBg);
+  setEbg(getGuiState().titleBg);
 };

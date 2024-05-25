@@ -8,7 +8,6 @@ import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { baseTransform, ITransform } from 'src/tidgal/store/stageInterface';
-import { webgalStore } from 'src/tidgal/store/store';
 import { IUserAnimation } from '../Modules/animations';
 
 /**
@@ -44,7 +43,7 @@ export const setTransform = (sentence: ISentence): IPerform => {
     WebGAL.gameplay.pixiStage?.stopPresetAnimationOnTarget(target);
     const animationObject: IAnimationObject | null = getAnimationObject(animationName, target, animationDuration);
     if (animationObject) {
-      logger.debug(`动画${animationName}作用在${target}`, animationDuration);
+      logger.log(`动画${animationName}作用在${target}`, animationDuration);
       WebGAL.gameplay.pixiStage?.registerAnimation(animationObject, key, target);
     }
   }, 0);
@@ -76,7 +75,7 @@ function getAnimationObject(animationName: string, target: string, duration: num
       newEffect.duration = effect.duration;
       return newEffect;
     });
-    logger.debug('装载自定义动画', mappedEffects);
+    logger.log('装载自定义动画', mappedEffects);
     return generateTimelineObj(mappedEffects, target, duration);
   }
   return null;

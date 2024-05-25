@@ -122,6 +122,10 @@ export interface IStageState {
   // 小头像 文件地址（相对或绝对）
   GameVar: IGameVar;
   PerformList: IRunPerform[];
+  /**
+   * The prefix of asset files. Will be concat to before standard filenames like `start.txt`.
+   */
+  assetBase: string;
   bgFilter: string;
   // 旧背景的文件路径
   bgName: string;

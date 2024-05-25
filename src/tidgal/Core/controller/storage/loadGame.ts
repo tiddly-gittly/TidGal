@@ -5,7 +5,6 @@ import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
 import { scenePrefetcher } from 'src/tidgal/Core/util/prefetcher/scenePrefetcher';
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
 import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 import { ISaveData } from 'src/tidgal/store/userDataInterface';
 import { sceneParser } from '../../parser/sceneParser';
 import { logger } from '../../util/logger';
@@ -13,16 +12,17 @@ import { sceneFetcher } from '../scene/sceneFetcher';
 import { restorePerform } from './jumpFromBacklog';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import { getSaveData } from 'src/tidgal/store/savesReducer';
 
 /**
  * 读取游戏存档
  * @param index 要读取的存档的档位
  */
 export const loadGame = (index: number) => {
-  const userDataState = webgalStore.getState().saveData;
+  const userDataState = getSaveData();
   // 获得存档文件
   const loadFile: ISaveData = userDataState.saveData[index];
-  logger.debug('读取的存档数据', loadFile);
+  logger.log('读取的存档数据', loadFile);
   // 加载存档
   loadGameFromStageData(loadFile);
 };

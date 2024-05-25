@@ -10,7 +10,7 @@ import { sceneFetcher } from './controller/scene/sceneFetcher';
 import { IUserAnimationEffects } from './Modules/animations';
 import { sceneParser } from './parser/sceneParser';
 import { infoFetcher } from './util/coreInitialFunction/infoFetcher';
-import { assetSetter, fileType } from './util/gameAssetsAccess/assetSetter';
+import { assetSetter, fileType, getAssetBase, setAssetOptions } from './util/gameAssetsAccess/assetSetter';
 import { logger } from './util/logger';
 import { scenePrefetcher } from './util/prefetcher/scenePrefetcher';
 
@@ -46,12 +46,13 @@ export const initializeScript = (options: IInitializeScriptOptions): void => {
     );
   }
 
+  setAssetOptions(options);
   // 获得 user Animation
-  getUserAnimation(options);
+  getUserAnimation();
   // 获取游戏信息
-  infoFetcher('./game/config.txt');
+  infoFetcher('game/config.txt');
   // 获取start场景
-  const sceneUrl: string = assetSetter(options, 'start.txt', fileType.scene);
+  const sceneUrl: string = assetSetter('start.txt', fileType.scene);
   // 场景写入到运行时
   sceneFetcher(sceneUrl).then((rawScene) => {
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
@@ -86,10 +87,11 @@ export const initializeScript = (options: IInitializeScriptOptions): void => {
   webSocketFunc();
 };
 
-function getUserAnimation(options: IInitializeScriptOptions) {
-  const animations: string[] = $tw.wiki.getTiddlerData(`${options.assetBase}/game/animation/animationTable.json`);
+function getUserAnimation() {
+  const assetBase = getAssetBase();
+  const animations: string[] = $tw.wiki.getTiddlerData(`${assetBase}/game/animation/animationTable.json`);
   for (const animationName of animations) {
-    const effects: IUserAnimationEffects = $tw.wiki.getTiddlerData(`${options.assetBase}/game/animation/${animationName}.json`);
+    const effects: IUserAnimationEffects = $tw.wiki.getTiddlerData(`${assetBase}/game/animation/${animationName}.json`);
     if (effects && Array.isArray(effects)) {
       const userAnimation = {
         name: animationName,

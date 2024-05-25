@@ -17,13 +17,21 @@ export enum fileType {
   video,
 }
 
+export let assetBase = '';
+export function setAssetOptions(options: IInitializeScriptOptions) {
+  assetBase = options.assetBase;
+}
+export const getAssetBase = () => {
+  return assetBase;
+};
+
 /**
  * 获取资源路径
  * @param fileName 资源的名称或地址
  * @param assetType 资源类型
  * @return {string} 处理后的资源路径（绝对或相对）
  */
-export const assetSetter = (options: IInitializeScriptOptions, fileName: string, assetType: fileType): string => {
+export const assetSetter = (fileName: string, assetType: fileType): string => {
   // 是绝对链接，直接返回
   if (fileName.match('http://') ?? fileName.match('https://')) {
     return fileName;
@@ -32,27 +40,27 @@ export const assetSetter = (options: IInitializeScriptOptions, fileName: string,
     let returnFilePath: string;
     switch (assetType) {
       case fileType.background: {
-        returnFilePath = `${options.assetBase}/game/background/${fileName}`;
+        returnFilePath = `${assetBase}/game/background/${fileName}`;
         break;
       }
       case fileType.scene: {
-        returnFilePath = `${options.assetBase}/game/scene/${fileName}`;
+        returnFilePath = `${assetBase}/game/scene/${fileName}`;
         break;
       }
       case fileType.vocal: {
-        returnFilePath = `${options.assetBase}/game/vocal/${fileName}`;
+        returnFilePath = `${assetBase}/game/vocal/${fileName}`;
         break;
       }
       case fileType.figure: {
-        returnFilePath = `${options.assetBase}/game/figure/${fileName}`;
+        returnFilePath = `${assetBase}/game/figure/${fileName}`;
         break;
       }
       case fileType.bgm: {
-        returnFilePath = `${options.assetBase}/game/bgm/${fileName}`;
+        returnFilePath = `${assetBase}/game/bgm/${fileName}`;
         break;
       }
       case fileType.video: {
-        returnFilePath = `${options.assetBase}/game/video/${fileName}`;
+        returnFilePath = `${assetBase}/game/video/${fileName}`;
         break;
       }
       default: {

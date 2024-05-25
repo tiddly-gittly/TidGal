@@ -2,14 +2,13 @@ import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 播放一段效果音
  * @param sentence 语句
  */
 export const playEffect = (sentence: ISentence): IPerform => {
-  logger.debug('play SE');
+  logger.log('play SE');
   // 如果有ID，这里被覆写，一般用于循环的情况
   // 有循环参数且有 ID，就循环
   let performInitName = 'effect-sound';
@@ -47,7 +46,7 @@ export const playEffect = (sentence: ISentence): IPerform => {
         if (isLoop) {
           seElement.loop = true;
         }
-        const userDataState = webgalStore.getState().userData;
+        const userDataState = getUserData();
         const mainVol = userDataState.optionData.volumeMain;
         // Work when volumeArg is a number between 0 and 100
         const volume = typeof volumeArgument === 'number' && volumeArgument >= 0 && volumeArgument <= 100 ? volumeArgument : 100;

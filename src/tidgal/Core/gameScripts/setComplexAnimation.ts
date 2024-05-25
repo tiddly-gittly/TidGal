@@ -4,7 +4,6 @@ import { IAnimationObject } from 'src/tidgal/Core/controller/stage/pixi/PixiCont
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/store/store';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 
@@ -21,7 +20,7 @@ export const setComplexAnimation = (sentence: ISentence): IPerform => {
   const animationFunction: Function | null = getAnimationObject(animationName);
   let stopFunction: () => void = () => {};
   if (animationFunction) {
-    logger.debug(`动画${animationName}作用在${target}`, animationDuration);
+    logger.log(`动画${animationName}作用在${target}`, animationDuration);
     const animationObject: IAnimationObject = animationFunction(target, animationDuration);
     WebGAL.gameplay.pixiStage?.stopPresetAnimationOnTarget(target);
     WebGAL.gameplay.pixiStage?.registerAnimation(animationObject, key, target);
@@ -44,7 +43,7 @@ export const setComplexAnimation = (sentence: ISentence): IPerform => {
 
 function getAnimationObject(animationName: string): Function | null {
   const result = webgalAnimations.find((e) => e.name === animationName);
-  logger.debug('装载动画', result);
+  logger.log('装载动画', result);
   if (result) {
     return result.animationGenerateFunc;
   }

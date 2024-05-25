@@ -12,7 +12,7 @@ import { match } from '../../util/match';
  * @param sentence 语句
  */
 export const playVocal = (sentence: ISentence) => {
-  logger.debug('play vocal');
+  logger.log('play vocal');
   const performInitName = 'vocal-play';
   const url = getSentenceArgByKey(sentence, 'vocal') as string; // 获取语音的url
   const volume = getSentenceArgByKey(sentence, 'volume') as number; // 获取语音的音量比

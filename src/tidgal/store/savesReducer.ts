@@ -18,13 +18,13 @@ interface SaveAction {
 }
 
 // Helper function to get save data
-const getSaveData = () => {
+export const getSaveData = () => {
   const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
   return $tw.wiki.getTiddlerData(saveDataTiddler, initState as ISavesData & Record<string, any>);
 };
 
 // Helper function to set save data
-const setSaveData = (newState: ISavesData) => {
+export const setSaveData = (newState: ISavesData) => {
   const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
   $tw.wiki.addTiddler({ title: saveDataTiddler, text: JSON.stringify(newState) });
 };

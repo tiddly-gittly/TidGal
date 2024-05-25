@@ -2,7 +2,6 @@ import localforage from 'localforage';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/store/store';
 import { unlockBgmInUserData } from 'src/tidgal/store/userDataReducer';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
@@ -25,7 +24,7 @@ export const unlockBgm = (sentence: ISentence): IPerform => {
   });
   logger.log(`解锁BGM：${name}，路径：${url}，所属系列：${series}`);
   unlockBgmInUserData({ name, url, series });
-  const userDataState = webgalStore.getState().userData;
+  const userDataState = getUserData();
   localforage.setItem(WebGAL.gameKey, userDataState).then(() => {});
   return {
     performName: 'none',

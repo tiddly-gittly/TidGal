@@ -1,13 +1,11 @@
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+/* eslint-disable unicorn/prefer-number-properties */
 import { compile } from 'angular-expressions';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { dumpToStorageFast } from 'src/tidgal/Core/controller/storage/storageController';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { ISetGameVar } from 'src/tidgal/store/stageInterface';
-import { stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
-import { setGlobalVar } from 'src/tidgal/store/userDataReducer';
+import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
+
+import { getUserData, setGlobalVar } from 'src/tidgal/store/userDataReducer';
 
 /**
  * 设置变量
@@ -20,7 +18,7 @@ export const setVar = (sentence: ISentence): IPerform => {
       setGlobal = true;
     }
   });
-  let targetReducerFunction: ActionCreatorWithPayload<ISetGameVar, string>;
+  let targetReducerFunction: CallableFunction;
   if (setGlobal) {
     targetReducerFunction = setGlobalVar;
   } else {
@@ -32,10 +30,10 @@ export const setVar = (sentence: ISentence): IPerform => {
     const valueExp = sentence.content.split(/=/)[1];
     if (valueExp === 'random()') {
       targetReducerFunction({ key, value: Math.random() });
-    } else if (/[()*+/\-]/.test(valueExp)) {
+    } else if (/[()*+/-]/.test(valueExp)) {
       // 如果包含加减乘除号，则运算
       // 先取出运算表达式中的变量
-      const valueExpArray = valueExp.split(/([()*+/\-])/g);
+      const valueExpArray = valueExp.split(/([()*+/-])/g);
       // 将变量替换为变量的值，然后合成表达式字符串
       const valueExp2 = valueExpArray
         .map((e) => {
@@ -61,10 +59,9 @@ export const setVar = (sentence: ISentence): IPerform => {
       }
     }
     if (setGlobal) {
-      logger.debug('设置全局变量：', { key, value: webgalStore.getState().userData.globalGameVar[key] });
-      dumpToStorageFast();
+      logger.log('设置全局变量完毕，结果：', { key, value: getUserData().globalGameVar[key] });
     } else {
-      logger.debug('设置变量：', { key, value: getStage().GameVar[key] });
+      logger.log('设置变量完毕，结果：', { key, value: getStage().GameVar[key] });
     }
   }
   return {
@@ -80,10 +77,10 @@ export const setVar = (sentence: ISentence): IPerform => {
 
 export function getValueFromState(key: string) {
   let returnValue: number | string | boolean = 0;
-  if (getStage().GameVar.hasOwnProperty(key)) {
+  if (key in getStage().GameVar) {
     returnValue = getStage().GameVar[key];
-  } else if (webgalStore.getState().userData.globalGameVar.hasOwnProperty(key)) {
-    returnValue = webgalStore.getState().userData.globalGameVar[key];
+  } else if (key in getUserData().globalGameVar) {
+    returnValue = getUserData().globalGameVar[key];
   }
   return returnValue;
 }

@@ -15,7 +15,7 @@ import { playVocal } from './vocal';
  */
 export const say = (sentence: ISentence): IPerform => {
   const stageState = getStage();
-  const userDataState = webgalStore.getState().userData;
+  const userDataState = getUserData();
   let dialogKey = Math.random().toString(); // 生成一个随机的key
   let dialogToShow = sentence.content; // 获取对话内容
   const isConcat = getSentenceArgByKey(sentence, 'concat'); // 是否是继承语句

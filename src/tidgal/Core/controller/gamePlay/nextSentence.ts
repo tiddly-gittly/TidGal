@@ -1,10 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
-import { logger } from '../../util/logger';
-
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import { getGuiState } from 'src/tidgal/store/GUIReducer';
 import { IRunPerform } from 'src/tidgal/store/stageInterface';
+import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
+import { logger } from '../../util/logger';
+import { scriptExecutor } from './scriptExecutor';
 
 /**
  * 进行下一句
@@ -16,7 +16,7 @@ export const nextSentence = () => {
   WebGAL.events.userInteractNext.emit();
 
   // 如果当前显示标题，那么不进行下一句
-  const GUIState = webgalStore.getState().GUI;
+  const GUIState = getGuiState();
   if (GUIState.showTitle) {
     return;
   }

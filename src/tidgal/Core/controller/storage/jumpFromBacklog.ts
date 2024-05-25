@@ -29,7 +29,7 @@ export const restorePerform = () => {
 export const jumpFromBacklog = (index: number) => {
   // 获得存档文件
   const backlogFile = WebGAL.backlogManager.getBacklog()[index];
-  logger.debug('读取的backlog数据', backlogFile);
+  logger.log('读取的backlog数据', backlogFile);
   // 重新获取并同步场景状态
   sceneFetcher(backlogFile.saveScene.sceneUrl).then((rawScene) => {
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(

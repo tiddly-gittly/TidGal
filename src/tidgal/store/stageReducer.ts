@@ -9,6 +9,7 @@ import { IEffect, IFreeFigure, ILive2DExpression, ILive2DMotion, IRunPerform, IS
 // 初始化舞台数据
 
 export const initState: IStageState = {
+  assetBase: '',
   oldBgName: '',
   bgName: '', // 背景文件地址（相对或绝对）
   figName: '', // 立绘_中 文件地址（相对或绝对）

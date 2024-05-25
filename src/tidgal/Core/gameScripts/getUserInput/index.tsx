@@ -5,7 +5,7 @@ import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import styles from './getUserInput.module.scss';
-import { webgalStore } from 'src/tidgal/store/store';
+
 import { textFont } from 'src/tidgal/store/userDataInterface';
 import { PerformController } from 'src/tidgal/Core/Modules/perform/performController';
 import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
@@ -24,7 +24,7 @@ export const getUserInput = (sentence: ISentence): IPerform => {
   const title = (titleFromArgs === 0 ? 'Please Input' : titleFromArgs) ?? 'Please Input';
   const buttonTextFromArgs = getSentenceArgByKey(sentence, 'buttonText');
   const buttonText = (buttonTextFromArgs === 0 ? 'OK' : buttonTextFromArgs) ?? 'OK';
-  const fontFamily = webgalStore.getState().userData.optionData.textboxFont;
+  const fontFamily = getUserData().optionData.textboxFont;
   const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
   const { playSeEnter, playSeClick } = useSEByWebgalStore();
   const chooseElements = (

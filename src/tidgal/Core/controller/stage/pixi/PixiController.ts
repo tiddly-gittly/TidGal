@@ -632,7 +632,7 @@ export default class PixiStage {
   // public addLive2dFigure(key: string, jsonPath: string, pos: string, motion: string, expression: string) {
   //   let stageWidth = this.stageWidth;
   //   let stageHeight = this.stageHeight;
-  //   logger.debug('Using motion:', motion);
+  //   logger.log('Using motion:', motion);
   //
   //   figureCash.push(jsonPath);
   //
@@ -740,7 +740,7 @@ export default class PixiStage {
   // }
 
   public changeModelMotionByKey(key: string, motion: string) {
-    // logger.debug(`Applying motion ${motion} to ${key}`);
+    // logger.log(`Applying motion ${motion} to ${key}`);
     const target = this.figureObjects.find((e) => e.key === key);
     if (target?.sourceType !== 'live2d') return;
     const figureRecordTarget = this.live2dFigureRecorder.find((e) => e.target === key);
@@ -761,7 +761,7 @@ export default class PixiStage {
   }
 
   public changeModelExpressionByKey(key: string, expression: string) {
-    // logger.debug(`Applying expression ${expression} to ${key}`);
+    // logger.log(`Applying expression ${expression} to ${key}`);
     const target = this.figureObjects.find((e) => e.key === key);
     if (target?.sourceType !== 'live2d') return;
     const figureRecordTarget = this.live2dFigureRecorder.find((e) => e.target === key);
@@ -912,7 +912,7 @@ export default class PixiStage {
             }
           }
         } catch (error) {
-          logger.fatal('PIXI Loader 故障', error);
+          logger.alert('PIXI Loader 故障', error);
           front.callback();
           // this.assetLoader.reset(); // 暂时先不用重置
           this.callLoader();

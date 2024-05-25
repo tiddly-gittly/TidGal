@@ -3,7 +3,6 @@ import { IAnimationObject } from 'src/tidgal/Core/controller/stage/pixi/PixiCont
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
-import { webgalStore } from 'src/tidgal/store/store';
 
 import { getAnimateDuration, getAnimationObject } from 'src/tidgal/Core/Modules/animationFunctions';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
@@ -23,7 +22,7 @@ export const setAnimation = (sentence: ISentence): IPerform => {
     WebGAL.gameplay.pixiStage?.stopPresetAnimationOnTarget(target);
     const animationObject: IAnimationObject | null = getAnimationObject(animationName, target, animationDuration);
     if (animationObject) {
-      logger.debug(`动画${animationName}作用在${target}`, animationDuration);
+      logger.log(`动画${animationName}作用在${target}`, animationDuration);
       WebGAL.gameplay.pixiStage?.registerAnimation(animationObject, key, target);
     }
   }, 0);

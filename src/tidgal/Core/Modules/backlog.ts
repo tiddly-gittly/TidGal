@@ -3,11 +3,10 @@
  */
 import cloneDeep from 'lodash/cloneDeep';
 import { IEffect, IStageState } from 'src/tidgal/store/stageInterface';
-import { webgalStore } from 'src/tidgal/store/store';
 import { ISaveScene } from 'src/tidgal/store/userDataInterface';
 
 import { SceneManager } from 'src/tidgal/Core/Modules/scene';
-import { SYSTEM_CONFIG } from 'src/tidgal/Coreconfig';
+import { getStage } from 'src/tidgal/store/stageReducer';
 
 export interface IBacklogItem {
   currentStageState: IStageState;
@@ -29,7 +28,10 @@ export class BacklogManager {
   }
 
   public editLastBacklogItemEffect(effects: IEffect[]) {
-    this.backlog.at(-1).currentStageState.effects = effects;
+    const lastBacklog = this.backlog.at(-1);
+    if (lastBacklog) {
+      lastBacklog.currentStageState.effects = effects;
+    }
   }
 
   public makeBacklogEmpty() {
@@ -64,7 +66,7 @@ export class BacklogManager {
     this.getBacklog().push(backlogElement);
 
     // 清除超出长度的部分
-    while (this.getBacklog().length > SYSTEM_CONFIG.backlog_size) {
+    while (this.getBacklog().length > Number($tw.wiki.getTiddlerText('$:/plugins/linonetwo/tidgal/configs/BacklogSize', '200'))) {
       this.getBacklog().shift();
     }
   }

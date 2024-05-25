@@ -2,14 +2,12 @@ import { sceneFetcher } from 'src/tidgal/Core/controller/scene/sceneFetcher';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { playBgm } from 'src/tidgal/Core/controller/stage/playBgm';
 import { resetStage } from 'src/tidgal/Core/controller/stage/resetStage';
-import { dumpToStorageFast } from 'src/tidgal/Core/controller/storage/storageController';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { sceneParser } from 'src/tidgal/Core/parser/sceneParser';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { setVisibility } from 'src/tidgal/store/GUIReducer';
+import { getGuiState, setVisibility } from 'src/tidgal/store/GUIReducer';
 import { saveActions } from 'src/tidgal/store/savesReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 结束游戏
@@ -24,13 +22,12 @@ export const end = (sentence: ISentence): IPerform => {
     WebGAL.sceneManager.resetScene();
   }, 5);
   saveActions.resetFastSave();
-  dumpToStorageFast();
   sceneFetcher(sceneUrl).then((rawScene) => {
     // 场景写入到运行时
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
   });
   setVisibility({ component: 'showTitle', visibility: true });
-  playBgm(webgalStore.getState().GUI.titleBgm);
+  playBgm(getGuiState().titleBgm);
   return {
     performName: 'none',
     duration: 0,

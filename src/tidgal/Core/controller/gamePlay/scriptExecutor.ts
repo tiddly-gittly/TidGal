@@ -4,7 +4,10 @@ import { commandType, ISentence } from 'src/tidgal/Core/controller/scene/sceneIn
 import { getValueFromState } from 'src/tidgal/Core/gameScripts/setVar';
 import { ISceneEntry } from 'src/tidgal/Core/Modules/scene';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { webgalStore } from 'src/tidgal/store/store';
+import { IStageState } from 'src/tidgal/store/stageInterface';
+import { getStage } from 'src/tidgal/store/stageReducer';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
+import { logger } from '../../util/logger';
 import { restoreScene } from '../scene/restoreScene';
 import { runScript } from './runScript';
 
@@ -13,7 +16,7 @@ export const whenChecker = (whenValue: string | undefined): boolean => {
     return true;
   }
   // 先把变量解析出来
-  const valueExpArray = whenValue.split(/([!()*+/<>\-]|>=|<=|==|&&|\|\||!=)/g);
+  const valueExpArray = whenValue.split(/([!()*+/<>-]|>=|<=|==|&&|\|\||!=)/g);
   const valueExp = valueExpArray
     .map((e) => {
       if (/[A-Za-z]/.test(e)) {
@@ -138,9 +141,9 @@ export const scriptExecutor = () => {
     currentStageState = getStage();
     const allState = {
       currentStageState,
-      globalGameVar: webgalStore.getState().userData.globalGameVar,
+      globalGameVar: getUserData().globalGameVar,
     };
-    logger.debug('本条语句执行结果', allState);
+    logger.log('本条语句执行结果', allState);
     // 保存 backlog
     if (isSaveBacklog) {
       // WebGAL.backlogManager.isSaveBacklogNext = true;
