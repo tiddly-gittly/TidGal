@@ -12,7 +12,7 @@ export const backToTitle = () => {
   // 清除语音
   setStage({ key: 'playVocal', value: '' });
   // 重新打开标题界面
-  dispatch(setVisibility({ component: 'showTitle', visibility: true }));
+  setVisibility({ component: 'showTitle', visibility: true });
   /**
    * 重设为标题背景
    */

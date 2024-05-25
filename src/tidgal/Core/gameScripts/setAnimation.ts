@@ -13,7 +13,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
  * @param sentence
  */
 export const setAnimation = (sentence: ISentence): IPerform => {
-  const startDialogKey = webgalStore.getState().stage.currentDialogKey;
+  const startDialogKey = getStage().currentDialogKey;
   const animationName = sentence.content;
   const animationDuration = getAnimateDuration(animationName);
   const target = (getSentenceArgByKey(sentence, 'target')?.toString() ?? 'default_id').toString();
@@ -29,7 +29,7 @@ export const setAnimation = (sentence: ISentence): IPerform => {
   }, 0);
   stopFunction = () => {
     setTimeout(() => {
-      const endDialogKey = webgalStore.getState().stage.currentDialogKey;
+      const endDialogKey = getStage().currentDialogKey;
       const isHasNext = startDialogKey !== endDialogKey;
       WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects(key);
     }, 0);

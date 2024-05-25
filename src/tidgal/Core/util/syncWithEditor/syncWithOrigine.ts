@@ -4,17 +4,15 @@ import { resetStage } from 'src/tidgal/Core/controller/stage/resetStage';
 import { sceneParser } from 'src/tidgal/Core/parser/sceneParser';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../logger';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 
 export const syncWithOrigine = (sceneName: string, sentenceId: number) => {
   logger.log('正在跳转到' + sceneName + ':' + sentenceId);
-  const dispatch = webgalStore.dispatch;
-  dispatch(setVisibility({ component: 'showTitle', visibility: false }));
-  dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
-  dispatch(setVisibility({ component: 'isShowLogo', visibility: false }));
+  setVisibility({ component: 'showTitle', visibility: false });
+  setVisibility({ component: 'showMenuPanel', visibility: false });
+  setVisibility({ component: 'isShowLogo', visibility: false });
   const title = document.querySelector('#Title_enter_page');
   if (title) {
     title.style.display = 'none';

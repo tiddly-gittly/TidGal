@@ -39,7 +39,7 @@ export const webSocketFunc = () => {
             scene: WebGAL.sceneManager.sceneData.currentScene.sceneName,
             sentence: WebGAL.sceneManager.sceneData.currentSentenceId,
           },
-          stageSyncMsg: webgalStore.getState().stage,
+          stageSyncMsg: getStage(),
           message: 'sync',
         },
       };

@@ -37,39 +37,58 @@ const setGuiState = (newState: IGuiState) => {
   $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(newState) });
 };
 
-export const guiActions = {
-  /**
-   * 设置GUI的各组件的显示状态
-   * @param action 改变显示状态的Action
-   */
-  setVisibility: (action: setVisibilityPayload) => {
-    const prevState = getGuiState();
-    const { component, visibility } = action;
-    prevState[component] = visibility;
-    setGuiState(prevState);
-  },
-  /**
-   * 设置MenuPanel的当前选中项
-   * @param action 改变当前选中项的Action
-   */
-  setMenuPanelTag: (action: MenuPanelTag) => {
-    const prevState = getGuiState();
-    prevState.currentMenuTag = action;
-    setGuiState(prevState);
-  },
-  /**
-   * 设置GUI资源的值
-   * @param action 改变资源的Action
-   */
-  setGuiAsset: (action: setAssetPayload) => {
-    const prevState = getGuiState();
-    const { asset, value } = action;
-    prevState[asset] = value;
-    setGuiState(prevState);
-  },
-  setLogoImage: (action: string[]) => {
-    const prevState = getGuiState();
-    prevState.logoImage = [...action];
-    setGuiState(prevState);
-  },
+/**
+ * 设置GUI的各组件的显示状态
+ * @param action 改变显示状态的Action
+ */
+export const setVisibility = (action: setVisibilityPayload) => {
+  // 获取当前的GUI状态
+  const prevState = getGuiState();
+  // 从Action中获取组件和显示状态
+  const { component, visibility } = action;
+  // 更新GUI状态中的组件显示状态
+  prevState[component] = visibility;
+  // 设置更新后的GUI状态
+  setGuiState(prevState);
+};
+
+/**
+ * 设置MenuPanel的当前选中项
+ * @param action 改变当前选中项的Action
+ */
+export const setMenuPanelTag = (action: MenuPanelTag) => {
+  // 获取当前的GUI状态
+  const prevState = getGuiState();
+  // 更新GUI状态中的当前选中项
+  prevState.currentMenuTag = action;
+  // 设置更新后的GUI状态
+  setGuiState(prevState);
+};
+
+/**
+ * 设置GUI资源的值
+ * @param action 改变资源的Action
+ */
+export const setGuiAsset = (action: setAssetPayload) => {
+  // 获取当前的GUI状态
+  const prevState = getGuiState();
+  // 从Action中获取资源和值
+  const { asset, value } = action;
+  // 更新GUI状态中的资源值
+  prevState[asset] = value;
+  // 设置更新后的GUI状态
+  setGuiState(prevState);
+};
+
+/**
+ * 设置Logo图片
+ * @param action 新的Logo图片数组
+ */
+export const setLogoImage = (action: string[]) => {
+  // 获取当前的GUI状态
+  const prevState = getGuiState();
+  // 更新GUI状态中的Logo图片
+  prevState.logoImage = [...action];
+  // 设置更新后的GUI状态
+  setGuiState(prevState);
 };

@@ -1,8 +1,9 @@
+/* eslint-disable prefer-const */
 import { ITransform } from 'src/tidgal/store/stageInterface';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage } from 'src/tidgal/store/stageReducer';
 
-type AnimationFrame = ITransform & { duration: number };
-type AnimationObject = AnimationFrame[];
+export type AnimationFrame = ITransform & { duration: number };
+export type AnimationObject = AnimationFrame[];
 
 export function generateTransformAnimationObj(
   target: string,
@@ -11,7 +12,7 @@ export function generateTransformAnimationObj(
 ): AnimationObject {
   let animationObject;
   // 获取那个 target 的当前变换
-  const transformState = webgalStore.getState().stage.effects;
+  const transformState = getStage().effects;
   const targetEffect = transformState.find((effect) => effect.target === target);
   applyFrame.duration = 500;
   if (duration && typeof duration === 'number') {
@@ -20,7 +21,7 @@ export function generateTransformAnimationObj(
   animationObject = [applyFrame];
   // 找到 effect
   if (targetEffect) {
-    const effectWithDuration = { ...targetEffect!.transform!, duration: 0 };
+    const effectWithDuration = { ...targetEffect.transform!, duration: 0 };
     animationObject.unshift(effectWithDuration);
   } else {
     // 应用默认effect，也就是最终的 effect 的 alpha = 0 版本

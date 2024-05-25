@@ -135,7 +135,7 @@ export const scriptExecutor = () => {
    */
   setTimeout(() => {
     // 同步当前舞台数据
-    currentStageState = webgalStore.getState().stage;
+    currentStageState = getStage();
     const allState = {
       currentStageState,
       globalGameVar: webgalStore.getState().userData.globalGameVar,

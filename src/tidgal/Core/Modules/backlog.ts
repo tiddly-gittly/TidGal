@@ -42,7 +42,7 @@ export class BacklogManager {
 
   public saveCurrentStateToBacklog() {
     // 存一下 Backlog
-    const currentStageState = webgalStore.getState().stage;
+    const currentStageState = getStage();
     const stageStateToBacklog = cloneDeep(currentStageState);
     stageStateToBacklog.PerformList.forEach((ele) => {
       ele.script.args.forEach((argelement) => {

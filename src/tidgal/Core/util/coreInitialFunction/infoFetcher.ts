@@ -21,7 +21,6 @@ declare global {
  */
 export const infoFetcher = (url: string) => {
   const GUIState = webgalStore.getState().GUI;
-  const dispatch = webgalStore.dispatch;
   axios.get(url).then((r) => {
     const gameConfigRaw: string = r.data;
     const gameConfig = WebgalParser.parseConfig(gameConfigRaw);
@@ -34,20 +33,20 @@ export const infoFetcher = (url: string) => {
         switch (command) {
           case 'Title_img': {
             const titleUrl = assetSetter(args.join(''), fileType.background);
-            dispatch(setGuiAsset({ asset: 'titleBg', value: titleUrl }));
+            setGuiAsset({ asset: 'titleBg', value: titleUrl });
             setEbg(titleUrl);
             break;
           }
 
           case 'Game_Logo': {
             const logoUrlList = args.map((url) => assetSetter(url, fileType.background));
-            dispatch(setLogoImage(logoUrlList));
+            setLogoImage(logoUrlList);
             break;
           }
 
           case 'Title_bgm': {
             const bgmUrl = assetSetter(args[0], fileType.bgm);
-            dispatch(setGuiAsset({ asset: 'titleBgm', value: bgmUrl }));
+            setGuiAsset({ asset: 'titleBgm', value: bgmUrl });
             break;
           }
 

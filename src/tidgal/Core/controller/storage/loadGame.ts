@@ -67,8 +67,8 @@ export function loadGameFromStageData(stageData: ISaveData) {
   setTimeout(restorePerform, 0);
   // restorePerform();
 
-  dispatch(setVisibility({ component: 'showTitle', visibility: false }));
-  dispatch(setVisibility({ component: 'showMenuPanel', visibility: false }));
+  setVisibility({ component: 'showTitle', visibility: false });
+  setVisibility({ component: 'showMenuPanel', visibility: false });
   /**
    * 恢复模糊背景
    */

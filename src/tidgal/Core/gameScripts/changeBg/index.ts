@@ -1,12 +1,13 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
-// import {getRandomPerformName} from '../../../util/getRandomPerformName';
+import { AnimationFrame, generateTransformAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
 import { getAnimateDuration } from 'src/tidgal/Core/Modules/animationFunctions';
 import { IUserAnimation } from 'src/tidgal/Core/Modules/animations';
+import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { ITransform } from 'src/tidgal/store/stageInterface';
 import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
 import { unlockCgInUserData } from 'src/tidgal/store/userDataReducer';
+import { WebGAL } from '../../WebGAL';
 
 /**
  * 进行背景图片的切换
@@ -26,13 +27,12 @@ export const changeBg = (sentence: ISentence): IPerform => {
     }
   });
 
-  const dispatch = webgalStore.dispatch;
-  if (name !== '') dispatch(unlockCgInUserData({ name, url, series }));
+  if (name !== '') unlockCgInUserData({ name, url, series });
 
   /**
    * 删掉相关 Effects，因为已经移除了
    */
-  dispatch(stageActions.removeEffectByTargetId(`bg-main`));
+  stageActions.removeEffectByTargetId(`bg-main`);
 
   // 处理 transform 和 默认 transform
   const transformString = getSentenceArgByKey(sentence, 'transform');
@@ -47,7 +47,7 @@ export const changeBg = (sentence: ISentence): IPerform => {
   >;
   if (transformString) {
     try {
-      const frame = JSON.parse(transformString.toString());
+      const frame = JSON.parse(transformString.toString()) as AnimationFrame;
       animationObject = generateTransformAnimationObj('bg-main', frame, duration);
       // 因为是切换，必须把一开始的 alpha 改为 0
       animationObject[0].alpha = 0;

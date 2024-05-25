@@ -16,7 +16,7 @@ import { IUserAnimation } from '../Modules/animations';
  * @param sentence
  */
 export const setTransform = (sentence: ISentence): IPerform => {
-  const startDialogKey = webgalStore.getState().stage.currentDialogKey;
+  const startDialogKey = getStage().currentDialogKey;
   const animationName = (Math.random() * 10).toString(16);
   const animationString = sentence.content;
   let animationObject: Array<
@@ -50,7 +50,7 @@ export const setTransform = (sentence: ISentence): IPerform => {
   }, 0);
   stopFunction = () => {
     setTimeout(() => {
-      const endDialogKey = webgalStore.getState().stage.currentDialogKey;
+      const endDialogKey = getStage().currentDialogKey;
       const isHasNext = startDialogKey !== endDialogKey;
       WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects(key);
     }, 0);

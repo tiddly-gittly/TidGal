@@ -32,7 +32,7 @@ export async function continueGame() {
   /**
    * 重设模糊背景
    */
-  setEbg(webgalStore.getState().stage.bgName);
+  setEbg(getStage().bgName);
   // 当且仅当游戏未开始时使用快速存档
   // 当游戏开始后 使用原来的逻辑
   if ((await hasFastSaveRecord()) && WebGAL.sceneManager.sceneData.currentSentenceId === 0) {

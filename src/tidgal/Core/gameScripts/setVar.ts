@@ -64,7 +64,7 @@ export const setVar = (sentence: ISentence): IPerform => {
       logger.debug('设置全局变量：', { key, value: webgalStore.getState().userData.globalGameVar[key] });
       dumpToStorageFast();
     } else {
-      logger.debug('设置变量：', { key, value: webgalStore.getState().stage.GameVar[key] });
+      logger.debug('设置变量：', { key, value: getStage().GameVar[key] });
     }
   }
   return {
@@ -80,8 +80,8 @@ export const setVar = (sentence: ISentence): IPerform => {
 
 export function getValueFromState(key: string) {
   let returnValue: number | string | boolean = 0;
-  if (webgalStore.getState().stage.GameVar.hasOwnProperty(key)) {
-    returnValue = webgalStore.getState().stage.GameVar[key];
+  if (getStage().GameVar.hasOwnProperty(key)) {
+    returnValue = getStage().GameVar[key];
   } else if (webgalStore.getState().userData.globalGameVar.hasOwnProperty(key)) {
     returnValue = webgalStore.getState().userData.globalGameVar[key];
   }

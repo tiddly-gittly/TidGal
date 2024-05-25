@@ -4,7 +4,6 @@ import { animate } from 'popmotion';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { ITransform } from 'src/tidgal/store/stageInterface';
 import { stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 动画创建模板

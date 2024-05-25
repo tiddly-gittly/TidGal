@@ -1,7 +1,6 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 语句执行的模板代码

@@ -6,7 +6,6 @@ import { scenePrefetcher } from 'src/tidgal/Core/util/prefetcher/scenePrefetcher
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
 import { IStageState } from 'src/tidgal/store/stageInterface';
 import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 import { sceneParser } from '../../parser/sceneParser';
 import { logger } from '../../util/logger';
 import { sceneFetcher } from '../scene/sceneFetcher';
@@ -63,13 +62,12 @@ export const jumpFromBacklog = (index: number) => {
 
   stageActions.resetStageState(newStageState);
 
-
   // 恢复演出
   setTimeout(restorePerform, 0);
 
   // 关闭backlog界面
-  dispatch(setVisibility({ component: 'showBacklog', visibility: false }));
+  setVisibility({ component: 'showBacklog', visibility: false });
 
   // 重新显示 TextBox
-  dispatch(setVisibility({ component: 'showTextBox', visibility: true }));
+  setVisibility({ component: 'showTextBox', visibility: true });
 };

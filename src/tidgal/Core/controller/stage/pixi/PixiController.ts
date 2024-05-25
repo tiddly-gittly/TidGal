@@ -6,7 +6,6 @@ import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { IEffect, IFigureAssociatedAnimation } from 'src/tidgal/store/stageInterface';
 import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 import { v4 as uuid } from 'uuid';
 import 'pixi-spine'; // Do this once at the very start of your code. This registers the loader!
 import { Spine } from 'pixi-spine';
@@ -255,7 +254,7 @@ export default class PixiStage {
             transform: targetTransform,
           };
           stageActions.updateEffect(effect);
-          // if (!this.notUpdateBacklogEffects) updateCurrentBacklogEffects(webgalStore.getState().stage.effects);
+          // if (!this.notUpdateBacklogEffects) updateCurrentBacklogEffects(getStage().effects);
         }
       }
       this.stageAnimations.splice(index, 1);
@@ -696,8 +695,8 @@ export default class PixiStage {
   //           /**
   //            * 检查 Motion 和 Expression
   //            */
-  //           const motionFromState = webgalStore.getState().stage.live2dMotion.find((e) => e.target === key);
-  //           const expressionFromState = webgalStore.getState().stage.live2dExpression.find((e) => e.target === key);
+  //           const motionFromState = getStage().live2dMotion.find((e) => e.target === key);
+  //           const expressionFromState = getStage().live2dExpression.find((e) => e.target === key);
   //           if (motionFromState) {
   //             motionToSet = motionFromState.motion;
   //           }
@@ -849,7 +848,7 @@ export default class PixiStage {
     // /**
     //  * 删掉相关 Effects，因为已经移除了
     //  */
-    // const prevEffects = webgalStore.getState().stage.effects;
+    // const prevEffects = getStage().effects;
     // const newEffects = __.cloneDeep(prevEffects);
     // const index = newEffects.findIndex((e) => e.target === key);
     // if (index >= 0) {

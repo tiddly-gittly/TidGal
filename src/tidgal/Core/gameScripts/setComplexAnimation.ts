@@ -13,7 +13,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
  * @param sentence
  */
 export const setComplexAnimation = (sentence: ISentence): IPerform => {
-  const startDialogKey = webgalStore.getState().stage.currentDialogKey;
+  const startDialogKey = getStage().currentDialogKey;
   const animationName = sentence.content;
   const animationDuration = (getSentenceArgByKey(sentence, 'duration') ?? 0) as number;
   const target = getSentenceArgByKey(sentence, 'target')?.toString() ?? '0';
@@ -26,7 +26,7 @@ export const setComplexAnimation = (sentence: ISentence): IPerform => {
     WebGAL.gameplay.pixiStage?.stopPresetAnimationOnTarget(target);
     WebGAL.gameplay.pixiStage?.registerAnimation(animationObject, key, target);
     stopFunction = () => {
-      const endDialogKey = webgalStore.getState().stage.currentDialogKey;
+      const endDialogKey = getStage().currentDialogKey;
       const isHasNext = startDialogKey !== endDialogKey;
       WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects(key);
     };

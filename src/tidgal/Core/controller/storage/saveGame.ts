@@ -19,7 +19,7 @@ export const saveGame = (index: number) => {
  * @param index 游戏的档位
  */
 export function generateCurrentStageData(index: number, isSavePreviewImage = true) {
-  const stageState = webgalStore.getState().stage;
+  const stageState = getStage();
   const saveBacklog = cloneDeep(WebGAL.backlogManager.getBacklog());
 
   /**

@@ -17,20 +17,19 @@ import { webgalStore } from 'src/tidgal/store/store';
  */
 export const end = (sentence: ISentence): IPerform => {
   resetStage(true);
-  const dispatch = webgalStore.dispatch;
   // 重新获取初始场景
   const sceneUrl: string = assetSetter('start.txt', fileType.scene);
   // 为了在 scriptExecutor 自增 sentenceId 后再重置场景
   setTimeout(() => {
     WebGAL.sceneManager.resetScene();
   }, 5);
-  dispatch(saveActions.resetFastSave());
+  saveActions.resetFastSave();
   dumpToStorageFast();
   sceneFetcher(sceneUrl).then((rawScene) => {
     // 场景写入到运行时
     WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
   });
-  dispatch(setVisibility({ component: 'showTitle', visibility: true }));
+  setVisibility({ component: 'showTitle', visibility: true });
   playBgm(webgalStore.getState().GUI.titleBgm);
   return {
     performName: 'none',

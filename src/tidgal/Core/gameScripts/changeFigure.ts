@@ -7,7 +7,6 @@ import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/ass
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getStage, setStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 /**
  * 更改立绘
  * @param sentence 语句
@@ -220,12 +219,12 @@ export function changeFigure(sentence: ISentence): IPerform {
     const freeFigureItem: IFreeFigure = { key, name: content, basePosition: pos };
     setAnimationNames(key, sentence);
     if (motion) {
-      dispatch(stageActions.setLive2dMotion({ target: key, motion }));
+      stageActions.setLive2dMotion({ target: key, motion });
     }
     if (expression) {
-      dispatch(stageActions.setLive2dExpression({ target: key, expression }));
+      stageActions.setLive2dExpression({ target: key, expression });
     }
-    dispatch(stageActions.setFreeFigureByKey(freeFigureItem));
+    stageActions.setFreeFigureByKey(freeFigureItem);
   } else {
     const positionMap = {
       center: 'fig-center',
@@ -241,10 +240,10 @@ export function changeFigure(sentence: ISentence): IPerform {
     key = positionMap[pos];
     setAnimationNames(key, sentence);
     if (motion) {
-      dispatch(stageActions.setLive2dMotion({ target: key, motion }));
+      stageActions.setLive2dMotion({ target: key, motion });
     }
     if (expression) {
-      dispatch(stageActions.setLive2dExpression({ target: key, expression }));
+      stageActions.setLive2dExpression({ target: key, expression });
     }
     setStage({ key: dispatchMap[pos], value: content });
   }
