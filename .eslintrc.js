@@ -8,4 +8,10 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   extends: ['eslint-config-tidgi'],
+  rules: {
+    'unicorn/prevent-abbreviations': 'off',
+    '@typescript-eslint/strict-boolean-expressions': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+  },
 };

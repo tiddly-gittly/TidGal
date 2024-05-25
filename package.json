@@ -35,6 +35,7 @@
   "devDependencies": {
     "@modern-js/tsconfig": "^2.50.0",
     "@types/jasmine": "^5.1.4",
+    "@types/lodash": "^4.17.4",
     "@types/node": "^20.12.12",
     "dprint": "^0.45.1",
     "eslint-config-tidgi": "^1.2.3",
@@ -47,8 +48,22 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@pixi/filter-dot": "^4.2.0",
+    "@pixi/filter-glitch": "^4.2.0",
+    "@pixi/filter-godray": "^4.2.0",
+    "@pixi/filter-old-film": "^4.2.0",
+    "@pixi/filter-reflection": "^4.2.0",
+    "@pixi/filter-rgb-split": "^4.2.0",
+    "lodash": "^4.17.21",
+    "mitt": "^3.0.1",
     "npm-check-updates": "^16.14.20",
+    "pixi-filters": "^4.2.0",
+    "pixi-live2d-display": "^0.4.0",
+    "pixi-spine": "^3.1.2",
+    "pixi.js": "^6.3.0",
     "tiddlywiki": "^5.3.3",
-    "tiddlywiki-plugin-dev": "^0.2.0"
+    "tiddlywiki-plugin-dev": "^0.2.0",
+    "uuid": "^9.0.1",
+    "webgal-parser": "^4.4.15"
   }
 }
