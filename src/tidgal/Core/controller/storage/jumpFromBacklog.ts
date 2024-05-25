@@ -5,7 +5,7 @@ import { stopAllPerform } from 'src/tidgal/Core/controller/gamePlay/stopAllPerfo
 import { scenePrefetcher } from 'src/tidgal/Core/util/prefetcher/scenePrefetcher';
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
 import { IStageState } from 'src/tidgal/store/stageInterface';
-import { resetStageState } from 'src/tidgal/store/stageReducer';
+import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
 import { webgalStore } from 'src/tidgal/store/store';
 import { sceneParser } from '../../parser/sceneParser';
 import { logger } from '../../util/logger';
@@ -17,7 +17,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
  * 恢复演出
  */
 export const restorePerform = () => {
-  const stageState = webgalStore.getState().stage;
+  const stageState = getStage();
   stageState.PerformList.forEach((e) => {
     runScript(e.script);
   });
@@ -28,7 +28,6 @@ export const restorePerform = () => {
  * @param index
  */
 export const jumpFromBacklog = (index: number) => {
-  const dispatch = webgalStore.dispatch;
   // 获得存档文件
   const backlogFile = WebGAL.backlogManager.getBacklog()[index];
   logger.debug('读取的backlog数据', backlogFile);
@@ -62,7 +61,8 @@ export const jumpFromBacklog = (index: number) => {
   // 恢复舞台状态
   const newStageState: IStageState = cloneDeep(backlogFile.currentStageState);
 
-  dispatch(resetStageState(newStageState));
+  stageActions.resetStageState(newStageState);
+
 
   // 恢复演出
   setTimeout(restorePerform, 0);

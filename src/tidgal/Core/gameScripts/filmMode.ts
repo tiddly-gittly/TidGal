@@ -1,7 +1,6 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 语句执行的模板代码
@@ -9,9 +8,9 @@ import { webgalStore } from 'src/tidgal/store/store';
  */
 export const filmMode = (sentence: ISentence): IPerform => {
   if (sentence.content !== '' && sentence.content !== 'none') {
-    webgalStore.dispatch(setStage({ key: 'enableFilm', value: sentence.content }));
+    setStage({ key: 'enableFilm', value: sentence.content });
   } else {
-    webgalStore.dispatch(setStage({ key: 'enableFilm', value: '' }));
+    setStage({ key: 'enableFilm', value: '' });
   }
   return {
     performName: 'none',

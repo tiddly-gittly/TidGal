@@ -1,7 +1,6 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 /**
  * 显示小头像
@@ -12,7 +11,7 @@ export const miniAvatar = (sentence: ISentence): IPerform => {
   if (sentence.content === 'none' || sentence.content === '') {
     content = '';
   }
-  webgalStore.dispatch(setStage({ key: 'miniAvatar', value: content }));
+  setStage({ key: 'miniAvatar', value: content });
   return {
     performName: 'none',
     duration: 0,

@@ -4,8 +4,7 @@ import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { IStageState } from 'src/tidgal/store/stageInterface';
-import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 import { match } from '../../util/match';
 
 /**
@@ -15,10 +14,9 @@ import { match } from '../../util/match';
 export const playVocal = (sentence: ISentence) => {
   logger.debug('play vocal');
   const performInitName = 'vocal-play';
-  const url = getSentenceArgByKey(sentence, 'vocal'); // 获取语音的url
-  const volume = getSentenceArgByKey(sentence, 'volume'); // 获取语音的音量比
-  let currentStageState: IStageState;
-  currentStageState = webgalStore.getState().stage;
+  const url = getSentenceArgByKey(sentence, 'vocal') as string; // 获取语音的url
+  const volume = getSentenceArgByKey(sentence, 'volume') as number; // 获取语音的音量比
+  const currentStageState: IStageState = getStage();
   let pos = '';
   let key = '';
   const freeFigure = currentStageState.freeFigure;
@@ -54,8 +52,8 @@ export const playVocal = (sentence: ISentence) => {
   }
 
   // 获得舞台状态
-  webgalStore.dispatch(setStage({ key: 'playVocal', value: url }));
-  webgalStore.dispatch(setStage({ key: 'vocal', value: url }));
+  setStage({ key: 'playVocal', value: url });
+  setStage({ key: 'vocal', value: url });
 
   let isOver = false;
 
@@ -67,11 +65,11 @@ export const playVocal = (sentence: ISentence) => {
     arrangePerformPromise: new Promise((resolve) => {
       // 播放语音
       setTimeout(() => {
-        const VocalControl: any = document.querySelector('#currentVocal');
+        const VocalControl: any = document.querySelector<HTMLAudioElement>('#currentVocal');
         // 设置语音音量
         typeof volume === 'number' && volume >= 0 && volume <= 100
-          ? webgalStore.dispatch(setStage({ key: 'vocalVolume', value: volume }))
-          : webgalStore.dispatch(setStage({ key: 'vocalVolume', value: 100 }));
+          ? setStage({ key: 'vocalVolume', value: volume })
+          : setStage({ key: 'vocalVolume', value: 100 });
         // 设置语音
         if (VocalControl !== null) {
           VocalControl.currentTime = 0;

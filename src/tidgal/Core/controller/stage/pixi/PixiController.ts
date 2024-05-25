@@ -254,7 +254,7 @@ export default class PixiStage {
             target: thisTickerFunction.targetKey,
             transform: targetTransform,
           };
-          webgalStore.dispatch(stageActions.updateEffect(effect));
+          stageActions.updateEffect(effect);
           // if (!this.notUpdateBacklogEffects) updateCurrentBacklogEffects(webgalStore.getState().stage.effects);
         }
       }
@@ -951,7 +951,7 @@ function updateCurrentBacklogEffects(newEffects: IEffect[]) {
     WebGAL.backlogManager.editLastBacklogItemEffect(cloneDeep(newEffects));
   }, 50);
 
-  webgalStore.dispatch(setStage({ key: 'effects', value: newEffects }));
+  setStage({ key: 'effects', value: newEffects });
 }
 
 /**
@@ -966,7 +966,7 @@ const getScreenFps = (() => {
     window.webkitRequestAnimationFrame,
     // @ts-expect-error
     window.mozRequestAnimationFrame,
-  ].find(Boolean);
+  ].find(Boolean) as typeof window.requestAnimationFrame;
   if (!nextFrame) {
     console.error('requestAnimationFrame is not supported!');
     return;

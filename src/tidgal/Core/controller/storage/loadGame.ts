@@ -4,7 +4,7 @@ import { stopAllPerform } from 'src/tidgal/Core/controller/gamePlay/stopAllPerfo
 import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
 import { scenePrefetcher } from 'src/tidgal/Core/util/prefetcher/scenePrefetcher';
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
-import { resetStageState } from 'src/tidgal/store/stageReducer';
+import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
 import { webgalStore } from 'src/tidgal/store/store';
 import { ISaveData } from 'src/tidgal/store/userDataInterface';
 import { sceneParser } from '../../parser/sceneParser';
@@ -61,8 +61,7 @@ export function loadGameFromStageData(stageData: ISaveData) {
 
   // 恢复舞台状态
   const newStageState = cloneDeep(loadFile.nowStageState);
-  const dispatch = webgalStore.dispatch;
-  dispatch(resetStageState(newStageState));
+  stageActions.resetStageState(newStageState);
 
   // 恢复演出
   setTimeout(restorePerform, 0);
@@ -73,5 +72,5 @@ export function loadGameFromStageData(stageData: ISaveData) {
   /**
    * 恢复模糊背景
    */
-  setEbg(webgalStore.getState().stage.bgName);
+  setEbg(getStage().bgName);
 }

@@ -1,7 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { initState, resetStageState, setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage, initState, setStage, stageActions } from 'src/tidgal/store/stageReducer';
 
 export const resetStage = (resetBacklog: boolean, resetSceneAndVariable = true) => {
   /**
@@ -21,9 +20,9 @@ export const resetStage = (resetBacklog: boolean, resetSceneAndVariable = true) 
 
   // 清空舞台状态表
   const initSceneDataCopy = cloneDeep(initState);
-  const currentVariables = webgalStore.getState().stage.GameVar;
-  webgalStore.dispatch(resetStageState(initSceneDataCopy));
+  const currentVariables = getStage().GameVar;
+  stageActions.resetStageState(initSceneDataCopy);
   if (!resetSceneAndVariable) {
-    webgalStore.dispatch(setStage({ key: 'GameVar', value: currentVariables }));
+    setStage({ key: 'GameVar', value: currentVariables });
   }
 };

@@ -6,7 +6,7 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
+import { getStage, setStage, stageActions } from 'src/tidgal/store/stageReducer';
 import { webgalStore } from 'src/tidgal/store/store';
 /**
  * 更改立绘
@@ -27,10 +27,9 @@ export function changeFigure(sentence: ISentence): IPerform {
   let mouthHalfOpen = '';
   let eyesOpen = '';
   let eyesClose = '';
-  let animationFlag: any = '';
-  let mouthAnimationKey: any = 'mouthAnimation';
-  let eyesAnimationKey: any = 'blinkAnimation';
-  const dispatch = webgalStore.dispatch;
+  let animationFlag = '';
+  let mouthAnimationKey = 'mouthAnimation';
+  let eyesAnimationKey = 'blinkAnimation';
 
   for (const e of sentence.args) {
     switch (e.key) {
@@ -110,7 +109,7 @@ export function changeFigure(sentence: ISentence): IPerform {
 
   const id = key || `fig-${pos}`;
 
-  const currentFigureAssociatedAnimation = webgalStore.getState().stage.figureAssociatedAnimation;
+  const currentFigureAssociatedAnimation = getStage().figureAssociatedAnimation;
   const filteredFigureAssociatedAnimation = currentFigureAssociatedAnimation.filter((item) => item.targetId !== id);
   const newFigureAssociatedAnimationItem = {
     targetId: id,
@@ -126,24 +125,24 @@ export function changeFigure(sentence: ISentence): IPerform {
     },
   };
   filteredFigureAssociatedAnimation.push(newFigureAssociatedAnimationItem);
-  dispatch(setStage({ key: 'figureAssociatedAnimation', value: filteredFigureAssociatedAnimation }));
+  setStage({ key: 'figureAssociatedAnimation', value: filteredFigureAssociatedAnimation });
 
   /**
    * 如果 url 没变，不移除
    */
   let isRemoveEffects = true;
   if (key === '') {
-    if (pos === 'center' && webgalStore.getState().stage.figName === sentence.content) {
+    if (pos === 'center' && getStage().figName === sentence.content) {
       isRemoveEffects = false;
     }
-    if (pos === 'left' && webgalStore.getState().stage.figNameLeft === sentence.content) {
+    if (pos === 'left' && getStage().figNameLeft === sentence.content) {
       isRemoveEffects = false;
     }
-    if (pos === 'right' && webgalStore.getState().stage.figNameRight === sentence.content) {
+    if (pos === 'right' && getStage().figNameRight === sentence.content) {
       isRemoveEffects = false;
     }
   } else {
-    const figWithKey = webgalStore.getState().stage.freeFigure.find((e) => e.key === key);
+    const figWithKey = getStage().freeFigure.find((e) => e.key === key);
     if (figWithKey && figWithKey.name === sentence.content) {
       isRemoveEffects = false;
     }
@@ -213,7 +212,7 @@ export function changeFigure(sentence: ISentence): IPerform {
     }
   };
   if (isFreeFigure) {
-    const currentFreeFigures = webgalStore.getState().stage.freeFigure;
+    const currentFreeFigures = getStage().freeFigure;
 
     /**
      * 重设
@@ -247,7 +246,7 @@ export function changeFigure(sentence: ISentence): IPerform {
     if (expression) {
       dispatch(stageActions.setLive2dExpression({ target: key, expression }));
     }
-    dispatch(setStage({ key: dispatchMap[pos], value: content }));
+    setStage({ key: dispatchMap[pos], value: content });
   }
 
   return {

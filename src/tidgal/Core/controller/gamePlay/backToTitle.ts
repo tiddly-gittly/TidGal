@@ -4,15 +4,13 @@ import { stopAllPerform } from 'src/tidgal/Core/controller/gamePlay/stopAllPerfo
 import { setEbg } from 'src/tidgal/Core/gameScripts/changeBg/setEbg';
 import { setVisibility } from 'src/tidgal/store/GUIReducer';
 import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 
 export const backToTitle = () => {
-  const dispatch = webgalStore.dispatch;
   stopAllPerform();
   stopAuto();
   stopFast();
   // 清除语音
-  dispatch(setStage({ key: 'playVocal', value: '' }));
+  setStage({ key: 'playVocal', value: '' });
   // 重新打开标题界面
   dispatch(setVisibility({ component: 'showTitle', visibility: true }));
   /**

@@ -3,10 +3,9 @@ import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performCon
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { useTextDelay } from 'src/tidgal/Corehooks/useTextOptions';
-import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 import { textSize, voiceOption } from 'src/tidgal/store/userDataInterface';
+import { getTextDelay } from 'src/tidgal/utils/getTextDelay';
 import { playVocal } from './vocal';
 
 /**
@@ -15,9 +14,8 @@ import { playVocal } from './vocal';
  * @return {IPerform} 执行的演出
  */
 export const say = (sentence: ISentence): IPerform => {
-  const stageState = webgalStore.getState().stage;
+  const stageState = getStage();
   const userDataState = webgalStore.getState().userData;
-  const dispatch = webgalStore.dispatch;
   let dialogKey = Math.random().toString(); // 生成一个随机的key
   let dialogToShow = sentence.content; // 获取对话内容
   const isConcat = getSentenceArgByKey(sentence, 'concat'); // 是否是继承语句
@@ -30,25 +28,25 @@ export const say = (sentence: ISentence): IPerform => {
   if (isConcat) {
     dialogKey = stageState.currentDialogKey;
     dialogToShow = stageState.showText + dialogToShow;
-    dispatch(setStage({ key: 'currentConcatDialogPrev', value: stageState.showText }));
+    setStage({ key: 'currentConcatDialogPrev', value: stageState.showText });
   } else {
-    dispatch(setStage({ key: 'currentConcatDialogPrev', value: '' }));
+    setStage({ key: 'currentConcatDialogPrev', value: '' });
   }
 
   // 设置文本显示
-  dispatch(setStage({ key: 'showText', value: dialogToShow }));
-  dispatch(setStage({ key: 'vocal', value: '' }));
+  setStage({ key: 'showText', value: dialogToShow });
+  setStage({ key: 'vocal', value: '' });
 
   // 清除语音
   if (!(userDataState.optionData.voiceInterruption === voiceOption.no && vocal === null)) {
     // 只有开关设置为不中断，并且没有语音的时候，才需要不中断
-    dispatch(setStage({ key: 'playVocal', value: '' }));
+    setStage({ key: 'playVocal', value: '' });
     WebGAL.gameplay.performController.unmountPerform('vocal-play', true);
   }
   // 设置key
-  dispatch(setStage({ key: 'currentDialogKey', value: dialogKey }));
+  setStage({ key: 'currentDialogKey', value: dialogKey });
   // 计算延迟
-  const textDelay = useTextDelay(userDataState.optionData.textSpeed);
+  const textDelay = getTextDelay(userDataState.optionData.textSpeed);
   // 本句延迟
   const sentenceDelay = textDelay * sentence.content.length;
 
@@ -56,19 +54,19 @@ export const say = (sentence: ISentence): IPerform => {
     if (e.key === 'fontSize') {
       switch (e.value) {
         case 'default': {
-          dispatch(setStage({ key: 'showTextSize', value: -1 }));
+          setStage({ key: 'showTextSize', value: -1 });
           break;
         }
         case 'small': {
-          dispatch(setStage({ key: 'showTextSize', value: textSize.small }));
+          setStage({ key: 'showTextSize', value: textSize.small });
           break;
         }
         case 'medium': {
-          dispatch(setStage({ key: 'showTextSize', value: textSize.medium }));
+          setStage({ key: 'showTextSize', value: textSize.medium });
           break;
         }
         case 'large': {
-          dispatch(setStage({ key: 'showTextSize', value: textSize.large }));
+          setStage({ key: 'showTextSize', value: textSize.large });
           break;
         }
       }
@@ -83,7 +81,7 @@ export const say = (sentence: ISentence): IPerform => {
   if (clear) {
     showName = '';
   }
-  dispatch(setStage({ key: 'showName', value: showName }));
+  setStage({ key: 'showName', value: showName });
 
   // 播放一段语音
   if (vocal) {

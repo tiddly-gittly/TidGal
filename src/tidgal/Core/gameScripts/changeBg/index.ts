@@ -6,7 +6,6 @@ import { IUserAnimation } from 'src/tidgal/Core/Modules/animations';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { ITransform } from 'src/tidgal/store/stageInterface';
 import { setStage, stageActions } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
 import { unlockCgInUserData } from 'src/tidgal/store/userDataReducer';
 
 /**
@@ -87,7 +86,7 @@ export const changeBg = (sentence: ISentence): IPerform => {
     WebGAL.animationManager.nextExitAnimationName.set('bg-main-off', getSentenceArgByKey(sentence, 'exit')!.toString());
     duration = getAnimateDuration(getSentenceArgByKey(sentence, 'exit')!.toString());
   }
-  dispatch(setStage({ key: 'bgName', value: sentence.content }));
+  setStage({ key: 'bgName', value: sentence.content });
 
   return {
     performName: 'none',

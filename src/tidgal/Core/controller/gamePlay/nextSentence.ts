@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { getStage, resetStageState } from 'src/tidgal/store/stageReducer';
+import { getStage, stageActions } from 'src/tidgal/store/stageReducer';
 import { webgalStore } from 'src/tidgal/store/store';
 import { logger } from '../../util/logger';
 
@@ -55,7 +55,7 @@ export const nextSentence = () => {
         index--;
       }
     }
-    webgalStore.dispatch(resetStageState(newStageState));
+    stageActions.resetStageState(newStageState);
     scriptExecutor();
     return;
   }

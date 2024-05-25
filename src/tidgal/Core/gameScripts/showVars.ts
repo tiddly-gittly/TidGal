@@ -3,7 +3,7 @@ import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performCon
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 
 /**
  * 进行普通对话的显示
@@ -11,16 +11,15 @@ import { webgalStore } from 'src/tidgal/store/store';
  * @return {IPerform} 执行的演出
  */
 export const showVars = (sentence: ISentence): IPerform => {
-  const stageState = webgalStore.getState().stage;
+  const stageState = getStage();
   const userDataState = webgalStore.getState().userData;
-  const dispatch = webgalStore.dispatch;
   // 设置文本显示
   const allVariable = {
     stageGameVar: stageState.GameVar,
     globalGameVar: userDataState.globalGameVar,
   };
-  dispatch(setStage({ key: 'showText', value: JSON.stringify(allVariable) }));
-  dispatch(setStage({ key: 'showName', value: '展示变量' }));
+  setStage({ key: 'showText', value: JSON.stringify(allVariable) });
+  setStage({ key: 'showName', value: '展示变量' });
   logger.debug('展示变量：', allVariable);
   setTimeout(() => {
     WebGAL.events.textSettle.emit();

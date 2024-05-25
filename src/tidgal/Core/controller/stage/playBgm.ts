@@ -1,6 +1,5 @@
 import { logger } from 'src/tidgal/Core/util/logger';
-import { setStage } from 'src/tidgal/store/stageReducer';
-import { webgalStore } from 'src/tidgal/store/store';
+import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 
 // /**
 //  * 停止bgm
@@ -14,7 +13,7 @@ import { webgalStore } from 'src/tidgal/store/store';
 //     if (!VocalControl.paused) VocalControl.pause();
 //   }
 //   // 获得舞台状态并设置
-//   webgalStore.dispatch(setStage({key: 'bgm', value: ''}));
+//   setStage({key: 'bgm', value: ''});
 // };
 
 let emptyBgmTimeout: ReturnType<typeof setTimeout>;
@@ -30,17 +29,17 @@ export function playBgm(url: string, enter = 0, volume = 100): void {
   if (url === '') {
     emptyBgmTimeout = setTimeout(() => {
       // 淡入淡出效果结束后，将 bgm 置空
-      webgalStore.dispatch(setStage({ key: 'bgm', value: { src: '', enter: 0, volume: 100 } }));
+      setStage({ key: 'bgm', value: { src: '', enter: 0, volume: 100 } });
     }, enter);
-    const lastSource = webgalStore.getState().stage.bgm.src;
-    webgalStore.dispatch(setStage({ key: 'bgm', value: { src: lastSource, enter: -enter, volume } }));
+    const lastSource = getStage().bgm.src;
+    setStage({ key: 'bgm', value: { src: lastSource, enter: -enter, volume } });
   } else {
     // 不要清除bgm了！
     clearTimeout(emptyBgmTimeout);
-    webgalStore.dispatch(setStage({ key: 'bgm', value: { src: url, enter, volume } }));
+    setStage({ key: 'bgm', value: { src: url, enter, volume } });
   }
-  const audioElement = document.querySelector('#currentBgm')!;
-  if (audioElement.src) {
+  const audioElement = document.querySelector<HTMLAudioElement>('#currentBgm')!;
+  if (audioElement?.src) {
     audioElement?.play();
   }
 }
