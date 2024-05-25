@@ -12,7 +12,7 @@ import { useSEByWebgalStore } from 'src/tidgal/Corehooks/useSoundEffect';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import { setStageVar } from 'src/tidgal/store/stageReducer';
+import { stageActions } from 'src/tidgal/store/stageReducer';
 
 /**
  * 显示选择枝
@@ -37,9 +37,7 @@ export const getUserInput = (sentence: ISentence): IPerform => {
           onClick={() => {
             const userInput: HTMLInputElement = document.getElementById('user-input') as HTMLInputElement;
             if (userInput) {
-              webgalStore.dispatch(
-                setStageVar({ key: varKey, value: (userInput?.value ?? '') === '' ? ' ' : userInput?.value ?? '' }),
-              );
+              stageActions.setStageVar({ key: varKey, value: (userInput?.value ?? '') === '' ? ' ' : userInput?.value ?? '' }),
             }
             playSeClick();
             WebGAL.gameplay.performController.unmountPerform('userInput');

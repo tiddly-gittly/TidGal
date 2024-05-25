@@ -10,7 +10,7 @@ import { saveActions } from 'src/tidgal/store/savesReducer';
  */
 export const saveGame = (index: number) => {
   const saveData: ISaveData = generateCurrentStageData(index);
-  webgalStore.dispatch(saveActions.saveGame({ index, saveData }));
+  saveActions.saveGame({ index, saveData });
   dumpSavesToStorage(index, index);
 };
 

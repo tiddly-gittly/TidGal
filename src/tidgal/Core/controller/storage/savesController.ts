@@ -17,7 +17,7 @@ export function dumpSavesToStorage(startIndex: number, endIndex: number) {
 export function getSavesFromStorage(startIndex: number, endIndex: number) {
   for (let index = startIndex; index <= endIndex; index++) {
     localforage.getItem(`${WebGAL.gameKey}-saves${index}`).then((save) => {
-      webgalStore.dispatch(saveActions.saveGame({ index, saveData: save as ISaveData }));
+      saveActions.saveGame({ index, saveData: save as ISaveData });
       logger.log(`存档${index}读取自本地存储`);
     });
   }
@@ -31,6 +31,6 @@ export async function dumpFastSaveToStorage() {
 
 export async function getFastSaveFromStorage() {
   const save = await localforage.getItem(`${WebGAL.gameKey}-saves-fast`);
-  webgalStore.dispatch(saveActions.setFastSave(save as ISaveData));
+  saveActions.setFastSave(save as ISaveData);
   logger.log(`快速存档读取自本地存储`);
 }

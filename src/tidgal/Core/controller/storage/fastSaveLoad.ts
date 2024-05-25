@@ -24,7 +24,7 @@ export function initKey() {
 export async function fastSaveGame() {
   const saveData: ISaveData = generateCurrentStageData(-1, false);
   const newSaveData = cloneDeep(saveData);
-  webgalStore.dispatch(saveActions.setFastSave(newSaveData));
+  saveActions.setFastSave(newSaveData);
   await dumpFastSaveToStorage();
 }
 
@@ -55,7 +55,7 @@ export async function loadFastSaveGame() {
  * 移除紧急回避的数据
  */
 export async function removeFastSaveGameRecord() {
-  webgalStore.dispatch(saveActions.resetFastSave());
+  saveActions.resetFastSave();
   await setStorageAsync();
   // await localforage.setItem(isFastSaveKey, false);
   // await localforage.setItem(fastSaveGameKey, null);

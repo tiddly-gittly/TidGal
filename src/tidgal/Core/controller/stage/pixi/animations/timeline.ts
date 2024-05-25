@@ -59,7 +59,7 @@ export function generateTimelineObj(
   }
 
   const { duration: sliceDuration, ...endState } = getEndStateEffect();
-  webgalStore.dispatch(stageActions.updateEffect({ target: targetKey, transform: endState }));
+  stageActions.updateEffect({ target: targetKey, transform: endState });
 
   /**
    * 在此书写为动画设置初态的操作

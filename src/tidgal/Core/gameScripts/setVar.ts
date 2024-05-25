@@ -5,7 +5,7 @@ import { dumpToStorageFast } from 'src/tidgal/Core/controller/storage/storageCon
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { logger } from 'src/tidgal/Core/util/logger';
 import { ISetGameVar } from 'src/tidgal/store/stageInterface';
-import { setStageVar } from 'src/tidgal/store/stageReducer';
+import { stageActions } from 'src/tidgal/store/stageReducer';
 import { webgalStore } from 'src/tidgal/store/store';
 import { setGlobalVar } from 'src/tidgal/store/userDataReducer';
 
@@ -24,14 +24,14 @@ export const setVar = (sentence: ISentence): IPerform => {
   if (setGlobal) {
     targetReducerFunction = setGlobalVar;
   } else {
-    targetReducerFunction = setStageVar;
+    targetReducerFunction = stageActions.setStageVar;
   }
   // 先把表达式拆分为变量名和赋值语句
   if (sentence.content.includes('=')) {
     const key = sentence.content.split(/=/)[0];
     const valueExp = sentence.content.split(/=/)[1];
     if (valueExp === 'random()') {
-      webgalStore.dispatch(targetReducerFunction({ key, value: Math.random() }));
+      targetReducerFunction({ key, value: Math.random() });
     } else if (/[()*+/\-]/.test(valueExp)) {
       // 如果包含加减乘除号，则运算
       // 先取出运算表达式中的变量
@@ -46,18 +46,18 @@ export const setVar = (sentence: ISentence): IPerform => {
         .reduce((pre, current) => pre + current, '');
       const exp = compile(valueExp2);
       const result = exp();
-      webgalStore.dispatch(targetReducerFunction({ key, value: result }));
+      targetReducerFunction({ key, value: result });
     } else if (/true|false/.test(valueExp)) {
       if (valueExp.includes('true')) {
-        webgalStore.dispatch(targetReducerFunction({ key, value: true }));
+        targetReducerFunction({ key, value: true });
       }
       if (valueExp.includes('false')) {
-        webgalStore.dispatch(targetReducerFunction({ key, value: false }));
+        targetReducerFunction({ key, value: false });
       }
     } else {
-      if (isNaN(Number(valueExp))) webgalStore.dispatch(targetReducerFunction({ key, value: valueExp }));
+      if (isNaN(Number(valueExp))) targetReducerFunction({ key, value: valueExp });
       else {
-        webgalStore.dispatch(targetReducerFunction({ key, value: Number(valueExp) }));
+        targetReducerFunction({ key, value: Number(valueExp) });
       }
     }
     if (setGlobal) {

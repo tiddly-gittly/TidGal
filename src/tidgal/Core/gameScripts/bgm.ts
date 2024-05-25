@@ -23,7 +23,7 @@ export const bgm = (sentence: ISentence): IPerform => {
   });
   const enter = getSentenceArgByKey(sentence, 'enter'); // 获取bgm的淡入时间
   const volume = getSentenceArgByKey(sentence, 'volume'); // 获取bgm的音量比
-  if (name !== '') webgalStore.dispatch(unlockBgmInUserData({ name, url, series }));
+  if (name !== '') unlockBgmInUserData({ name, url, series });
   playBgm(
     url,
     typeof enter === 'number' && enter >= 0 ? enter : 0, // 已正确设置淡入时间时，进行淡入

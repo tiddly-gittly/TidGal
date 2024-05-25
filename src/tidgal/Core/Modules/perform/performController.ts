@@ -23,7 +23,7 @@ export class PerformController {
     // 同步演出状态
     if (syncPerformState) {
       const performToAdd = { id: perform.performName, isHoldOn: perform.isHoldOn, script };
-      webgalStore.dispatch(stageActions.addPerform(performToAdd));
+      stageActions.addPerform(performToAdd);
     }
 
     // 时间到后自动清理演出
@@ -72,7 +72,7 @@ export class PerformController {
   }
 
   public erasePerformFromState(name: string) {
-    webgalStore.dispatch(stageActions.removePerformByName(name));
+    stageActions.removePerformByName(name);
   }
 
   public removeAllPerform() {

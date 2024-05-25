@@ -24,7 +24,7 @@ export const unlockCg = (sentence: ISentence): IPerform => {
     }
   });
   logger.log(`解锁CG：${name}，路径：${url}，所属系列：${series}`);
-  webgalStore.dispatch(unlockCgInUserData({ name, url, series }));
+  unlockCgInUserData({ name, url, series });
   const userDataState = webgalStore.getState().userData;
   localforage.setItem(WebGAL.gameKey, userDataState).then(() => {});
   return {

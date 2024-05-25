@@ -3,9 +3,7 @@
  * 这些状态会在指定的生命周期与本地存储发生交换，比如打开存档界面、存档、修改设置时。
  * 在引擎初始化时会将这些状态从本地存储加载到运行时状态。
  */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import cloneDeep from 'lodash/cloneDeep';
-import { language } from 'src/tidgal/config/language';
 import {
   fullScreenOption,
   IAppreciationAsset,
@@ -32,7 +30,7 @@ const initialOptionSet: IOptionData = {
   uiSeVolume: 50, // UI音效音量
   textboxFont: textFont.song,
   textboxOpacity: 75,
-  language: language.zhCn,
+  language: $tw.wiki.filterTiddlers('[[$:/language]get[text]get[name]else[en-GB]]')[0],
   voiceInterruption: voiceOption.yes,
   fullScreen: fullScreenOption.off,
 };
@@ -47,148 +45,104 @@ export const initState: IUserData = {
   },
 };
 
-const userDataSlice = createSlice({
-  name: 'userData',
-  initialState: cloneDeep(initState),
-  reducers: {
-    /**
-     * 设置用户数据
-     * @param state
-     * @param action
-     */
-    setUserData: (state, action: PayloadAction<ISetUserDataPayload>) => {
-      const { key, value } = action.payload;
-      state[key] = value;
-    },
-    unlockCgInUserData: (state, action: PayloadAction<IAppreciationAsset>) => {
-      const { name, url, series } = action.payload;
-      // 检查是否存在
-      let isExist = false;
-      state.appreciationData.cg.forEach((e) => {
-        if (url === e.url) {
-          isExist = true;
-          e.url = url;
-          e.series = series;
-        }
-      });
-      if (!isExist) {
-        state.appreciationData.cg.push(action.payload);
-      }
-    },
-    unlockBgmInUserData: (state, action: PayloadAction<IAppreciationAsset>) => {
-      const { name, url, series } = action.payload;
-      // 检查是否存在
-      let isExist = false;
-      state.appreciationData.bgm.forEach((e) => {
-        if (url === e.url) {
-          isExist = true;
-          e.url = url;
-          e.series = series;
-        }
-      });
-      if (!isExist) {
-        state.appreciationData.bgm.push(action.payload);
-      }
-    },
-    /**
-     * 替换用户数据
-     * @param state
-     * @param action
-     */
-    resetUserData: (state, action: PayloadAction<IUserData>) => {
-      Object.assign(state, action.payload);
-    },
-    /**
-     * 设置选项数据
-     * @param state
-     * @param action
-     */
-    setOptionData: (state, action: PayloadAction<ISetOptionDataPayload>) => {
-      const { key, value } = action.payload;
-      (state.optionData)[key] = value;
-    },
-    /**
-     * 修改不跟随存档的全局变量
-     * @param state 当前状态
-     * @param action 要改变或添加的变量
-     */
-    setGlobalVar: (state, action: PayloadAction<ISetGameVar>) => {
-      state.globalGameVar[action.payload.key] = action.payload.value;
-    },
-    /**
-     * 设置存档/读档页面
-     * @param state
-     * @param action
-     */
-    setSlPage: (state, action: PayloadAction<number>) => {
-      state.optionData.slPage = action.payload;
-    },
-    resetOptionSet(state) {
-      Object.assign(state.optionData, initialOptionSet);
-    },
-    resetAllData(state) {
-      Object.assign(state, cloneDeep(initState));
-    },
+// Helper function to get user data
+const getUserData = () => {
+  const userDataTiddler = '$:/temp/tidgal/default/UserData';
+  return $tw.wiki.getTiddlerData(userDataTiddler, initState as IUserData & Record<string, any>);
+};
+
+// Helper function to set user data
+const setUserData = (newState: IUserData) => {
+  const userDataTiddler = '$:/temp/tidgal/default/UserData';
+  $tw.wiki.addTiddler({ title: userDataTiddler, text: JSON.stringify(newState) });
+};
+
+export const userDataActions = {
+  /**
+   * 设置用户数据
+   * @param action
+   */
+  setUserData: (action: ISetUserDataPayload) => {
+    const prevState = getUserData();
+    const { key, value } = action;
+    prevState[key] = value;
+    setUserData(prevState);
   },
-});
-
-export const {
-  setUserData,
-  resetUserData,
-  setOptionData,
-  setGlobalVar,
-  setSlPage,
-  unlockCgInUserData,
-  unlockBgmInUserData,
-  resetOptionSet,
-  resetAllData,
-} = userDataSlice.actions;
-export default userDataSlice.reducer;
-
-// /**
-//  * 创建用户数据的状态管理
-//  * @return {IUserData} 用户数据
-//  * @return {function} 改变用户数据
-//  */
-// export function userDataStateStore():UserDataStore {
-//     const [userDataState, setUserDataState] = useState(initState);
-//
-//     // 设置用户数据
-//     const setUserData = <K extends keyof IUserData>(key: K, value: any) => {
-//
-//         setUserDataState(state => {
-//             state[key] = value;
-//             return {...state};
-//         });
-//
-//     };
-//
-//     // 替换用户数据（多用于与本地存储交互）
-//     const replaceUserData = (newUserData: IUserData) => {
-//
-//         setUserDataState(state => ({...state, ...newUserData}));
-//     };
-//
-//     const setOptionData = <K extends keyof IOptionData>(key: K, value: any) => {
-//         setUserDataState(state => {
-//             state.optionData[key] = value;
-//             return {...state};
-//         });
-//     };
-//
-//     const setSlPage = (index: number) => {
-//         setUserDataState(state => {
-//             state.optionData.slPage = index;
-//             return {...state};
-//         });
-//
-//     };
-//
-//     return {
-//         userDataState,
-//         setUserData,
-//         replaceUserData,
-//         setOptionData,
-//         setSlPage,
-//     };
-// }
+  unlockCgInUserData: (action: IAppreciationAsset) => {
+    const prevState = getUserData();
+    const { url, series } = action;
+    // 检查是否存在
+    let isExist = false;
+    prevState.appreciationData.cg.forEach((e) => {
+      if (url === e.url) {
+        isExist = true;
+        e.url = url;
+        e.series = series;
+      }
+    });
+    if (!isExist) {
+      prevState.appreciationData.cg.push(action);
+    }
+    setUserData(prevState);
+  },
+  unlockBgmInUserData: (action: IAppreciationAsset) => {
+    const prevState = getUserData();
+    const { url, series } = action;
+    // 检查是否存在
+    let isExist = false;
+    prevState.appreciationData.bgm.forEach((e) => {
+      if (url === e.url) {
+        isExist = true;
+        e.url = url;
+        e.series = series;
+      }
+    });
+    if (!isExist) {
+      prevState.appreciationData.bgm.push(action);
+    }
+    setUserData(prevState);
+  },
+  /**
+   * 替换用户数据
+   * @param action
+   */
+  resetUserData: (action: IUserData) => {
+    setUserData(action);
+  },
+  /**
+   * 设置选项数据
+   * @param action
+   */
+  setOptionData: (action: ISetOptionDataPayload) => {
+    const prevState = getUserData();
+    // @ts-expect-error Type 'string' is not assignable to type 'never'.ts(2322)
+    prevState.optionData[action.key] = action.value;
+    setUserData(prevState);
+  },
+  /**
+   * 修改不跟随存档的全局变量
+   * @param action 要改变或添加的变量
+   */
+  setGlobalVar: (action: ISetGameVar) => {
+    const prevState = getUserData();
+    prevState.globalGameVar[action.key] = action.value;
+    setUserData(prevState);
+  },
+  /**
+   * 设置存档/读档页面
+   * @param action
+   */
+  setSlPage: (action: number) => {
+    const prevState = getUserData();
+    prevState.optionData.slPage = action;
+    setUserData(prevState);
+  },
+  resetOptionSet: () => {
+    const prevState = getUserData();
+    Object.assign(prevState.optionData, initialOptionSet);
+    setUserData(prevState);
+  },
+  resetAllData: () => {
+    setUserData(cloneDeep(initState));
+  },
+};

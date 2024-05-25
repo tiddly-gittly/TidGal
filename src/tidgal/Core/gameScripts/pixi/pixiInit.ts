@@ -28,7 +28,7 @@ export const pixiInit = (sentence: ISentence): IPerform => {
       /**
        * 从状态表里清除演出
        */
-      webgalStore.dispatch(stageActions.removeAllPixiPerforms());
+      stageActions.removeAllPixiPerforms();
     }
   });
   return {

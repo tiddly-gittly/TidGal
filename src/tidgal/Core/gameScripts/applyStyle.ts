@@ -15,7 +15,7 @@ export const applyStyle = (sentence: ISentence): IPerform => {
     if (splitSegment.length >= 2) {
       const classNameToBeChange = splitSegment[0];
       const classNameChangeTo = splitSegment[1];
-      webgalStore.dispatch(stageActions.replaceUIlable([classNameToBeChange, classNameChangeTo]));
+      stageActions.replaceUIlable([classNameToBeChange, classNameChangeTo]);
     }
   }
   return {

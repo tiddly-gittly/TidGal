@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import cloneDeep from 'lodash/cloneDeep';
+/* eslint-disable unicorn/no-null */
 import { ISaveData } from './userDataInterface';
 
 export interface ISavesData {
@@ -18,29 +17,48 @@ interface SaveAction {
   saveData: ISaveData;
 }
 
-const saveDataSlice = createSlice({
-  name: 'saveData',
-  initialState: cloneDeep(initState),
-  reducers: {
-    setFastSave: (state, action: PayloadAction<ISaveData | null>) => {
-      state.quickSaveData = action.payload;
-    },
-    resetFastSave: (state) => {
-      state.quickSaveData = null;
-    },
-    resetSaves: (state) => {
-      state.quickSaveData = null;
-      state.saveData = [];
-    },
-    saveGame: (state, action: PayloadAction<SaveAction>) => {
-      state.saveData[action.payload.index] = action.payload.saveData;
-    },
-    replaceSaveGame: (state, action: PayloadAction<ISaveData[]>) => {
-      state.saveData = action.payload;
-    },
+// Helper function to get save data
+const getSaveData = () => {
+  const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
+  return $tw.wiki.getTiddlerData(saveDataTiddler, initState as ISavesData & Record<string, any>);
+};
+
+// Helper function to set save data
+const setSaveData = (newState: ISavesData) => {
+  const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
+  $tw.wiki.addTiddler({ title: saveDataTiddler, text: JSON.stringify(newState) });
+};
+
+interface SaveAction {
+  index: number;
+  saveData: ISaveData;
+}
+
+export const saveActions = {
+  setFastSave: (action: ISaveData | null) => {
+    const prevState = getSaveData();
+    prevState.quickSaveData = action;
+    setSaveData(prevState);
   },
-});
-
-export const saveActions = saveDataSlice.actions;
-
-export default saveDataSlice.reducer;
+  resetFastSave: () => {
+    const prevState = getSaveData();
+    prevState.quickSaveData = null;
+    setSaveData(prevState);
+  },
+  resetSaves: () => {
+    const prevState = getSaveData();
+    prevState.quickSaveData = null;
+    prevState.saveData = [];
+    setSaveData(prevState);
+  },
+  saveGame: (action: SaveAction) => {
+    const prevState = getSaveData();
+    prevState.saveData[action.index] = action.saveData;
+    setSaveData(prevState);
+  },
+  replaceSaveGame: (action: ISaveData[]) => {
+    const prevState = getSaveData();
+    prevState.saveData = action;
+    setSaveData(prevState);
+  },
+};

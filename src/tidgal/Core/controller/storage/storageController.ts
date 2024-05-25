@@ -27,7 +27,7 @@ export const getStorage = debounce(() => {
       setStorage();
       return;
     }
-    webgalStore.dispatch(resetUserData(newUserData as IUserData));
+    resetUserData(newUserData as IUserData);
   });
 }, 100);
 
@@ -60,7 +60,7 @@ export const dumpToStorageFast = () => {
         setStorage();
         return;
       }
-      webgalStore.dispatch(resetUserData(newUserData as IUserData));
+      resetUserData(newUserData as IUserData);
     });
     logger.log('同步本地存储');
   });
@@ -91,5 +91,5 @@ export async function getStorageAsync() {
     const userDataState = webgalStore.getState().userData;
     logger.log('现在重置数据');
     return await localforage.setItem(WebGAL.gameKey, userDataState);
-  } else webgalStore.dispatch(resetUserData(newUserData as IUserData));
+  } else resetUserData(newUserData as IUserData);
 }

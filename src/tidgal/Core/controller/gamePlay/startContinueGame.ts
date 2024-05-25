@@ -25,7 +25,7 @@ export const startGame = () => {
     // 开始第一条语句
     nextSentence();
   });
-  webgalStore.dispatch(setVisibility({ component: 'showTitle', visibility: false }));
+  setVisibility({ component: 'showTitle', visibility: false });
 };
 
 export async function continueGame() {

@@ -153,8 +153,8 @@ export function changeFigure(sentence: ISentence): IPerform {
   if (isRemoveEffects) {
     const deleteKey = `fig-${pos}`;
     const deleteKey2 = `${key}`;
-    webgalStore.dispatch(stageActions.removeEffectByTargetId(deleteKey));
-    webgalStore.dispatch(stageActions.removeEffectByTargetId(deleteKey2));
+    stageActions.removeEffectByTargetId(deleteKey);
+    stageActions.removeEffectByTargetId(deleteKey2);
   }
   const setAnimationNames = (key: string, sentence: ISentence) => {
     // 处理 transform 和 默认 transform

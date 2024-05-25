@@ -24,7 +24,7 @@ export const unlockBgm = (sentence: ISentence): IPerform => {
     }
   });
   logger.log(`解锁BGM：${name}，路径：${url}，所属系列：${series}`);
-  webgalStore.dispatch(unlockBgmInUserData({ name, url, series }));
+  unlockBgmInUserData({ name, url, series });
   const userDataState = webgalStore.getState().userData;
   localforage.setItem(WebGAL.gameKey, userDataState).then(() => {});
   return {

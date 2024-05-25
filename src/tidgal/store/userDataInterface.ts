@@ -1,4 +1,3 @@
-import { language } from 'src/tidgal/config/language';
 import { IBacklogItem } from 'src/tidgal/Core/Modules/backlog';
 import { ISceneEntry } from 'src/tidgal/Core/Modules/scene';
 import { IGameVar, IStageState } from './stageInterface';
@@ -44,7 +43,7 @@ export interface IOptionData {
   bgmVolume: number;
   // 是否中断语音
   fullScreen: fullScreenOption;
-  language: language;
+  language: string;
   // 背景音乐音量
   seVolume: number;
   // 用户界面音效音量
@@ -114,21 +113,21 @@ export interface IUserData {
   optionData: IOptionData;
 }
 
-export interface ISetUserDataPayload {
-  key: keyof IUserData;
-  value: any;
+export interface ISetUserDataPayload<K extends keyof IOptionData = keyof IOptionData> {
+  key: K;
+  value: IOptionData[K];
 }
 
-export interface ISetOptionDataPayload {
-  key: keyof IOptionData;
-  value: any;
+export interface ISetOptionDataPayload<K extends keyof IOptionData = keyof IOptionData> {
+  key: K;
+  value: IOptionData[K];
 }
 
 export interface IUserDataStore {
   replaceUserData: (newUserData: IUserData) => void;
-  setOptionData: <K extends keyof IOptionData>(key: K, value: any) => void;
+  setOptionData: <K extends keyof IOptionData>(key: K, value: IOptionData[K]) => void;
   setSlPage: (index: number) => void;
-  setUserData: <K extends keyof IUserData>(key: K, value: any) => void;
+  setUserData: <K extends keyof IUserData>(key: K, value: IUserData[K]) => void;
   userDataState: IUserData;
 }
 
