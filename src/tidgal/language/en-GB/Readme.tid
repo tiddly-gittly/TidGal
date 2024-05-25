@@ -1,0 +1,9 @@
+title: $:/plugins/linonetwo/tidgal/language/en-GB/Readme
+
+\define lingo-base() $:/plugins/linonetwo/tidgal/language/
+
+! <<lingo Name>>
+
+<<lingo Description>>
+
+Write readme here.
