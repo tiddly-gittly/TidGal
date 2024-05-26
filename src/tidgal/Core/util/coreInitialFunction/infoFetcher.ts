@@ -52,7 +52,7 @@ export const infoFetcher = (url: string) => {
 
         case 'Game_name': {
           WebGAL.gameName = args[0];
-          document.title = args[0];
+          // document.title = args[0];
           break;
         }
 

@@ -1,7 +1,7 @@
 title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
 
 <div>
-  <div class="introContainer" id="introContainer" />;
+  <div class="introContainer" id="introContainer" />
   <style>
     .introContainer {
       box-sizing: border-box;
