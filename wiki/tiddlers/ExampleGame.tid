@@ -1,0 +1,8 @@
+title: ExampleGame
+tags: Index
+
+Assets:
+
+<<tree prefix:"ExampleGame/">>
+
+<$galgame assetBase="ExampleGame/" />

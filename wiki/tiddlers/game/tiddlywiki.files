@@ -1,0 +1,147 @@
+{
+  "directories": [
+    {
+      "path": "./",
+      "filesRegExp": "^.*\\.(?:txt|css)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        }
+      }
+    },
+    {
+      "path": "./bgm",
+      "filesRegExp": "^.*\\.(?:mp3)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/bgm/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "audio/mpeg",
+        "tags": [
+          "bgm"
+        ]
+      }
+    },
+    {
+      "path": "./background",
+      "filesRegExp": "^.*\\.(?:png)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/background/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "image/png",
+        "tags": [
+          "background"
+        ]
+      }
+    },
+    {
+      "path": "./figure",
+      "filesRegExp": "^.*\\.(?:png)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/figure/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "image/png",
+        "tags": [
+          "figure"
+        ]
+      }
+    },
+    {
+      "path": "./tex",
+      "filesRegExp": "^.*\\.(?:png)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/tex/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "image/png",
+        "tags": [
+          "tex"
+        ]
+      }
+    },
+    {
+      "path": "./scene",
+      "filesRegExp": "^.*\\.(?:txt)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/scene/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "text/plain",
+        "tags": [
+          "scene"
+        ]
+      }
+    },
+    {
+      "path": "./vocal",
+      "filesRegExp": "^.*\\.(?:wav)$",
+      "isTiddlerFile": false,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "ExampleGame/vocal/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "audio/wav",
+        "tags": [
+          "vocal"
+        ]
+      }
+    }
+  ]
+}
