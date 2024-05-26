@@ -33,6 +33,7 @@ import { pixiInit } from '../gameScripts/pixi/pixiInit';
 import { say } from '../gameScripts/say';
 import { setVar } from '../gameScripts/setVar';
 import { showVars } from '../gameScripts/showVars';
+import { logger } from '../util/logger';
 import { defineScripts, IConfigInterface, ScriptConfig } from './utils';
 
 export const SCRIPT_TAG_MAP = defineScripts({

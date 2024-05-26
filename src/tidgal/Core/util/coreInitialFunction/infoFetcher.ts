@@ -17,7 +17,7 @@ declare global {
 export const infoFetcher = (url: string) => {
   const GUIState = getGuiState();
   const assetBase = getAssetBase();
-  const gameConfigTiddlerTitle = `${assetBase}/${url}`;
+  const gameConfigTiddlerTitle = `${assetBase}${url}`;
   const gameConfigRaw = $tw.wiki.getTiddlerText(gameConfigTiddlerTitle);
   if (!gameConfigRaw) {
     logger.alert('未能获取到游戏信息', gameConfigTiddlerTitle);

@@ -60,8 +60,8 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
       tiddlywiki-plugin-dev:
-        specifier: ^0.2.0
-        version: 0.2.0(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.12)(typescript@5.4.5))
+        specifier: ^0.2.1
+        version: 0.2.1(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.12)(typescript@5.4.5))
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
@@ -85,8 +85,8 @@ importers:
         specifier: ^9.0.8
         version: 9.0.8
       dprint:
-        specifier: ^0.45.1
-        version: 0.45.1
+        specifier: ^0.46.0
+        version: 0.46.0
       eslint-config-tidgi:
         specifier: ^1.2.3
         version: 1.2.3(typescript@5.4.5)
@@ -94,7 +94,7 @@ importers:
         specifier: ^9.0.11
         version: 9.0.11
       lint-staged:
-        specifier: ^15.2.4
+        specifier: ^15.2.5
         version: 15.2.5
       postcss:
         specifier: ^8.4.38
@@ -158,8 +158,18 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@dprint/darwin-arm64@0.46.0':
+    resolution: {integrity: sha512-amWNjJnss6F0fcf0SwtbfuGltyC4Y3HC3mjiN+FB+gscY76T7AgXfLoRSGuqIgls+7iqt2lcgFB+C+9gw8dxow==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@dprint/darwin-x64@0.45.1':
     resolution: {integrity: sha512-YUj421LmBLDlxpIER3pORKfQmpmXD50n5mClHjpZrnl17WTiHtQ+jHvDJdJoxH2eS66W0mQyxLoGo5SfFfiM7A==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@dprint/darwin-x64@0.46.0':
+    resolution: {integrity: sha512-VuBsDWnSGK3pVpDK/dbDw10Q5CpaHWcfmw39lBZqcBd4jkW9E4ytkT3/UmrRkkgfu8UuYxkRv81S1xGD7OTsog==}
     cpu: [x64]
     os: [darwin]
 
@@ -178,8 +188,20 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@dprint/linux-arm64-glibc@0.46.0':
+    resolution: {integrity: sha512-yMB0QSxMhXf9J7M1m57S6WurQPUciahmY3Sf++wiiLwRpPGNdwAIcw9asIRwTG1lmaiQQ8gdTiFEO+JRHp0Q6w==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
   '@dprint/linux-arm64-musl@0.45.1':
     resolution: {integrity: sha512-un2awe1L1sAJLsCPSEUrE0/cgupdzbYFoyBOutyU1zHR9KQn47AtIDw+chvuinU4xleHDuEGyXGuJ6NE+Ky6vw==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
+  '@dprint/linux-arm64-musl@0.46.0':
+    resolution: {integrity: sha512-1XOr2sq1DTYBpYPTaY0owSadSiiHVHP4eeICenp76qVb9XCTPDp84QM+l/xZMXjKry2Njmi9P9NYPd/fn3DwEg==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
@@ -190,8 +212,20 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@dprint/linux-x64-glibc@0.46.0':
+    resolution: {integrity: sha512-zY9oLBAz/I5dl3nk4hhAWLeHIKiAeL3Hck1VY2g/GArIckEDuhVJzfyCI+mS5+LfTKrnC0Z+UJ9iMUGfLi8PgQ==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
   '@dprint/linux-x64-musl@0.45.1':
     resolution: {integrity: sha512-p2/gjnHDd8GRCvtey5HZO4o/He6pSmY/zpcCuIXprFW9P0vNlEj3DFhz4FPpOKXM+csrsVWWs2E0T/xr5QZtVg==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@dprint/linux-x64-musl@0.46.0':
+    resolution: {integrity: sha512-6BNk/hH8OBME3zPewQfmyYS/iHBh+YY2OKFP4SrYBpunbhRBCRRDwLSBddrzlwq4Ku1vIhZukR9c0AsRLGdSCA==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
@@ -207,6 +241,11 @@ packages:
 
   '@dprint/win32-x64@0.45.1':
     resolution: {integrity: sha512-2l78XM7KsW46P2Yv6uPB3fE+y92EsBlrCxi+RVQ0pbznPFdMdkLyGgaCuh683zdld14jHlaADpIQ7YchGAEMAg==}
+    cpu: [x64]
+    os: [win32]
+
+  '@dprint/win32-x64@0.46.0':
+    resolution: {integrity: sha512-21r+obZZbsw6qgaRjz6ddLTsNM/vIxGd84YafeuraCJOhJ+8uzts4IPXL6x28sTF0HWy/sjqxjBZEJUt7u/VaA==}
     cpu: [x64]
     os: [win32]
 
@@ -1280,7 +1319,7 @@ packages:
     resolution: {integrity: sha512-UZIhv8G+5b5skkcuhgvxYWHjk7FW7/JP5lPASMEUoliAPwIH/rxoUSQPia2cuOj9AmDZmwUl1usKm85t5VUMew==}
     engines: {node: ^16.0.0 || >=18.0.0}
     peerDependencies:
-      eslint: ^8.57.0 || $eslint
+      eslint: ^8.56.0
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -1849,6 +1888,10 @@ packages:
 
   dprint@0.45.1:
     resolution: {integrity: sha512-OYefcDgxd6jSdig/Cfkw1vdvyiOIRruCPnqGBbXpc95buDt9kvwL+Lic1OHc+SaQSsQub0BUZMd5+TNgy8Sh3A==}
+    hasBin: true
+
+  dprint@0.46.0:
+    resolution: {integrity: sha512-hyc2j79E6ySz58x02vKd/U2byvErquW6M5teKi43vAXRkzR/ef66yM7tg42dyXMsr3ACY8eUzx08lZcHVIa8KQ==}
     hasBin: true
 
   earcut@2.2.4:
@@ -3924,8 +3967,8 @@ packages:
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
 
-  tiddlywiki-plugin-dev@0.2.0:
-    resolution: {integrity: sha512-fXltgGSS/UuSPK++49fyI9STWKskWhnze5P4yXl2D6QGHFPaG99uXCVhM1IXo7x2zUDNtq9eNRxTtdc47ianZg==}
+  tiddlywiki-plugin-dev@0.2.1:
+    resolution: {integrity: sha512-DGaiV4i5cmK/3gSt4EZCL4ZR4My6mYczkkc5xV5Zzdf009yLqBaNj6GFYO+ReYZn8V8xkQno0/yNfnG19cXIgQ==}
     engines: {node: '>=14.17.6'}
     hasBin: true
 
@@ -4264,7 +4307,13 @@ snapshots:
   '@dprint/darwin-arm64@0.45.1':
     optional: true
 
+  '@dprint/darwin-arm64@0.46.0':
+    optional: true
+
   '@dprint/darwin-x64@0.45.1':
+    optional: true
+
+  '@dprint/darwin-x64@0.46.0':
     optional: true
 
   '@dprint/dockerfile@0.3.0': {}
@@ -4276,13 +4325,25 @@ snapshots:
   '@dprint/linux-arm64-glibc@0.45.1':
     optional: true
 
+  '@dprint/linux-arm64-glibc@0.46.0':
+    optional: true
+
   '@dprint/linux-arm64-musl@0.45.1':
+    optional: true
+
+  '@dprint/linux-arm64-musl@0.46.0':
     optional: true
 
   '@dprint/linux-x64-glibc@0.45.1':
     optional: true
 
+  '@dprint/linux-x64-glibc@0.46.0':
+    optional: true
+
   '@dprint/linux-x64-musl@0.45.1':
+    optional: true
+
+  '@dprint/linux-x64-musl@0.46.0':
     optional: true
 
   '@dprint/markdown@0.15.3': {}
@@ -4292,6 +4353,9 @@ snapshots:
   '@dprint/typescript@0.84.4': {}
 
   '@dprint/win32-x64@0.45.1':
+    optional: true
+
+  '@dprint/win32-x64@0.46.0':
     optional: true
 
   '@esbuild/aix-ppc64@0.20.2':
@@ -5912,6 +5976,16 @@ snapshots:
       '@dprint/linux-x64-glibc': 0.45.1
       '@dprint/linux-x64-musl': 0.45.1
       '@dprint/win32-x64': 0.45.1
+
+  dprint@0.46.0:
+    optionalDependencies:
+      '@dprint/darwin-arm64': 0.46.0
+      '@dprint/darwin-x64': 0.46.0
+      '@dprint/linux-arm64-glibc': 0.46.0
+      '@dprint/linux-arm64-musl': 0.46.0
+      '@dprint/linux-x64-glibc': 0.46.0
+      '@dprint/linux-x64-musl': 0.46.0
+      '@dprint/win32-x64': 0.46.0
 
   earcut@2.2.4: {}
 
@@ -8464,7 +8538,7 @@ snapshots:
 
   through@2.3.8: {}
 
-  tiddlywiki-plugin-dev@0.2.0(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.12)(typescript@5.4.5)):
+  tiddlywiki-plugin-dev@0.2.1(postcss@8.4.38)(ts-node@10.9.2(@types/node@20.12.12)(typescript@5.4.5)):
     dependencies:
       autoprefixer: 10.4.19(postcss@8.4.38)
       browserslist: 4.23.0

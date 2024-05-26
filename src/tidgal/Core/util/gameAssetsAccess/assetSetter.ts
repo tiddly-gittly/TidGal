@@ -40,27 +40,27 @@ export const assetSetter = (fileName: string, assetType: fileType): string => {
     let returnFilePath: string;
     switch (assetType) {
       case fileType.background: {
-        returnFilePath = `${assetBase}/background/${fileName}`;
+        returnFilePath = `${assetBase}background/${fileName}`;
         break;
       }
       case fileType.scene: {
-        returnFilePath = `${assetBase}/scene/${fileName}`;
+        returnFilePath = `${assetBase}scene/${fileName}`;
         break;
       }
       case fileType.vocal: {
-        returnFilePath = `${assetBase}/vocal/${fileName}`;
+        returnFilePath = `${assetBase}vocal/${fileName}`;
         break;
       }
       case fileType.figure: {
-        returnFilePath = `${assetBase}/figure/${fileName}`;
+        returnFilePath = `${assetBase}figure/${fileName}`;
         break;
       }
       case fileType.bgm: {
-        returnFilePath = `${assetBase}/bgm/${fileName}`;
+        returnFilePath = `${assetBase}bgm/${fileName}`;
         break;
       }
       case fileType.video: {
-        returnFilePath = `${assetBase}/video/${fileName}`;
+        returnFilePath = `${assetBase}video/${fileName}`;
         break;
       }
       default: {

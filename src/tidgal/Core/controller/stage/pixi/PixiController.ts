@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import cloneDeep from 'lodash/cloneDeep';
 import * as PIXI from 'pixi.js';
 import { WebGALPixiContainer } from 'src/tidgal/Core/controller/stage/pixi/WebGALPixiContainer';
@@ -245,7 +246,6 @@ export default class PixiStage {
               y: target.pixiContainer.y,
             },
             rotation: target.pixiContainer.rotation,
-            // @ts-expect-error
             blur: target.pixiContainer.blur,
             ...webgalFilters,
           };
@@ -268,13 +268,13 @@ export default class PixiStage {
     mouthState: string,
     presetPosition: string,
   ) {
-    const currentFigure = this.getStageObjByKey(key)?.pixiContainer!;
+    const currentFigure = this.getStageObjByKey(key)?.pixiContainer;
 
     if (!currentFigure) {
       return;
     }
 
-    const mouthTextureUrls: any = {
+    const mouthTextureUrls: Record<string, string> = {
       open: targetAnimation.mouthAnimation.open,
       half_open: targetAnimation.mouthAnimation.halfOpen,
       closed: targetAnimation.mouthAnimation.close,
@@ -323,12 +323,12 @@ export default class PixiStage {
     blinkState: string,
     presetPosition: string,
   ) {
-    const currentFigure = this.getStageObjByKey(key)?.pixiContainer!;
+    const currentFigure = this.getStageObjByKey(key)?.pixiContainer;
 
     if (!currentFigure) {
       return;
     }
-    const blinkTextureUrls: any = {
+    const blinkTextureUrls: Record<string, string> = {
       open: targetAnimation.blinkAnimation.open,
       closed: targetAnimation.blinkAnimation.close,
     };

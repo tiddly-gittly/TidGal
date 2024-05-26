@@ -20,6 +20,8 @@ class GalGameWidget extends Widget {
     this.computeAttributes();
     this.execute();
     const assetBase = this.getAttribute('assetBase');
+    const width = this.getAttribute('width', '100%');
+    const height = this.getAttribute('height', '400px');
     const stageTitle = this.getAttribute('stageTitle', '$:/plugins/linonetwo/tidgal/Stage/Stage');
     if (!assetBase) {
       const containerElement = $tw.utils.domMaker('p', {
@@ -29,7 +31,9 @@ class GalGameWidget extends Widget {
       this.domNodes.push(containerElement);
       return;
     }
-    const containerElement = $tw.utils.domMaker('main', {});
+    const containerElement = $tw.utils.domMaker('main', {
+      style: { width, height },
+    });
     const transcludeWidgetNode = $tw.wiki.makeTranscludeWidget(stageTitle, {
       document,
       parentWidget: this,
@@ -42,7 +46,10 @@ class GalGameWidget extends Widget {
     this.children.push(transcludeWidgetNode);
     this.domNodes.push(containerElement);
     // load the game
-    initializeScript({ assetBase });
+    initializeScript({ assetBase }).catch(error => {
+      $tw.utils.error(error as Error);
+      containerElement.innerText = `Error loading the game (${(error as Error).message})`;
+    });
   }
 
   stageState: IStageState = initStageState;

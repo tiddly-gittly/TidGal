@@ -24,7 +24,7 @@ export interface IInitializeScriptOptions {
 /**
  * 引擎初始化函数
  */
-export const initializeScript = (options: IInitializeScriptOptions): void => {
+export async function initializeScript(options: IInitializeScriptOptions) {
   if (!options?.assetBase) {
     throw new Error('Missing options.assetBase');
   }
@@ -52,25 +52,28 @@ export const initializeScript = (options: IInitializeScriptOptions): void => {
   // 获取start场景
   const sceneUrl: string = assetSetter('start.txt', fileType.scene);
   // 场景写入到运行时
-  sceneFetcher(sceneUrl).then((rawScene) => {
-    WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
-    // 开始场景的预加载
-    const subSceneList = WebGAL.sceneManager.sceneData.currentScene.subSceneList;
-    WebGAL.sceneManager.settledScenes.push(sceneUrl); // 放入已加载场景列表，避免递归加载相同场景
-    const subSceneListUniq = uniqWith(subSceneList); // 去重
-    scenePrefetcher(subSceneListUniq);
-  });
+  const rawScene = await sceneFetcher(sceneUrl);
+  WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
+  // 开始场景的预加载
+  const subSceneList = WebGAL.sceneManager.sceneData.currentScene.subSceneList;
+  WebGAL.sceneManager.settledScenes.push(sceneUrl); // 放入已加载场景列表，避免递归加载相同场景
+  const subSceneListUniq = uniqWith(subSceneList); // 去重
+  scenePrefetcher(subSceneListUniq);
   /**
    * 启动Pixi
    */
   WebGAL.gameplay.pixiStage = new PixiStage();
-};
+}
 
 function getUserAnimation() {
   const assetBase = getAssetBase();
-  const animations: string[] = $tw.wiki.getTiddlerData(`${assetBase}/game/animation/animationTable.json`);
+  const animationTableTiddler = `${assetBase}animation/animationTable.json`;
+  const animations: string[] = $tw.wiki.getTiddlerData(animationTableTiddler);
+  if (animations === undefined) {
+    throw new Error(`No animationTable.json found in the ${animationTableTiddler}`);
+  }
   for (const animationName of animations) {
-    const effects: IUserAnimationEffects = $tw.wiki.getTiddlerData(`${assetBase}/game/animation/${animationName}.json`);
+    const effects: IUserAnimationEffects = $tw.wiki.getTiddlerData(`${assetBase}animation/${animationName}.json`);
     if (effects && Array.isArray(effects)) {
       const userAnimation = {
         name: animationName,
