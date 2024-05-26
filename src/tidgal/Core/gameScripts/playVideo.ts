@@ -1,12 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { getRandomPerformName } from 'src/tidgal/Core/Modules/perform/performController';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
 /**
  * 播放一段视频 * @param sentence
@@ -24,13 +21,13 @@ export const playVideo = (sentence: ISentence): IPerform => {
     blockingNextFlag = true;
   }
 
-  // eslint-disable-next-line react/no-deprecated
-  ReactDOM.render(
-    <div className={styles.videoContainer}>
-      <video className={styles.fullScreen_video} id='playVideoElement' src={sentence.content} autoPlay={true} />
-    </div>,
-    document.querySelector('#videoContainer'),
-  );
+  // FIXME: 改为设置状态，然后 HTML 在 tid 里写
+  // ReactDOM.render(
+  //   <div className={styles.videoContainer}>
+  //     <video className={styles.fullScreen_video} id='playVideoElement' src={sentence.content} autoPlay={true} />
+  //   </div>,
+  //   document.querySelector('#videoContainer'),
+  // );
   let isOver = false;
   return {
     performName: 'none',
@@ -83,8 +80,8 @@ export const playVideo = (sentence: ISentence): IPerform => {
               if (bgmElement) {
                 vocalElement.volume = vocalVol.toString();
               }
-              // eslint-disable-next-line react/no-deprecated
-              ReactDOM.render(<div />, document.querySelector('#videoContainer'));
+              // FIXME: 改为设置状态，然后 HTML 在 tid 里写
+              // ReactDOM.render(<div />, document.querySelector('#videoContainer'));
             },
             blockingNext: () => blockingNextFlag,
             blockingAuto: () => {

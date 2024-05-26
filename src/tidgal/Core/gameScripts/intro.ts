@@ -1,9 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
-import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
+// import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { IPerform } from '../Modules/perform/performInterface';
 /**
  * 显示一小段黑屏演示
@@ -143,24 +141,24 @@ export const intro = (sentence: ISentence): IPerform => {
    * 接受 next 事件
    */
   WebGAL.events.userInteractNext.on(toNextIntroElement);
+  // FIXME: 改为设置状态，然后 HTML 在 tid 里写
 
-  const showIntro = introArray.map((e, i) => (
-    <div
-      key={'introtext' + i + Math.random().toString()}
-      style={{ animationDelay: `${delayTime * i}ms` }}
-      className={chosenAnimationClass}
-    >
-      {e}
-      {e === '' ? '\u00A0' : ''}
-    </div>
-  ));
-  const intro = (
-    <div style={introContainerStyle}>
-      <div style={{ padding: '3em 4em 3em 4em' }}>{showIntro}</div>
-    </div>
-  );
+  // const showIntro = introArray.map((e, i) => (
+  //   <div
+  //     key={'introtext' + i + Math.random().toString()}
+  //     style={{ animationDelay: `${delayTime * i}ms` }}
+  //     className={chosenAnimationClass}
+  //   >
+  //     {e}
+  //     {e === '' ? '\u00A0' : ''}
+  //   </div>
+  // ));
+  // const intro = (
+  //   <div style={introContainerStyle}>
+  //     <div style={{ padding: '3em 4em 3em 4em' }}>{showIntro}</div>
+  //   </div>
+  // );
   // eslint-disable-next-line react/no-deprecated
-  ReactDOM.render(intro, document.querySelector('#introContainer'));
   const introContainer = document.querySelector('#introContainer');
 
   if (introContainer) {

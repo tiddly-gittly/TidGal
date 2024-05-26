@@ -1,15 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { whenChecker } from 'src/tidgal/Core/controller/gamePlay/scriptExecutor';
-import { changeScene } from 'src/tidgal/Core/controller/scene/changeScene';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { jmp } from 'src/tidgal/Core/gameScripts/label/jmp';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { textFont } from 'src/tidgal/store/userDataInterface';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
 import { getSEByWebgalStore } from 'src/tidgal/utils/getSoundEffect';
-import { WebGAL } from '../../WebGAL';
-import styles from './choose.module.scss';
 
 class ChooseOption {
   /**
@@ -59,49 +52,48 @@ export const choose = (sentence: ISentence): IPerform => {
   const fontFamily = getUserData().optionData.textboxFont;
   const font = fontFamily === textFont.song ? '"思源宋体", serif' : '"WebgalUI", serif';
   const { playSeEnter, playSeClick } = getSEByWebgalStore();
-  // 运行时计算JSX.Element[]
-  const runtimeBuildList = (chooseListFull: ChooseOption[]) => {
-    return chooseListFull
-      .filter((e, i) => whenChecker(e.showCondition))
-      .map((e, i) => {
-        const enable = whenChecker(e.enableCondition);
-        const className = enable ? styles.Choose_item : styles.Choose_item_disabled;
-        const onClick = enable
-          ? () => {
-            playSeClick();
-            if (e.jumpToScene) {
-              changeScene(e.jump, e.text);
-            } else {
-              jmp(e.jump);
-            }
-            WebGAL.gameplay.performController.unmountPerform('choose');
-          }
-          : () => {};
-        return (
-          <div
-            className={className}
-            style={{ fontFamily: font }}
-            key={e.jump + i}
-            onClick={onClick}
-            onMouseEnter={playSeEnter}
-          >
-            {e.text}
-          </div>
-        );
-      });
-  };
-  // eslint-disable-next-line react/no-deprecated
-  ReactDOM.render(
-    <div className={styles.Choose_Main}>{runtimeBuildList(chooseOptions)}</div>,
-    document.querySelector('#chooseContainer'),
-  );
+  // FIXME: 改为设置状态，然后 HTML 在 tid 里写
+  // const runtimeBuildList = (chooseListFull: ChooseOption[]) => {
+  //   return chooseListFull
+  //     .filter((e, i) => whenChecker(e.showCondition))
+  //     .map((e, i) => {
+  //       const enable = whenChecker(e.enableCondition);
+  //       const className = enable ? styles.Choose_item : styles.Choose_item_disabled;
+  //       const onClick = enable
+  //         ? () => {
+  //           playSeClick();
+  //           if (e.jumpToScene) {
+  //             changeScene(e.jump, e.text);
+  //           } else {
+  //             jmp(e.jump);
+  //           }
+  //           WebGAL.gameplay.performController.unmountPerform('choose');
+  //         }
+  //         : () => {};
+  //       return (
+  //         <div
+  //           className={className}
+  //           style={{ fontFamily: font }}
+  //           key={e.jump + i}
+  //           onClick={onClick}
+  //           onMouseEnter={playSeEnter}
+  //         >
+  //           {e.text}
+  //         </div>
+  //       );
+  //     });
+  // };
+  // // eslint-disable-next-line react/no-deprecated
+  // ReactDOM.render(
+  //   <div className={styles.Choose_Main}>{runtimeBuildList(chooseOptions)}</div>,
+  //   document.querySelector('#chooseContainer'),
+  // );
   return {
     performName: 'choose',
     duration: 1000 * 60 * 60 * 24,
     isHoldOn: false,
     stopFunction: () => {
-      // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render(<div />, document.querySelector('#chooseContainer'));
+      // ReactDOM.render(<div />, document.querySelector('#chooseContainer'));
     },
     blockingNext: () => true,
     blockingAuto: () => true,

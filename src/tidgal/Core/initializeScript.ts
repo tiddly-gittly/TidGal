@@ -3,8 +3,6 @@
  */
 import uniqWith from 'lodash/uniqWith';
 import PixiStage from 'src/tidgal/Core/controller/stage/pixi/PixiController';
-import { bindExtraFunc } from 'src/tidgal/Core/util/coreInitialFunction/bindExtraFunc';
-import { webSocketFunc } from 'src/tidgal/Core/util/syncWithEditor/webSocketFunc';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { sceneFetcher } from './controller/scene/sceneFetcher';
 import { IUserAnimationEffects } from './Modules/animations';
@@ -66,25 +64,6 @@ export const initializeScript = (options: IInitializeScriptOptions): void => {
    * 启动Pixi
    */
   WebGAL.gameplay.pixiStage = new PixiStage();
-
-  /**
-   * iOS 设备 卸载所有 Service Worker
-   */
-  // if ('serviceWorker' in navigator && isIOS) {
-  //   navigator.serviceWorker.getRegistrations().then((registrations) => {
-  //     for (const registration of registrations) {
-  //       registration.unregister().then(() => {
-  //         logger.log('已卸载 Service Worker');
-  //       });
-  //     }
-  //   });
-  // }
-
-  /**
-   * 绑定工具函数
-   */
-  bindExtraFunc();
-  webSocketFunc();
 };
 
 function getUserAnimation() {

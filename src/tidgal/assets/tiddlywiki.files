@@ -1,0 +1,23 @@
+{
+  "directories": [
+    {
+      "path": "./se",
+      "filesRegExp": "^.*\\.(?:mp3)$",
+      "isTiddlerFile": false,
+      "searchSubdirectories": true,
+      "fields": {
+        "title": {
+          "source": "basename-uri-decoded",
+          "prefix": "$:/plugins/linonetwo/tidgal/assets/se/"
+        },
+        "created": {
+          "source": "created"
+        },
+        "modified": {
+          "source": "modified"
+        },
+        "type": "audio/mpeg"
+      }
+    }
+  ]
+}

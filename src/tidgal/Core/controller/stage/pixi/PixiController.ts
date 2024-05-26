@@ -14,9 +14,9 @@ import { SCREEN_CONSTANTS } from 'src/tidgal/Core/util/constants';
 // import { Live2DModel, SoundManager } from 'pixi-live2d-display'; // 如果要使用 Live2D，取消这里的注释
 
 export interface IAnimationObject {
-  getEndFilterEffect?: Function;
-  setEndState: Function;
-  setStartState: Function;
+  getEndFilterEffect?: CallableFunction;
+  setEndState: CallableFunction;
+  setStartState: CallableFunction;
   tickerFunc: PIXI.TickerCallback<number>;
 }
 
