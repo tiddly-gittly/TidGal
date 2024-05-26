@@ -13,14 +13,14 @@ title: $:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform
 
   <style>
     .FullScreenPerform_main {
-      position: absolute;
+      position: relative;
       width: 100%;
       height: 100%;
       top: 0;
     }
 
     .FullScreenPerform_element {
-      position: absolute;
+      position: relative;
       display: none;
       width: 100%;
       height: 100%;
@@ -28,7 +28,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform
     }
 
     .fullScreen_video {
-      position: absolute;
+      position: relative;
       display: block;
       width: 100%;
       height: 100%;
@@ -130,7 +130,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform
     }
 
     .videoContainer {
-      position: absolute;
+      position: relative;
       display: block;
       width: 100%;
       height: 100%;
