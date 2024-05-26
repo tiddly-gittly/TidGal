@@ -21,6 +21,7 @@ class GalGameWidget extends Widget {
     this.computeAttributes();
     this.execute();
     const assetBase = this.getAttribute('assetBase');
+    const stageTitle = this.getAttribute('stageTitle', '$:/plugins/linonetwo/tidgal/Stage/Stage');
     if (!assetBase) {
       const containerElement = $tw.utils.domMaker('p', {
         text: 'No assetBase!',
@@ -29,12 +30,20 @@ class GalGameWidget extends Widget {
       this.domNodes.push(containerElement);
       return;
     }
-    initializeScript({ assetBase });
-    const containerElement = $tw.utils.domMaker('div', {
-      text: 'This is a widget!',
+    const containerElement = $tw.utils.domMaker('main', {});
+    const transcludeWidgetNode = $tw.wiki.makeTranscludeWidget(stageTitle, {
+      document,
+      parentWidget: this,
+      recursionMarker: 'yes',
+      mode: 'block',
+      importPageMacros: true,
     });
+    transcludeWidgetNode.render(containerElement, null);
     parent.insertBefore(containerElement, nextSibling);
+    this.children.push(transcludeWidgetNode);
     this.domNodes.push(containerElement);
+    // load the game
+    initializeScript({ assetBase });
   }
 
   stageState: IStageState = initStageState;

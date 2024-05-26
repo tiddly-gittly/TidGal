@@ -1,0 +1,21 @@
+title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxFilmLine
+
+<!-- WIP 待实现逐字播放，计算 delay 需要写比较复杂的筛选器计算，估延后 -->
+
+<$list filter="[{$:/temp/tidgal/default/StageState##showText}split[]]" counter="counter" variable="currentChar">
+  <% if [<counter-last>match[no]] %>
+    <span
+      class="TextBox_textElement_Settled"
+      style=`animationDelay: {delay}ms`
+    >
+      <<currentChar>>
+    </span>
+  <% else %>
+    <span
+      class="TextBox_textElement_start"
+      style=`animationDelay: {delay}ms`
+    >
+      <<currentChar>>
+    </span>
+  <% endif %>
+</$list>
