@@ -37,6 +37,7 @@
     "@types/jasmine": "^5.1.4",
     "@types/lodash": "^4.17.4",
     "@types/node": "^20.12.12",
+    "@types/uuid": "^9.0.8",
     "dprint": "^0.45.1",
     "eslint-config-tidgi": "^1.2.3",
     "husky": "^9.0.11",
@@ -67,5 +68,10 @@
     "tiddlywiki-plugin-dev": "^0.2.0",
     "uuid": "^9.0.1",
     "webgal-parser": "^4.4.15"
+  },
+  "pnpm": {
+    "overrides": {
+      "@pixi/mesh-extras": "6.5.10"
+    }
   }
 }
