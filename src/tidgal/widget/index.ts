@@ -1,12 +1,11 @@
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import { IChangedTiddlers } from 'tiddlywiki';
-import './index.css';
-import { initializeScript } from './Core/initializeScript';
-import { onBgChange } from './Stage/MainStage/useSetBg';
-import { setStageObjectEffects } from './Stage/MainStage/useSetEffects';
-import { onFigureChange } from './Stage/MainStage/useSetFigure';
-import { IStageState } from './store/stageInterface';
-import { initStageState } from './store/stageReducer';
+import { initializeScript } from '../Core/initializeScript';
+import { onBgChange } from '../Stage/MainStage/useSetBg';
+import { setStageObjectEffects } from '../Stage/MainStage/useSetEffects';
+import { onFigureChange } from '../Stage/MainStage/useSetFigure';
+import { IStageState } from '../store/stageInterface';
+import { initStageState } from '../store/stageReducer';
 
 class GalGameWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers) {
