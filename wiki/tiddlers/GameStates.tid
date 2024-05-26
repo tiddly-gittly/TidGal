@@ -1,0 +1,18 @@
+title: GameStates
+tags: $:/tags/SideBar
+
+!!! Stage State
+
+<$codeblock code={{$:/temp/tidgal/default/StageState}} />
+
+!!! User Data
+
+<$codeblock code={{$:/temp/tidgal/default/UserData}} />
+
+!!! Save Data
+
+<$codeblock code={{$:/temp/tidgal/default/SaveData}} />
+
+!!! Gui State
+
+<$codeblock code={{$:/temp/tidgal/default/GuiState}} />
