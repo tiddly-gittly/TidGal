@@ -39,6 +39,7 @@ class GalGameWidget extends Widget {
       return;
     }
     const containerElement = $tw.utils.domMaker('main', {
+      class: 'galgame-container',
       style: { width, height },
     }) as HTMLDivElement;
     this.containerElement = containerElement;

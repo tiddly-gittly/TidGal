@@ -57,8 +57,7 @@ export interface ILive2DRecord {
 //   duration: number;
 // }
 
-// @ts-expect-error
-window.PIXI = PIXI;
+// window.PIXI = PIXI;
 
 export default class PixiStage {
   /**
@@ -94,10 +93,8 @@ export default class PixiStage {
       backgroundAlpha: 0,
       preserveDrawingBuffer: true,
     });
-    // @ts-expect-error
-
-    window.PIXIapp = this; // @ts-expect-error
-    window.__PIXI_APP__ = app;
+    // window.PIXIapp = this;
+    // window.__PIXI_APP__ = app;
     // 清空原节点
     const pixiContainer = getContainer()?.querySelector?.('#pixiContianer');
     if (pixiContainer) {
@@ -959,18 +956,6 @@ function updateCurrentBacklogEffects(newEffects: IEffect[]) {
  * @return {Promise<number>}
  */
 const getScreenFps = (() => {
-  // 先做一下兼容性处理
-  const nextFrame = [
-    window.requestAnimationFrame,
-    // @ts-expect-error
-    window.webkitRequestAnimationFrame,
-    // @ts-expect-error
-    window.mozRequestAnimationFrame,
-  ].find(Boolean) as typeof window.requestAnimationFrame;
-  if (!nextFrame) {
-    console.error('requestAnimationFrame is not supported!');
-    return;
-  }
   return async (targetCount = 60) => {
     // 判断参数是否合规
     if (targetCount < 1) throw new Error('targetCount cannot be less than 1.');
@@ -978,7 +963,7 @@ const getScreenFps = (() => {
     let count = 0;
     return await new Promise((resolve) => {
       (function log() {
-        nextFrame(() => {
+        requestAnimationFrame(() => {
           if (++count >= targetCount) {
             const diffDate = Date.now() - beginDate;
             const fps = (count / diffDate) * 1000;

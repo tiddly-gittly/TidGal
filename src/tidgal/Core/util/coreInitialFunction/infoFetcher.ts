@@ -5,11 +5,6 @@ import { getGuiState, setGuiAsset, setLogoImage } from 'src/tidgal/store/GUIRedu
 import { assetSetter, fileType, getAssetBase } from '../gameAssetsAccess/assetSetter';
 import { logger } from '../logger';
 
-declare global {
-  interface Window {
-    renderPromise?: CallableFunction;
-  }
-}
 /**
  * 获取游戏信息
  * @param url 游戏信息路径
@@ -63,6 +58,4 @@ export const infoFetcher = (url: string) => {
       }
     });
   }
-  window?.renderPromise?.();
-  delete window.renderPromise;
 };

@@ -1,18 +1,17 @@
 title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
 
 \rules except horizrule dash
+\whitespace trim
 
-<div>
-  <div class="introContainer" id="introContainer" />
-  <style>
-    .introContainer {
-      box-sizing: border-box;
-      position: relative;
-      z-index: 11;
-      width: 100%;
-      height: 100%;
-      color: white;
-      display: none;
-    }
-  </style>
-</div>
+<div class="introContainer" id="introContainer" />
+<style>
+  .introContainer {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: none;
+  }
+</style>
