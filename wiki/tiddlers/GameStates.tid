@@ -16,3 +16,7 @@ tags: $:/tags/SideBar
 !!! Gui State
 
 <$codeblock code={{$:/temp/tidgal/default/GuiState}} />
+
+!!!! introContainer
+
+<$codeblock code={{$:/temp/tidgal/default/introContainer}} />

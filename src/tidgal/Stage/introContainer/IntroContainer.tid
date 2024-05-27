@@ -3,7 +3,9 @@ title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
 \rules except horizrule dash
 \whitespace trim
 
-<div class="introContainer" id="introContainer" />
+<div class="introContainer" id="introContainer">
+  {{$:/temp/tidgal/default/introContainer}}
+</div>
 <style>
   .introContainer {
     box-sizing: border-box;

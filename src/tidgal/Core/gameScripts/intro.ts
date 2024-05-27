@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
+/* eslint-disable unicorn/prefer-number-properties */
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 // import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { IPerform } from '../Modules/perform/performInterface';
 import { getContainer } from '../util/coreInitialFunction/container';
+import { objectToInlineStyle } from '../util/css';
 /**
  * 显示一小段黑屏演示
  * @param sentence
@@ -15,40 +18,40 @@ export const intro = (sentence: ISentence): IPerform => {
 
   const performName = `introPerform${Math.random().toString()}`;
   let fontSize: string | undefined;
-  let backgroundColor: any = 'rgba(0, 0, 0, 1)';
-  let color: any = 'rgba(255, 255, 255, 1)';
-  const animationClass: any = (type: string, length = 0) => {
+  let backgroundColor = 'rgba(0, 0, 0, 1)';
+  let color = 'rgba(255, 255, 255, 1)';
+  const animationClass = (type: string, length = 0) => {
     switch (type) {
       case 'fadeIn': {
-        return styles.fadeIn;
+        return 'tidgal-fadeIn';
       }
       case 'slideIn': {
-        return styles.slideIn;
+        return 'tidgal-slideIn';
       }
       case 'typingEffect': {
-        return `${styles.typingEffect} ${length}`;
+        return `${'tidgal-typingEffect'} ${length}`;
       }
       case 'pixelateEffect': {
-        return styles.pixelateEffect;
+        return 'tidgal-pixelateEffect';
       }
       case 'revealAnimation': {
-        return styles.revealAnimation;
+        return 'tidgal-revealAnimation';
       }
       default: {
-        return styles.fadeIn;
+        return 'tidgal-fadeIn';
       }
     }
   };
-  let chosenAnimationClass = styles.fadeIn;
+  let chosenAnimationClass = 'tidgal-fadeIn';
   let delayTime = 1500;
   let isHold = false;
 
   for (const e of sentence.args) {
     if (e.key === 'backgroundColor') {
-      backgroundColor = e.value || 'rgba(0, 0, 0, 1)';
+      backgroundColor = (e.value as string) || 'rgba(0, 0, 0, 1)';
     }
     if (e.key === 'fontColor') {
-      color = e.value || 'rgba(255, 255, 255, 1)';
+      color = (e.value as string) || 'rgba(255, 255, 255, 1)';
     }
     if (e.key === 'fontSize') {
       switch (e.value) {
@@ -67,7 +70,7 @@ export const intro = (sentence: ISentence): IPerform => {
       }
     }
     if (e.key === 'animation') {
-      chosenAnimationClass = animationClass(e.value);
+      chosenAnimationClass = animationClass(e.value as string);
     }
     if (e.key === 'delayTime') {
       const parsedValue = Number.parseInt(e.value.toString(), 10);
@@ -97,7 +100,7 @@ export const intro = (sentence: ISentence): IPerform => {
 
   let timeout = setTimeout(() => {});
   const toNextIntroElement = () => {
-    const introContainer = getContainer()?.querySelector?.<HTMLDivElement>('#introContainer');
+    const introContainer = getContainer()?.querySelector<HTMLDivElement>('#introContainer');
     // 由于用户操作，相当于时间向前推进，这时候更新这个演出的预计完成时间
     baseDuration -= delayTime;
     clearTimeout(setBlockingStateTimeout);
@@ -144,23 +147,27 @@ export const intro = (sentence: ISentence): IPerform => {
   WebGAL.events.userInteractNext.on(toNextIntroElement);
   // FIXME: 改为设置状态，然后 HTML 在 tid 里写
 
-  // const showIntro = introArray.map((e, i) => (
-  //   <div
-  //     key={'introtext' + i + Math.random().toString()}
-  //     style={{ animationDelay: `${delayTime * i}ms` }}
-  //     className={chosenAnimationClass}
-  //   >
-  //     {e}
-  //     {e === '' ? '\u00A0' : ''}
-  //   </div>
-  // ));
-  // const intro = (
-  //   <div style={introContainerStyle}>
-  //     <div style={{ padding: '3em 4em 3em 4em' }}>{showIntro}</div>
-  //   </div>
-  // );
+  const showIntro = introArray.map((textChar, i) => `
+    <div
+      key='introtext${i}${Math.random().toString()}'
+      style='animation-delay: ${delayTime * i}ms;'
+      class='${chosenAnimationClass}'
+    >
+      ${textChar}
+      ${textChar === '' ? '\u00A0' : ''}
+    </div>
+  `).join('');
+
+  const intro = `
+    <div style='${objectToInlineStyle(introContainerStyle)}'>
+      <div style='padding: 3em 4em 3em 4em;'>
+        ${showIntro}
+      </div>
+    </div>
+  `;
+  $tw.wiki.setText('$:/temp/tidgal/default/introContainer', undefined, undefined, intro);
   // eslint-disable-next-line react/no-deprecated
-  const introContainer = getContainer()?.querySelector?.('#introContainer');
+  const introContainer = getContainer()?.querySelector<HTMLDivElement>('#introContainer');
 
   if (introContainer) {
     introContainer.style.display = 'block';
@@ -171,7 +178,7 @@ export const intro = (sentence: ISentence): IPerform => {
     duration,
     isHoldOn: false,
     stopFunction: () => {
-      const introContainer = getContainer()?.querySelector?.('#introContainer');
+      const introContainer = getContainer()?.querySelector<HTMLDivElement>('#introContainer');
       if (introContainer) {
         introContainer.style.display = 'none';
       }
