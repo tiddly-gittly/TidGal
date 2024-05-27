@@ -1,20 +1,20 @@
 title: $:/plugins/linonetwo/tidgal/Stage/AudioContainer/AudioContainer
 
+<!-- You can add `controls="controls"` to debug it -->
+<!-- // TODO: fade() -->
 <% if [{$:/temp/tidgal/default/GuiState##showTitle}match[true]] %>
-  <!-- You can add `controls="controls"` to debug it -->
-  <!-- // TODO: fade() -->
   <audio
     id='currentBgm'
     src={{{ [{$:/temp/tidgal/default/GuiState##titleBgm}get[text]addprefix[data:audio/mpeg;base64,]] }}}
     loop="true"
-    autoPlay={{{ [{$:/temp/tidgal/default/GuiState##isEnterGame}match[true]] }}}
+    autoPlay={{{ [{$:/temp/tidgal/default/GuiState##isEnterGame}match[true]else[false]] }}}
   />
 <% else %>
   <audio
     id='currentBgm'
-    src={{{ [{$:/temp/tidgal/default/GuiState}jsonget[bgm],[src]get[text]addprefix[data:audio/mpeg;base64,]] }}}
+    src={{{ [{$:/temp/tidgal/default/StageState}jsonget[bgm],[src]get[text]addprefix[data:audio/mpeg;base64,]] }}}
     loop="true"
-    autoPlay={{{ [{$:/temp/tidgal/default/GuiState##isEnterGame}match[true]] }}}
+    autoPlay={{{ [{$:/temp/tidgal/default/GuiState##isEnterGame}match[true]else[false]] }}}
   />
 <% endif %>
 
@@ -24,8 +24,9 @@ title: $:/plugins/linonetwo/tidgal/Stage/AudioContainer/AudioContainer
 />
 
 <% if [{$:/temp/tidgal/default/GuiState##uiSe}!match[]] %>
-<audio
-  loop="false"
-  src={{{ [{$:/temp/tidgal/default/StageState##uiSe}get[text]addprefix[data:audio/mpeg;base64,]] }}}
-  autoPlay="true"
-/>
+  <audio
+    loop="false"
+    src={{{ [{$:/temp/tidgal/default/StageState##uiSe}get[text]addprefix[data:audio/mpeg;base64,]] }}}
+    autoPlay="true"
+  />
+<% endif %>

@@ -1,5 +1,7 @@
 import { widget as Widget } from '$:/core/modules/widgets/widget.js';
 import { IChangedTiddlers } from 'tiddlywiki';
+
+import { startGame } from '../Core/controller/gamePlay/startContinueGame';
 import { initializeScript } from '../Core/initializeScript';
 import { onBgChange } from '../Stage/MainStage/useSetBg';
 import { setStageObjectEffects } from '../Stage/MainStage/useSetEffects';
@@ -9,12 +11,17 @@ import { initStageState } from '../store/stageReducer';
 
 class GalGameWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers) {
-    if (changedTiddlers['$:/temp/tidgal/default/StageState']?.modified === true) {
+    if (changedTiddlers['$:/temp/tidgal/default/StageState']) {
       this.onStageStateChange();
+      return this.refreshChildren(changedTiddlers);
+    }
+    if (changedTiddlers['$:/temp/tidgal/default/GuiState'] || changedTiddlers['$:/temp/tidgal/default/UserData'] || changedTiddlers['$:/temp/tidgal/default/SaveData']) {
+      return this.refreshChildren(changedTiddlers);
     }
     return false;
   }
 
+  containerElement: HTMLDivElement | null = null;
   render(parent: Element, nextSibling: Element) {
     this.parentDomNode = parent;
     this.computeAttributes();
@@ -33,7 +40,8 @@ class GalGameWidget extends Widget {
     }
     const containerElement = $tw.utils.domMaker('main', {
       style: { width, height },
-    });
+    }) as HTMLDivElement;
+    this.containerElement = containerElement;
     const transcludeWidgetNode = $tw.wiki.makeTranscludeWidget(stageTitle, {
       document,
       parentWidget: this,
@@ -46,10 +54,7 @@ class GalGameWidget extends Widget {
     this.children.push(transcludeWidgetNode);
     this.domNodes.push(containerElement);
     // load the game
-    initializeScript({ assetBase }).catch(error => {
-      $tw.utils.error(error as Error);
-      containerElement.innerText = `Error loading the game (${(error as Error).message})`;
-    });
+    void this.loadGameAndStart(assetBase);
   }
 
   stageState: IStageState = initStageState;
@@ -64,6 +69,18 @@ class GalGameWidget extends Widget {
     onFigureChange(this.stageState, this.prevStageState);
     setStageObjectEffects(this.stageState, this.prevStageState);
     this.setPrevState();
+  }
+
+  async loadGameAndStart(assetBase: string) {
+    try {
+      await initializeScript({ assetBase });
+      startGame();
+    } catch (error) {
+      $tw.utils.error(error as Error);
+      if (this.containerElement) {
+        this.containerElement.innerText = `Error loading the game (${(error as Error).message})`;
+      }
+    }
   }
 }
 

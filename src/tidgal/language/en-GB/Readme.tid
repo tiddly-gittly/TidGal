@@ -6,4 +6,4 @@ title: $:/plugins/linonetwo/tidgal/language/en-GB/Readme
 
 <<lingo Description>>
 
-Write readme here.
+The code is based on the Core code of [[WebGAL|https://github.com/OpenWebGAL/WebGAL]] v4.5.1, with React-related dependencies removed, also enable it to read data from the Tiddlywiki.
