@@ -1,16 +1,17 @@
 // 切换自动播放状态
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
+// import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
 import { stopAuto } from './autoPlay';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import { getContainer } from '../../util/coreInitialFunction/container';
 
 /**
  * 设置 fast 按钮的激活与否
  * @param on
  */
 const setButton = (on: boolean) => {
-  const autoIcon = document.querySelector('#Button_ControlPanel_fast');
+  const autoIcon = getContainer()?.querySelector?.('#Button_ControlPanel_fast');
   if (autoIcon) {
     if (on) {
       autoIcon.className = styles.button_on;

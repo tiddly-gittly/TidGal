@@ -1,16 +1,17 @@
 // import {logger} from '../../util/logger';
 import { nextSentence } from 'src/tidgal/Core/controller/gamePlay/nextSentence';
-import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
+// import styles from 'src/tidgal/CoreUI/BottomControlPanel/bottomControlPanel.module.scss';
 
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
+import { getContainer } from '../../util/coreInitialFunction/container';
 
 /**
  * 设置 autoplay 按钮的激活与否
  * @param on
  */
 const setButton = (on: boolean) => {
-  const autoIcon = document.querySelector('#Button_ControlPanel_auto');
+  const autoIcon = getContainer()?.querySelector?.('#Button_ControlPanel_auto');
   if (autoIcon) {
     if (on) {
       autoIcon.className = styles.button_on;

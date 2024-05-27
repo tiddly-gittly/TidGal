@@ -3,6 +3,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { saveActions } from 'src/tidgal/store/savesReducer';
 import { getStage } from 'src/tidgal/store/stageReducer';
 import { ISaveData } from 'src/tidgal/store/userDataInterface';
+import { getContainer } from '../../util/coreInitialFunction/container';
 
 /**
  * 保存游戏
@@ -26,15 +27,17 @@ export function generateCurrentStageData(index: number, isSavePreviewImage = tru
    */
 
   let urlToSave = '';
-  if (isSavePreviewImage) {
-    const canvas: HTMLCanvasElement = document.querySelector('#pixiCanvas')!;
+  const canvas = getContainer()?.querySelector<HTMLCanvasElement>('#pixiCanvas');
+  if (isSavePreviewImage && canvas) {
     const canvas2 = document.createElement('canvas');
     const context = canvas2.getContext('2d');
-    canvas2.width = 480;
-    canvas2.height = 270;
-    context!.drawImage(canvas, 0, 0, 480, 270);
-    urlToSave = canvas2.toDataURL('image/webp', 0.5);
-    canvas2.remove();
+    if (context) {
+      canvas2.width = 480;
+      canvas2.height = 270;
+      context.drawImage(canvas, 0, 0, 480, 270);
+      urlToSave = canvas2.toDataURL('image/webp', 0.5);
+      canvas2.remove();
+    }
   }
   const saveData: ISaveData = {
     nowStageState: cloneDeep(stageState),

@@ -1,5 +1,6 @@
 import { logger } from 'src/tidgal/Core/util/logger';
 import { getStage, setStage } from 'src/tidgal/store/stageReducer';
+import { getContainer } from '../../util/coreInitialFunction/container';
 
 // /**
 //  * 停止bgm
@@ -38,7 +39,7 @@ export function playBgm(url: string, enter = 0, volume = 100): void {
     clearTimeout(emptyBgmTimeout);
     setStage({ key: 'bgm', value: { src: url, enter, volume } });
   }
-  const audioElement = document.querySelector<HTMLAudioElement>('#currentBgm')!;
+  const audioElement = getContainer()?.querySelector<HTMLAudioElement>?.('#currentBgm')!;
   if (audioElement?.src) {
     audioElement?.play();
   }

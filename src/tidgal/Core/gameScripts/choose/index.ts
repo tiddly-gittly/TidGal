@@ -86,14 +86,14 @@ export const choose = (sentence: ISentence): IPerform => {
   // // eslint-disable-next-line react/no-deprecated
   // ReactDOM.render(
   //   <div className={styles.Choose_Main}>{runtimeBuildList(chooseOptions)}</div>,
-  //   document.querySelector('#chooseContainer'),
+  //   getContainer()?.querySelector?.('#chooseContainer'),
   // );
   return {
     performName: 'choose',
     duration: 1000 * 60 * 60 * 24,
     isHoldOn: false,
     stopFunction: () => {
-      // ReactDOM.render(<div />, document.querySelector('#chooseContainer'));
+      // ReactDOM.render(<div />, getContainer()?.querySelector?.('#chooseContainer'));
     },
     blockingNext: () => true,
     blockingAuto: () => true,

@@ -3,6 +3,7 @@ import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 // import styles from 'src/tidgal/Stage/FullScreenPerform/fullScreenPerform.module.scss';
 import { IPerform } from '../Modules/perform/performInterface';
+import { getContainer } from '../util/coreInitialFunction/container';
 /**
  * 显示一小段黑屏演示
  * @param sentence
@@ -96,7 +97,7 @@ export const intro = (sentence: ISentence): IPerform => {
 
   let timeout = setTimeout(() => {});
   const toNextIntroElement = () => {
-    const introContainer = document.querySelector<HTMLDivElement>('#introContainer');
+    const introContainer = getContainer()?.querySelector?.<HTMLDivElement>('#introContainer');
     // 由于用户操作，相当于时间向前推进，这时候更新这个演出的预计完成时间
     baseDuration -= delayTime;
     clearTimeout(setBlockingStateTimeout);
@@ -159,7 +160,7 @@ export const intro = (sentence: ISentence): IPerform => {
   //   </div>
   // );
   // eslint-disable-next-line react/no-deprecated
-  const introContainer = document.querySelector('#introContainer');
+  const introContainer = getContainer()?.querySelector?.('#introContainer');
 
   if (introContainer) {
     introContainer.style.display = 'block';
@@ -170,7 +171,7 @@ export const intro = (sentence: ISentence): IPerform => {
     duration,
     isHoldOn: false,
     stopFunction: () => {
-      const introContainer = document.querySelector('#introContainer');
+      const introContainer = getContainer()?.querySelector?.('#introContainer');
       if (introContainer) {
         introContainer.style.display = 'none';
       }

@@ -5,6 +5,7 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getUserData } from 'src/tidgal/store/userDataReducer';
+import { getContainer } from '../util/coreInitialFunction/container';
 /**
  * 播放一段视频 * @param sentence
  */
@@ -26,7 +27,7 @@ export const playVideo = (sentence: ISentence): IPerform => {
   //   <div className={styles.videoContainer}>
   //     <video className={styles.fullScreen_video} id='playVideoElement' src={sentence.content} autoPlay={true} />
   //   </div>,
-  //   document.querySelector('#videoContainer'),
+  //   getContainer()?.querySelector?.('#videoContainer'),
   // );
   let isOver = false;
   return {
@@ -42,8 +43,8 @@ export const playVideo = (sentence: ISentence): IPerform => {
        * 启动视频播放
        */
       setTimeout(() => {
-        const VocalControl: any = document.querySelector('#playVideoElement');
-        if (VocalControl !== null) {
+        const VocalControl = getContainer()?.querySelector<HTMLVideoElement>('#playVideoElement');
+        if (VocalControl) {
           VocalControl.currentTime = 0;
           VocalControl.volume = bgmVol;
           const endPerform = () => {
@@ -72,16 +73,16 @@ export const playVideo = (sentence: ISentence): IPerform => {
               /**
                * 恢复音量
                */
-              const bgmElement: any = document.querySelector('#currentBgm');
+              const bgmElement: any = getContainer()?.querySelector?.('#currentBgm');
               if (bgmElement) {
                 bgmElement.volume = bgmVol.toString();
               }
-              const vocalElement: any = document.querySelector('#currentVocal');
+              const vocalElement: any = getContainer()?.querySelector?.('#currentVocal');
               if (bgmElement) {
                 vocalElement.volume = vocalVol.toString();
               }
               // FIXME: 改为设置状态，然后 HTML 在 tid 里写
-              // ReactDOM.render(<div />, document.querySelector('#videoContainer'));
+              // ReactDOM.render(<div />, getContainer()?.querySelector?.('#videoContainer'));
             },
             blockingNext: () => blockingNextFlag,
             blockingAuto: () => {
@@ -96,11 +97,11 @@ export const playVideo = (sentence: ISentence): IPerform => {
            */
           const vocalVol2 = 0;
           const bgmVol2 = 0;
-          const bgmElement: any = document.querySelector('#currentBgm');
+          const bgmElement: any = getContainer()?.querySelector?.('#currentBgm');
           if (bgmElement) {
             bgmElement.volume = bgmVol2.toString();
           }
-          const vocalElement: any = document.querySelector('#currentVocal');
+          const vocalElement: any = getContainer()?.querySelector?.('#currentVocal');
           if (bgmElement) {
             vocalElement.volume = vocalVol2.toString();
           }

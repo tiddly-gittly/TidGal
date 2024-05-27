@@ -11,6 +11,7 @@ import { v4 as uuid } from 'uuid';
 import 'pixi-spine'; // Do this once at the very start of your code. This registers the loader!
 import { Spine } from 'pixi-spine';
 import { SCREEN_CONSTANTS } from 'src/tidgal/Core/util/constants';
+import { getContainer } from 'src/tidgal/Core/util/coreInitialFunction/container';
 // import { figureCash } from 'src/tidgal/Core/gameScripts/vocal/conentsCash'; // 如果要使用 Live2D，取消这里的注释
 // import { Live2DModel, SoundManager } from 'pixi-live2d-display'; // 如果要使用 Live2D，取消这里的注释
 
@@ -98,7 +99,7 @@ export default class PixiStage {
     window.PIXIapp = this; // @ts-expect-error
     window.__PIXI_APP__ = app;
     // 清空原节点
-    const pixiContainer = document.querySelector('#pixiContianer');
+    const pixiContainer = getContainer()?.querySelector?.('#pixiContianer');
     if (pixiContainer) {
       pixiContainer.innerHTML = '';
       pixiContainer.append(app.view);
@@ -110,7 +111,7 @@ export default class PixiStage {
     app.renderer.view.id = 'pixiCanvas';
     // @ts-expect-error
     app.renderer.autoResize = true;
-    const appRoot = document.querySelector('#root');
+    const appRoot = getContainer()?.querySelector?.('#root');
     if (appRoot) {
       app.renderer.resize(appRoot.clientWidth, appRoot.clientHeight);
     }
@@ -565,12 +566,12 @@ export default class PixiStage {
 
     // 完成图片加载后执行的函数
     const setup = () => {
-      console.log(this.assetLoader.resources);
-      const spineResource: any = this.assetLoader.resources?.[spineId];
+      const spineResource = this.assetLoader.resources?.[spineId];
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
       setTimeout(() => {
-        if (spineResource && this.getStageObjByUuid(figureUuid)) {
+        if (spineResource.spineData && this.getStageObjByUuid(figureUuid)) {
           const figureSpine = new Spine(spineResource.spineData);
+          // @ts-expect-error
           const transY = spineResource?.spineData?.y ?? 0;
           /**
            * 重设大小

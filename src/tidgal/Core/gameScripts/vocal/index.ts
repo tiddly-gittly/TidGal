@@ -5,6 +5,7 @@ import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { IStageState } from 'src/tidgal/store/stageInterface';
 import { getStage, setStage } from 'src/tidgal/store/stageReducer';
+import { getContainer } from '../../util/coreInitialFunction/container';
 import { match } from '../../util/match';
 
 /**
@@ -26,7 +27,7 @@ export const playVocal = (sentence: ISentence) => {
   const lerpSpeed = 1;
 
   // 先停止之前的语音
-  const VocalControl: any = document.querySelector('#currentVocal');
+  const VocalControl: any = getContainer()?.querySelector?.('#currentVocal');
   WebGAL.gameplay.performController.unmountPerform('vocal-play', true);
   if (VocalControl !== null) {
     VocalControl.currentTime = 0;
@@ -65,7 +66,7 @@ export const playVocal = (sentence: ISentence) => {
     arrangePerformPromise: new Promise((resolve) => {
       // 播放语音
       setTimeout(() => {
-        const VocalControl: any = document.querySelector<HTMLAudioElement>('#currentVocal');
+        const VocalControl: any = getContainer()?.querySelector<HTMLAudioElement>?.('#currentVocal');
         // 设置语音音量
         typeof volume === 'number' && volume >= 0 && volume <= 100
           ? setStage({ key: 'vocalVolume', value: volume })
@@ -130,9 +131,9 @@ export const playVocal = (sentence: ISentence) => {
 
             bufferLength = audioContextWrapper.analyser.frequencyBinCount;
             audioContextWrapper.dataArray = new Uint8Array(bufferLength);
-            const vocalControl = document.querySelector('#currentVocal')!;
+            const vocalControl = getContainer()?.querySelector<HTMLMediaElement>('#currentVocal');
 
-            if (!audioContextWrapper.source) {
+            if (!audioContextWrapper.source && vocalControl) {
               audioContextWrapper.source = audioContextWrapper.audioContext.createMediaElementSource(vocalControl);
               audioContextWrapper.source.connect(audioContextWrapper.analyser);
             }
