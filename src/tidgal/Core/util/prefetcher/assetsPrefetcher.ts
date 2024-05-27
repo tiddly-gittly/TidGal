@@ -13,6 +13,8 @@ export const assetsPrefetcher = (assetList: IAsset[]) => {
     const hasPrefetch = WebGAL.sceneManager.settledAssets.includes(asset.url);
     if (hasPrefetch) {
       logger.log('该资源已在预加载列表中，无需重复加载');
+    } else if ($tw.wiki.getTiddler(asset.url)) {
+      logger.log('该资源已在 Wiki 中，无需重复加载');
     } else {
       const newLink = document.createElement('link');
       newLink.setAttribute('rel', 'prefetch');
