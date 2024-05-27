@@ -13,17 +13,16 @@ import { getStage } from 'src/tidgal/store/stageReducer';
 /**
  * 从头开始游戏
  */
-export const startGame = () => {
+export const startGame = async () => {
   resetStage(true);
 
   // 重新获取初始场景
   const sceneUrl: string = assetSetter('start.txt', fileType.scene);
   // 场景写入到运行时
-  sceneFetcher(sceneUrl).then((rawScene) => {
-    WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
-    // 开始第一条语句
-    nextSentence();
-  });
+  const rawScene = await sceneFetcher(sceneUrl);
+  WebGAL.sceneManager.sceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
+  // 开始第一条语句
+  nextSentence();
   setVisibility({ component: 'showTitle', visibility: false });
 };
 

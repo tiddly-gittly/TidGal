@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tidgal/Stage/AudioContainer/AudioContainer
 
+\rules except horizrule dash
+
 <!-- You can add `controls="controls"` to debug it -->
 <!-- // TODO: fade() -->
 <% if [{$:/temp/tidgal/default/GuiState##showTitle}match[true]] %>

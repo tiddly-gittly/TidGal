@@ -1,9 +1,11 @@
 title: $:/plugins/linonetwo/tidgal/Stage/Stage
 
+\rules except horizrule dash
+
 <div>
-  <div className="MainStage_main">
-    <div id="pixiContianer" className="pixiContainer" />
-    <div id="chooseContainer" className="chooseContainer" />
+  <div class="MainStage_main">
+    <div id="pixiContianer" class="pixiContainer" />
+    <div id="chooseContainer" class="chooseContainer" />
 
     {{$:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform}}
 

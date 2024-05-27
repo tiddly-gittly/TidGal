@@ -105,7 +105,7 @@ export default class PixiStage {
     }
 
     // 设置样式
-    app.renderer.view.style.position = 'absolute';
+    // app.renderer.view.style.position = 'absolute';
     app.renderer.view.style.display = 'block';
     app.renderer.view.id = 'pixiCanvas';
     // @ts-expect-error

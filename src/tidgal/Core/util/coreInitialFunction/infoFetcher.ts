@@ -24,7 +24,7 @@ export const infoFetcher = (url: string) => {
     return;
   }
   const gameConfig = WebgalParser.parseConfig(gameConfigRaw);
-  logger.log('获取到游戏信息', gameConfig);
+  logger.log('获取到游戏信息', JSON.stringify(gameConfig));
   // 按照游戏的配置开始设置对应的状态
   if (GUIState) {
     gameConfig.forEach((e) => {

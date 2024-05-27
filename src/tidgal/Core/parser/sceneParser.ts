@@ -86,7 +86,7 @@ export const WebgalParser = new SceneParser(assetsPrefetcher, assetSetter, ADD_N
 
 export const sceneParser = (rawScene: string, sceneName: string, sceneUrl: string): IScene => {
   const parsedScene = WebgalParser.parse(rawScene, sceneName, sceneUrl);
-  logger.log(`解析场景：${sceneName}，数据为：`, parsedScene);
+  logger.log(`解析场景：${sceneName}，数据为：`, JSON.stringify(parsedScene));
   return parsedScene;
 };
 

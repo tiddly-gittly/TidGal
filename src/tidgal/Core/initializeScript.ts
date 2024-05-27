@@ -7,6 +7,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { sceneFetcher } from './controller/scene/sceneFetcher';
 import { IUserAnimationEffects } from './Modules/animations';
 import { sceneParser } from './parser/sceneParser';
+import { setContainer } from './util/coreInitialFunction/container';
 import { infoFetcher } from './util/coreInitialFunction/infoFetcher';
 import { assetSetter, fileType, getAssetBase, setAssetOptions } from './util/gameAssetsAccess/assetSetter';
 import { logger } from './util/logger';
@@ -20,6 +21,7 @@ export interface IInitializeScriptOptions {
    * The prefix of asset files. Will be concat to before standard filenames like `start.txt`.
    */
   assetBase: string;
+  container: HTMLDivElement;
 }
 /**
  * 引擎初始化函数
@@ -27,6 +29,9 @@ export interface IInitializeScriptOptions {
 export async function initializeScript(options: IInitializeScriptOptions) {
   if (!options?.assetBase) {
     throw new Error('Missing options.assetBase');
+  }
+  if (!options?.container) {
+    throw new Error('Missing options.container');
   }
   // 打印初始log信息
   logger.log('Github: https://github.com/OpenWebGAL/WebGAL ');
@@ -45,6 +50,7 @@ export async function initializeScript(options: IInitializeScriptOptions) {
   }
 
   setAssetOptions(options);
+  setContainer(options.container);
   // 获得 user Animation
   getUserAnimation();
   // 获取游戏信息

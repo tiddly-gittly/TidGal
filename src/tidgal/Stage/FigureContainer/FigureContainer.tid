@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tidgal/Stage/FigureContainer/FigureContainer
 
+\rules except horizrule dash
+
 <div>
   <div class="FigureContainer_main">
     <div class="figContainerLeft figContainer" id="figLeftContainer">

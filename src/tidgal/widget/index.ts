@@ -72,14 +72,16 @@ class GalGameWidget extends Widget {
   }
 
   async loadGameAndStart(assetBase: string) {
+    if (!this.containerElement) {
+      $tw.utils.error('No container element in galgame widget!');
+      return;
+    }
     try {
-      await initializeScript({ assetBase });
-      startGame();
+      await initializeScript({ assetBase, container: this.containerElement });
+      await startGame();
     } catch (error) {
       $tw.utils.error(error as Error);
-      if (this.containerElement) {
-        this.containerElement.innerText = `Error loading the game (${(error as Error).message})`;
-      }
+      this.containerElement.innerText = `Error loading the game (${(error as Error).message})`;
     }
   }
 }

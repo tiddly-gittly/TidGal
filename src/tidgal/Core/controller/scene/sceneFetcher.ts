@@ -1,4 +1,3 @@
-import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 
 /**
  * 原始场景文件获取函数

@@ -1,5 +1,7 @@
 title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
 
+\rules except horizrule dash
+
 <div>
   <div class="introContainer" id="introContainer" />
   <style>
