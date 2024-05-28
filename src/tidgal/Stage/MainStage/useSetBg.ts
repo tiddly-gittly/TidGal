@@ -34,6 +34,7 @@ export function onBgChange(stageState: IStageState, prevStageState: IStageState)
 }
 
 function removeBg(bgObject: IStageObject) {
+  setEbg('');
   WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects('bg-main-softin');
   const oldBgKey = bgObject.key;
   bgObject.key = 'bg-main-off';
