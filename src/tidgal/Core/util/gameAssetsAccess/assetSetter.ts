@@ -71,3 +71,15 @@ export const assetSetter = (fileName: string, assetType: fileType): string => {
     return returnFilePath;
   }
 };
+
+export function getBase64URL(urlOrTiddlerTitle: string): string {
+  if (urlOrTiddlerTitle.startsWith('http')) {
+    return urlOrTiddlerTitle;
+  } else {
+    const base64Data = $tw.wiki.getTiddlerText(urlOrTiddlerTitle);
+    if (base64Data) {
+      return `data:image/png;base64,${base64Data}`;
+    }
+    return '';
+  }
+}

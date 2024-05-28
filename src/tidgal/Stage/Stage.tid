@@ -4,6 +4,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/Stage
 \whitespace trim
 
 <div class="MainStage_main">
+  <div id="ebg" />
   <div id="pixiContainer" class="pixiContainer" />
   <div id="chooseContainer" class="chooseContainer" />
   {{$:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform}}
@@ -27,6 +28,17 @@ title: $:/plugins/linonetwo/tidgal/Stage/Stage
     overflow: hidden;
   }
 
+  #ebg {
+    height: 100%;
+    width: 100%;
+    filter: blur(50px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .MainStage_main_container {
     width: 100%;
     height: 100%;

@@ -12,6 +12,7 @@ import 'pixi-spine'; // Do this once at the very start of your code. This regist
 import { Spine } from 'pixi-spine';
 import { SCREEN_CONSTANTS } from 'src/tidgal/Core/util/constants';
 import { getContainer } from 'src/tidgal/Core/util/coreInitialFunction/container';
+import { createTextureFromTiddler } from './textureFromTiddler';
 // import { figureCash } from 'src/tidgal/Core/gameScripts/vocal/conentsCash'; // 如果要使用 Live2D，取消这里的注释
 // import { Live2DModel, SoundManager } from 'pixi-live2d-display'; // 如果要使用 Live2D，取消这里的注释
 
@@ -280,7 +281,7 @@ export default class PixiStage {
 
     // Load mouth texture (reuse if already loaded)
     this.loadAsset(mouthTextureUrls[mouthState], () => {
-      const texture = this.assetLoader.resources[mouthTextureUrls[mouthState]].texture;
+      const texture = this.assetLoader.resources[mouthTextureUrls[mouthState]].texture ?? createTextureFromTiddler(mouthTextureUrls[mouthState]);
       if (!texture) {
         return;
       }
@@ -333,7 +334,7 @@ export default class PixiStage {
 
     // Load eye texture (reuse if already loaded)
     this.loadAsset(blinkTextureUrls[blinkState], () => {
-      const texture = this.assetLoader.resources[blinkTextureUrls[blinkState]].texture;
+      const texture = this.assetLoader.resources[blinkTextureUrls[blinkState]].texture ?? createTextureFromTiddler(blinkTextureUrls[blinkState]);
 
       if (!texture) {
         return;
@@ -407,7 +408,7 @@ export default class PixiStage {
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
 
       setTimeout(() => {
-        const texture = loader.resources?.[url]?.texture;
+        const texture = loader.resources?.[url]?.texture ?? createTextureFromTiddler(url);
         if (texture && this.getStageObjByUuid(bgUuid)) {
           /**
            * 重设大小
@@ -480,7 +481,7 @@ export default class PixiStage {
     const setup = () => {
       // TODO：找一个更好的解法，现在的解法是无论是否复用原来的资源，都设置一个延时以让动画工作正常！
       setTimeout(() => {
-        const texture = loader.resources?.[url]?.texture;
+        const texture = loader.resources?.[url]?.texture ?? createTextureFromTiddler(url);
         if (texture && this.getStageObjByUuid(figureUuid)) {
           /**
            * 重设大小
