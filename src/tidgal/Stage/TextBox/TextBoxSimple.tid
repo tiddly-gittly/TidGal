@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
-\rules except horizrule dash
+\rules except horizrule dash italic
 \whitespace trim
 
 <!-- 参考 TextBox.tsx 里的 compileSentence 方法，拆行。暂时不支持注音用法（复用 markdown 链接语法的，https://github.com/OpenWebGAL/WebGAL/discussions/498） -->

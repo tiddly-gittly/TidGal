@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform
 
-\rules except horizrule dash
+\rules except horizrule dash italic
 \whitespace trim
 
 <% if [{$:/temp/tidgal/default/StageState##enableFilm}match[true]] %>

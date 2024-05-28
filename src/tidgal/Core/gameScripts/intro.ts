@@ -146,16 +146,16 @@ export const intro = (sentence: ISentence): IPerform => {
    */
   WebGAL.events.userInteractNext.on(toNextIntroElement);
 
-  const showIntro = introArray.map((textChar, i) => `
-    <div
+  const showIntro = introArray.map((textChar, i) =>
+    `<p
       key='introtext${i}${Math.random().toString()}'
       style='animation-delay: ${delayTime * i}ms;'
       class='${chosenAnimationClass}'
     >
       ${textChar}
       ${textChar === '' ? '\u00A0' : ''}
-    </div>
-  `).join('');
+    </p>`
+  ).join('');
 
   const intro = `
     <div style='${objectToInlineStyle(introContainerStyle)}'>

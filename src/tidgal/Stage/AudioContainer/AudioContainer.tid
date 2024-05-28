@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tidgal/Stage/AudioContainer/AudioContainer
 
-\rules except horizrule dash
+\rules except horizrule dash italic
 \whitespace trim
 
 <!-- You can add `controls="controls"` to debug it -->

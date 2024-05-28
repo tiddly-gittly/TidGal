@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
 
-\rules except horizrule dash
+\rules except horizrule dash italic
 \whitespace trim
 
 <div class="introContainer" id="introContainer">
@@ -15,5 +15,9 @@ title: $:/plugins/linonetwo/tidgal/Stage/IntroContainer/IntroContainer
     height: 100%;
     color: white;
     display: none;
+  }
+  .introContainer p {
+    margin: 0;
+    margin-bottom: 0.6em;
   }
 </style>

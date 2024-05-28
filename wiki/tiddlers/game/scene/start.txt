@@ -1,7 +1,7 @@
 ; 初始场景，以及特效演示
 bgm:s_Title.mp3;
 unlockBgm:s_Title.mp3 -name=雲を追いかけて;
-intro:你好|欢迎来到 WebGAL 的世界 -fontSize=medium -backgroundColor=rgba(0, 0, 0, 1) -fontColor=rgba(255, 255, 255, 1) -animation=fadeIn -delayTime=1500;
+intro:你好|欢迎来到 WebGAL 的世界 -fontSize=medium -backgroundColor=rgba(0, 0, 0, 1) -fontColor=rgba(255, 255, 255, 1) -animation=fadeIn -delayTime=1500 -hold=true;
 changeBg:bg.png -next;
 unlockCg:bg.png -name=良夜;
 changeFigure:stand.png -left -next;

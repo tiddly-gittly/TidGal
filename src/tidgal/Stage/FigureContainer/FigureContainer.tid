@@ -1,6 +1,6 @@
 title: $:/plugins/linonetwo/tidgal/Stage/FigureContainer/FigureContainer
 
-\rules except horizrule dash
+\rules except horizrule dash italic
 \whitespace trim
 
 <div class="FigureContainer_main">
