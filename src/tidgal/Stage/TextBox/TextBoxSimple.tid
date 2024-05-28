@@ -33,7 +33,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
 <style>
   .TextBox_EventHandler {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     z-index: 6;
@@ -47,7 +47,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   $height: 330px;
 
   .TextBox_Container {
-    position: relative;
+    position: absolute;
     z-index: 6;
     bottom: 0;
     width: 100%;
@@ -56,7 +56,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
   .TextBox_main {
     z-index: 3;
-    position: relative;
+    position: absolute;
     right: 25px;
     min-height: $height;
     max-height: $height;
@@ -98,13 +98,13 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
   .TextBox_textElement_start {
     @include text_shadow_textElement;
-    position: relative;
+    position: absolute;
     animation: TextDelayShow 1000ms ease-out forwards;
     opacity: 0;
   }
 
   .outer {
-    position: relative;
+    position: absolute;
     white-space: nowrap;
     left: 0;
     top: 0;
@@ -121,7 +121,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
   .inner {
     white-space: nowrap;
-    position: relative;
+    position: absolute;
     left: 0;
     top: 0;
     -webkit-text-stroke: 0.1em rgba(255, 255, 255, 1);
@@ -139,11 +139,11 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   //  animation: TextDelayShow 700ms ease-out forwards;
   //  opacity: 0;
   //  content:attr(data-text);
-  //  position: relative;
+  //  position: absolute;
   //}
 
   .TextBox_textElement_Settled {
-    position: relative;
+    position: absolute;
     @include text_shadow_textElement;
     opacity: 1;
   }
@@ -151,7 +151,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   //
   //.TextBox_textElement_Settled::before{
   //  content:attr(data-text);
-  //  position: relative;
+  //  position: absolute;
   //  opacity: 1;
   //  -webkit-text-stroke: 1px red;
   //  z-index: 1;
@@ -164,7 +164,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     //min-width: 25%;
     padding: 0 2em 0 2em;
     //margin: 0 0 0 0;
-    position: relative;
+    position: absolute;
     left: 150px;
     top: -68px;
     height: 80px;
@@ -197,7 +197,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   }
 
   .miniAvatarContainer {
-    position: relative;
+    position: absolute;
     height: 450px;
     width: 450px;
     bottom: 0;
@@ -209,19 +209,19 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   .miniAvatarImg {
     max-height: 100%;
     max-width: 100%;
-    position: relative;
+    position: absolute;
     bottom: 0;
     filter: drop-shadow(15px 0 3px rgba(0, 0, 0, 0.5));
   }
 
   .nameContainer {
-    position: relative;
+    position: absolute;
     left: 2em;
     top: -3.5em;
   }
 
   .outerName {
-    position: relative;
+    position: absolute;
     left: 0;
     top: 0;
     //background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgb(225, 237, 255) 100%);
@@ -239,7 +239,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   }
 
   .innerName {
-    position: relative;
+    position: absolute;
     left: 0;
     top: 0;
     //-webkit-text-stroke: 0.1em rgba(0, 0, 0, 0.25);
