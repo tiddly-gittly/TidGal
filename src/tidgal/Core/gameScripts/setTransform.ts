@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { generateTransformAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
+import { AnimationFrame, generateTransformAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
 import { generateTimelineObj } from 'src/tidgal/Core/controller/stage/pixi/animations/timeline';
 import { IAnimationObject } from 'src/tidgal/Core/controller/stage/pixi/PixiController';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
@@ -15,7 +15,7 @@ import { IUserAnimation } from '../Modules/animations';
  * @param sentence
  */
 export const setTransform = (sentence: ISentence): IPerform => {
-  const startDialogKey = getStage().currentDialogKey;
+  // const startDialogKey = getStage().currentDialogKey;
   const animationName = (Math.random() * 10).toString(16);
   const animationString = sentence.content;
   let animationObject: Array<
@@ -26,7 +26,7 @@ export const setTransform = (sentence: ISentence): IPerform => {
   const duration = getSentenceArgByKey(sentence, 'duration');
   const target = getSentenceArgByKey(sentence, 'target')?.toString() ?? '0';
   try {
-    const frame = JSON.parse(animationString);
+    const frame = JSON.parse(animationString) as AnimationFrame;
     animationObject = generateTransformAnimationObj(target, frame, duration);
   } catch {
     // 解析都错误了，歇逼吧
@@ -49,8 +49,8 @@ export const setTransform = (sentence: ISentence): IPerform => {
   }, 0);
   stopFunction = () => {
     setTimeout(() => {
-      const endDialogKey = getStage().currentDialogKey;
-      const isHasNext = startDialogKey !== endDialogKey;
+      // const endDialogKey = getStage().currentDialogKey;
+      // const isHasNext = startDialogKey !== endDialogKey;
       WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects(key);
     }, 0);
   };
@@ -75,7 +75,7 @@ function getAnimationObject(animationName: string, target: string, duration: num
       newEffect.duration = effect.duration;
       return newEffect;
     });
-    logger.log('装载自定义动画', mappedEffects);
+    logger.log('装载自定义动画', JSON.stringify(mappedEffects));
     return generateTimelineObj(mappedEffects, target, duration);
   }
   return null;

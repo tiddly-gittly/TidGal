@@ -143,7 +143,7 @@ export const scriptExecutor = () => {
       currentStageState,
       globalGameVar: getUserData().globalGameVar,
     };
-    logger.log('本条语句执行结果', allState);
+    logger.log('本条语句执行结果', currentScript.content, JSON.stringify(allState));
     // 保存 backlog
     if (isSaveBacklog) {
       // WebGAL.backlogManager.isSaveBacklogNext = true;

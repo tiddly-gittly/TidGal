@@ -145,7 +145,6 @@ export const intro = (sentence: ISentence): IPerform => {
    * 接受 next 事件
    */
   WebGAL.events.userInteractNext.on(toNextIntroElement);
-  // FIXME: 改为设置状态，然后 HTML 在 tid 里写
 
   const showIntro = introArray.map((textChar, i) => `
     <div

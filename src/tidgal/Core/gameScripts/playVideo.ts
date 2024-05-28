@@ -73,13 +73,13 @@ export const playVideo = (sentence: ISentence): IPerform => {
               /**
                * 恢复音量
                */
-              const bgmElement: any = getContainer()?.querySelector?.('#currentBgm');
+              const bgmElement = getContainer()?.querySelector<HTMLAudioElement>('#currentBgm');
               if (bgmElement) {
-                bgmElement.volume = bgmVol.toString();
+                bgmElement.volume = bgmVol;
               }
-              const vocalElement: any = getContainer()?.querySelector?.('#currentVocal');
-              if (bgmElement) {
-                vocalElement.volume = vocalVol.toString();
+              const vocalElement = getContainer()?.querySelector<HTMLAudioElement>('#currentVocal');
+              if (vocalElement) {
+                vocalElement.volume = vocalVol;
               }
               // FIXME: 改为设置状态，然后 HTML 在 tid 里写
               // ReactDOM.render(<div />, getContainer()?.querySelector?.('#videoContainer'));
@@ -97,13 +97,13 @@ export const playVideo = (sentence: ISentence): IPerform => {
            */
           const vocalVol2 = 0;
           const bgmVol2 = 0;
-          const bgmElement: any = getContainer()?.querySelector?.('#currentBgm');
+          const bgmElement = getContainer()?.querySelector<HTMLAudioElement>('#currentBgm');
           if (bgmElement) {
-            bgmElement.volume = bgmVol2.toString();
+            bgmElement.volume = bgmVol2;
           }
-          const vocalElement: any = getContainer()?.querySelector?.('#currentVocal');
-          if (bgmElement) {
-            vocalElement.volume = vocalVol2.toString();
+          const vocalElement = getContainer()?.querySelector<HTMLAudioElement>('#currentVocal');
+          if (vocalElement) {
+            vocalElement.volume = vocalVol2;
           }
 
           VocalControl?.play();

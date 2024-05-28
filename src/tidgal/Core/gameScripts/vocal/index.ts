@@ -27,9 +27,9 @@ export const playVocal = (sentence: ISentence) => {
   const lerpSpeed = 1;
 
   // 先停止之前的语音
-  const VocalControl: any = getContainer()?.querySelector?.('#currentVocal');
+  const VocalControl = getContainer()?.querySelector<HTMLAudioElement>('#currentVocal');
   WebGAL.gameplay.performController.unmountPerform('vocal-play', true);
-  if (VocalControl !== null) {
+  if (VocalControl) {
     VocalControl.currentTime = 0;
     VocalControl.pause();
   }
@@ -66,13 +66,13 @@ export const playVocal = (sentence: ISentence) => {
     arrangePerformPromise: new Promise((resolve) => {
       // 播放语音
       setTimeout(() => {
-        const VocalControl: any = getContainer()?.querySelector<HTMLAudioElement>?.('#currentVocal');
+        const VocalControl = getContainer()?.querySelector<HTMLAudioElement>('#currentVocal');
         // 设置语音音量
         typeof volume === 'number' && volume >= 0 && volume <= 100
           ? setStage({ key: 'vocalVolume', value: volume })
           : setStage({ key: 'vocalVolume', value: 100 });
         // 设置语音
-        if (VocalControl !== null) {
+        if (VocalControl) {
           VocalControl.currentTime = 0;
           // 播放并作为一个特别演出加入
           const perform = {

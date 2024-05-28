@@ -5,6 +5,7 @@ import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { getStage, setStage } from 'src/tidgal/store/stageReducer';
 import { textSize, voiceOption } from 'src/tidgal/store/userDataInterface';
+import { getUserData } from 'src/tidgal/store/userDataReducer';
 import { getTextDelay } from 'src/tidgal/utils/getTextDelay';
 import { playVocal } from './vocal';
 

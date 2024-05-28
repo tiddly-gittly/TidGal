@@ -5,6 +5,7 @@ import { generateUniversalSoftOffAnimationObj } from 'src/tidgal/Core/controller
 import { logger } from 'src/tidgal/Core/util/logger';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { baseTransform } from 'src/tidgal/store/stageInterface';
+import { getStage } from 'src/tidgal/store/stageReducer';
 
 export function getAnimationObject(animationName: string, target: string, duration: number) {
   const effect = WebGAL.animationManager.getAnimations().find((ani) => ani.name === animationName);
@@ -16,7 +17,7 @@ export function getAnimationObject(animationName: string, target: string, durati
       newEffect.duration = effect.duration;
       return newEffect;
     });
-    logger.log('装载自定义动画', mappedEffects);
+    logger.log('装载自定义动画', JSON.stringify(mappedEffects));
     return generateTimelineObj(mappedEffects, target, duration);
   }
   return null;

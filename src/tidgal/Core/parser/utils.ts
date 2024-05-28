@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
 import { commandType, ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 
@@ -7,25 +8,25 @@ import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
  */
 export type ScriptFunction = (sentence: ISentence) => IPerform;
 
-export interface ScriptConfig {
+export interface IScriptConfig {
   next?: boolean;
   scriptFunction: ScriptFunction;
   scriptType: commandType;
 }
 
-export interface IConfigInterface extends ScriptConfig {
+export interface IConfigInterface extends IScriptConfig {
   scriptString: string;
 }
 
 export function ScriptConfig(
   scriptType: commandType,
   scriptFunction: ScriptFunction,
-  config?: Omit<ScriptConfig, 'scriptType' | 'scriptFunction'>,
-): ScriptConfig {
+  config?: Omit<IScriptConfig, 'scriptType' | 'scriptFunction'>,
+): IScriptConfig {
   return { scriptType, scriptFunction, ...config };
 }
 
-export const scriptRegistry: Record<commandType, IConfigInterface> = {} as any;
+export const scriptRegistry = {} as Record<commandType, IConfigInterface>;
 
 export function defineScripts<R extends Record<string, Omit<IConfigInterface, 'scriptString'>>>(
   record: R,

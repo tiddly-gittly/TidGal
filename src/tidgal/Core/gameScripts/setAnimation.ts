@@ -12,12 +12,11 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
  * @param sentence
  */
 export const setAnimation = (sentence: ISentence): IPerform => {
-  const startDialogKey = getStage().currentDialogKey;
+  // const startDialogKey = getStage().currentDialogKey;
   const animationName = sentence.content;
   const animationDuration = getAnimateDuration(animationName);
   const target = (getSentenceArgByKey(sentence, 'target')?.toString() ?? 'default_id').toString();
   const key = `${target}-${animationName}-${animationDuration}`;
-  let stopFunction;
   setTimeout(() => {
     WebGAL.gameplay.pixiStage?.stopPresetAnimationOnTarget(target);
     const animationObject: IAnimationObject | null = getAnimationObject(animationName, target, animationDuration);
@@ -26,10 +25,10 @@ export const setAnimation = (sentence: ISentence): IPerform => {
       WebGAL.gameplay.pixiStage?.registerAnimation(animationObject, key, target);
     }
   }, 0);
-  stopFunction = () => {
+  const stopFunction = () => {
     setTimeout(() => {
-      const endDialogKey = getStage().currentDialogKey;
-      const isHasNext = startDialogKey !== endDialogKey;
+      // const endDialogKey = getStage().currentDialogKey;
+      // const isHasNext = startDialogKey !== endDialogKey;
       WebGAL.gameplay.pixiStage?.removeAnimationWithSetEffects(key);
     }, 0);
   };
