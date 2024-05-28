@@ -108,7 +108,7 @@ export default class PixiStage {
     app.renderer.view.id = 'pixiCanvas';
     // @ts-expect-error
     app.renderer.autoResize = true;
-    const appRoot = getContainer()?.querySelector?.('#root');
+    const appRoot = getContainer();
     if (appRoot) {
       app.renderer.resize(appRoot.clientWidth, appRoot.clientHeight);
     }

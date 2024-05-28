@@ -42,6 +42,7 @@ class GalGameWidget extends Widget {
     this.parentDomNode = parent;
     this.computeAttributes();
     this.execute();
+    const id = this.getAttribute('id', 'default');
     const assetBase = this.getAttribute('assetBase');
     const width = this.getAttribute('width', '100%');
     const height = this.getAttribute('height', '400px');
@@ -55,7 +56,7 @@ class GalGameWidget extends Widget {
       return;
     }
     const containerElement = $tw.utils.domMaker('main', {
-      class: 'galgame-container',
+      class: `galgame-container galgame-container-${id}`,
       style: { width, height },
     }) as HTMLDivElement;
     this.containerElement = containerElement;
