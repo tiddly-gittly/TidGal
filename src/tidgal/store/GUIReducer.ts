@@ -10,7 +10,8 @@ import { IGuiState, MenuPanelTag, setAssetPayload, setVisibilityPayload } from '
 const initState: IGuiState = {
   showBacklog: false,
   showStarter: true,
-  showTitle: true,
+  // 在原版 WebGAL 中是 true，因为会先展示标题画面。在太微的微件里，因为是直接展示剧情，所以默认设为 false // TODO: 通过参数设置？
+  showTitle: false,
   showMenuPanel: false,
   showTextBox: true,
   showControls: true,
