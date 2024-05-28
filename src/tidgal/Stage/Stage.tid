@@ -4,7 +4,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/Stage
 \whitespace trim
 
 <div class="MainStage_main">
-  <div class="pixiContainer" />
+  <div id="pixiContainer" class="pixiContainer" />
   <div id="chooseContainer" class="chooseContainer" />
   {{$:/plugins/linonetwo/tidgal/Stage/FullScreenPerform/FullScreenPerform}}
   {{$:/plugins/linonetwo/tidgal/Stage/AudioContainer/AudioContainer}}

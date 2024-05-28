@@ -96,7 +96,7 @@ export default class PixiStage {
     // window.PIXIapp = this;
     // window.__PIXI_APP__ = app;
     // 清空原节点
-    const pixiContainer = getContainer()?.querySelector?.('#pixiContianer');
+    const pixiContainer = getContainer()?.querySelector?.('#pixiContainer');
     if (pixiContainer) {
       pixiContainer.innerHTML = '';
       pixiContainer.append(app.view);
