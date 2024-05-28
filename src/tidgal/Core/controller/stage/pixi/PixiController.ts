@@ -129,6 +129,8 @@ export default class PixiStage {
     this.backgroundContainer.zIndex = 0;
     app.stage.addChild(this.effectsContainer, this.figureContainer, this.backgroundContainer);
     this.currentApp = app;
+    // enable this for debugging with https://github.com/bfanger/pixi-inspector
+    // (globalThis as any).__PIXI_APP__ = app; // eslint-disable-line @typescript-eslint/no-unsafe-member-access
     // 每 5s 获取帧率，并且防 loader 死
     const update = () => {
       this.updateFps();
