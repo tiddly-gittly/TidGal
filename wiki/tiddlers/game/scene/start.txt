@@ -5,7 +5,7 @@ intro:你好|欢迎来到 WebGAL 的世界 -fontSize=medium -backgroundColor=rgb
 changeBg:bg.png -next;
 unlockCg:bg.png -name=良夜;
 changeFigure:stand.png -left -next;
-setAnimation:enter-from-left -target=fig-left -next;
+;setAnimation:enter-from-left -target=fig-left -next; 目前动画会导致报错，暂时难以排查
 WebGAL:欢迎使用 WebGAL！这是一款全新的网页端视觉小说引擎。 -v1.wav -fontSize=default;
 ;
 pixiPerform:snow;
