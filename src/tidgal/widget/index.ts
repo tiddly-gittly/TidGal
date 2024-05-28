@@ -81,13 +81,13 @@ class GalGameWidget extends Widget {
   }
 
   onStageStateChange() {
-    stageUpdated();
     this.stageState = getStage();
     onBgChange(this.stageState, this.prevStageState);
     onFigureChange(this.stageState, this.prevStageState);
     setStageObjectEffects(this.stageState, this.prevStageState);
     // update prev state after we finish using it.
     this.setPrevState();
+    stageUpdated();
   }
 
   async loadGameAndStart(assetBase: string) {
