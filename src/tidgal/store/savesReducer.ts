@@ -17,16 +17,25 @@ interface SaveAction {
   saveData: ISaveData;
 }
 
-// Helper function to get save data
+let localState: ISavesData | undefined;
+/** tw only update in next tick, so in this tick we set/get in local state, until next tick */
+export const savesUpdated = () => {
+  setTimeout(() => {
+    localState = undefined;
+  }, 0);
+};
 export const getSaveData = () => {
   const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
-  return $tw.wiki.getTiddlerData(saveDataTiddler, initState as ISavesData & Record<string, any>);
+  const prevState = localState ?? $tw.wiki.getTiddlerData(saveDataTiddler, initState as ISavesData & Record<string, any>);
+  if (localState === undefined) localState = prevState;
+  return prevState;
 };
 
 // Helper function to set save data
 export const setSaveData = (newState: ISavesData) => {
   const saveDataTiddler = '$:/temp/tidgal/default/SaveData';
-  $tw.wiki.addTiddler({ title: saveDataTiddler, text: JSON.stringify(newState) });
+  localState = newState;
+  $tw.wiki.addTiddler({ title: saveDataTiddler, text: JSON.stringify(localState) });
 };
 
 interface SaveAction {

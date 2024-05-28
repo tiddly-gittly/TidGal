@@ -27,14 +27,23 @@ const initState: IGuiState = {
   isShowLogo: true,
 };
 
+let localState: IGuiState | undefined;
+export const guiUpdated = () => {
+  setTimeout(() => {
+    localState = undefined;
+  }, 0);
+};
 export const getGuiState = () => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
-  return $tw.wiki.getTiddlerData(guiStateTiddler, initState as IGuiState & Record<string, any>);
+  const prevState = localState ?? $tw.wiki.getTiddlerData(guiStateTiddler, initState as IGuiState & Record<string, any>);
+  if (localState === undefined) localState = prevState;
+  return prevState;
 };
 
 export const setGuiState = (newState: IGuiState) => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
-  $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(newState) });
+  localState = newState;
+  $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(localState) });
 };
 
 /**

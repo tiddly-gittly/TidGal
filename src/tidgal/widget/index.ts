@@ -6,8 +6,11 @@ import { initializeScript } from '../Core/initializeScript';
 import { onBgChange } from '../Stage/MainStage/useSetBg';
 import { setStageObjectEffects } from '../Stage/MainStage/useSetEffects';
 import { onFigureChange } from '../Stage/MainStage/useSetFigure';
+import { guiUpdated } from '../store/GUIReducer';
+import { savesUpdated } from '../store/savesReducer';
 import { IStageState } from '../store/stageInterface';
-import { initStageState } from '../store/stageReducer';
+import { getStage, initStageState, stageUpdated } from '../store/stageReducer';
+import { userDataUpdated } from '../store/userDataReducer';
 
 class GalGameWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers) {
@@ -15,9 +18,22 @@ class GalGameWidget extends Widget {
       this.onStageStateChange();
       return this.refreshChildren(changedTiddlers);
     }
-    if (changedTiddlers['$:/temp/tidgal/default/GuiState'] || changedTiddlers['$:/temp/tidgal/default/UserData'] || changedTiddlers['$:/temp/tidgal/default/SaveData']) {
+    // if (changedTiddlers['$:/temp/tidgal/default/GuiState'] || changedTiddlers['$:/temp/tidgal/default/UserData'] || changedTiddlers['$:/temp/tidgal/default/SaveData']) {
+    //   return this.refreshChildren(changedTiddlers);
+    // }
+    if (changedTiddlers['$:/temp/tidgal/default/GuiState']) {
+      guiUpdated();
       return this.refreshChildren(changedTiddlers);
     }
+    if (changedTiddlers['$:/temp/tidgal/default/UserData']) {
+      userDataUpdated();
+      return this.refreshChildren(changedTiddlers);
+    }
+    if (changedTiddlers['$:/temp/tidgal/default/SaveData']) {
+      savesUpdated();
+      return this.refreshChildren(changedTiddlers);
+    }
+
     return false;
   }
 
@@ -65,10 +81,12 @@ class GalGameWidget extends Widget {
   }
 
   onStageStateChange() {
-    this.stageState = $tw.wiki.getTiddlerData('$:/temp/tidgal/default/StageState', initStageState as unknown as Record<any, unknown>) as unknown as IStageState;
+    stageUpdated();
+    this.stageState = getStage();
     onBgChange(this.stageState, this.prevStageState);
     onFigureChange(this.stageState, this.prevStageState);
     setStageObjectEffects(this.stageState, this.prevStageState);
+    // update prev state after we finish using it.
     this.setPrevState();
   }
 

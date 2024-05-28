@@ -44,9 +44,18 @@ export const initState: IUserData = {
   },
 };
 
+let localState: IUserData | undefined;
+/** tw only update in next tick, so in this tick we set/get in local state, until next tick */
+export const userDataUpdated = () => {
+  setTimeout(() => {
+    localState = undefined;
+  }, 0);
+};
 export const getUserData = () => {
   const userDataTiddler = '$:/temp/tidgal/default/UserData';
-  return $tw.wiki.getTiddlerData(userDataTiddler, initState as IUserData & Record<string, any>);
+  const prevState = localState ?? $tw.wiki.getTiddlerData(userDataTiddler, initState as IUserData & Record<string, any>);
+  if (localState === undefined) localState = prevState;
+  return prevState;
 };
 
 /**
@@ -55,7 +64,8 @@ export const getUserData = () => {
  */
 export const setUserData = (newState: IUserData) => {
   const userDataTiddler = '$:/temp/tidgal/default/UserData';
-  $tw.wiki.addTiddler({ title: userDataTiddler, text: JSON.stringify(newState) });
+  localState = newState;
+  $tw.wiki.addTiddler({ title: userDataTiddler, text: JSON.stringify(localState) });
 };
 
 /**

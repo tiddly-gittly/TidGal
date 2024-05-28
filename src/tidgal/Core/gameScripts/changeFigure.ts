@@ -1,11 +1,12 @@
 import { ISentence } from 'src/tidgal/Core/controller/scene/sceneInterface';
-import { generateTransformAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
+import { AnimationFrame, generateTransformAnimationObj } from 'src/tidgal/Core/controller/stage/pixi/animations/generateTransformAnimationObj';
 import { getAnimateDuration } from 'src/tidgal/Core/Modules/animationFunctions';
 import { IUserAnimation } from 'src/tidgal/Core/Modules/animations';
 import { IPerform } from 'src/tidgal/Core/Modules/perform/performInterface';
 import { assetSetter, fileType } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 import { getSentenceArgByKey } from 'src/tidgal/Core/util/getSentenceArg';
 import { WebGAL } from 'src/tidgal/Core/WebGAL';
+import { IFreeFigure, IStageState, ITransform } from 'src/tidgal/store/stageInterface';
 import { getStage, setStage, stageActions } from 'src/tidgal/store/stageReducer';
 /**
  * 更改立绘
@@ -168,9 +169,8 @@ export function changeFigure(sentence: ISentence): IPerform {
       }
     >;
     if (transformString) {
-      console.log(transformString);
       try {
-        const frame = JSON.parse(transformString.toString());
+        const frame = JSON.parse(transformString.toString()) as AnimationFrame;
         animationObject = generateTransformAnimationObj(key, frame, duration);
         // 因为是切换，必须把一开始的 alpha 改为 0
         animationObject[0].alpha = 0;
