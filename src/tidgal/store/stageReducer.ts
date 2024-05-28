@@ -53,9 +53,7 @@ const stageTempTiddler = '$:/temp/tidgal/default/StageState';
 let localState: IStageState | undefined;
 /** tw only update in next tick, so in this tick we set/get in local state, until next tick */
 export const stageUpdated = () => {
-  setTimeout(() => {
-    localState = undefined;
-  }, 0);
+  localState = undefined;
 };
 /**
  * 创建舞台的状态管理
@@ -66,10 +64,10 @@ export function setStage(param: ISetStagePayload | Partial<IStageState>) {
   if ('key' in param && 'value' in param) {
     const { key, value } = param;
     localState = { ...prevState, [key]: value } satisfies IStageState;
-    $tw.wiki.addTiddler({ title: stageTempTiddler, text: JSON.stringify(localState) });
+    $tw.wiki.addTiddler({ title: stageTempTiddler, text: JSON.stringify(localState), type: 'application/json' });
   } else {
     localState = { ...prevState, ...param } satisfies IStageState;
-    $tw.wiki.addTiddler({ title: stageTempTiddler, text: JSON.stringify(localState) });
+    $tw.wiki.addTiddler({ title: stageTempTiddler, text: JSON.stringify(localState), type: 'application/json' });
   }
 }
 

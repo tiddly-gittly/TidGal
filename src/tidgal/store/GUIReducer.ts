@@ -29,9 +29,7 @@ const initState: IGuiState = {
 
 let localState: IGuiState | undefined;
 export const guiUpdated = () => {
-  setTimeout(() => {
-    localState = undefined;
-  }, 0);
+  localState = undefined;
 };
 export const getGuiState = () => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
@@ -43,7 +41,7 @@ export const getGuiState = () => {
 export const setGuiState = (newState: IGuiState) => {
   const guiStateTiddler = '$:/temp/tidgal/default/GuiState';
   localState = newState;
-  $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(localState) });
+  $tw.wiki.addTiddler({ title: guiStateTiddler, text: JSON.stringify(localState), type: 'application/json' });
 };
 
 /**
