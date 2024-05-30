@@ -76,7 +76,11 @@ export function getBase64URL(urlOrTiddlerTitle: string): string {
   if (urlOrTiddlerTitle.startsWith('http')) {
     return urlOrTiddlerTitle;
   } else {
+    // DEBUG: console urlOrTiddlerTitle
+    console.log(`urlOrTiddlerTitle`, urlOrTiddlerTitle);
     const base64Data = $tw.wiki.getTiddlerText(urlOrTiddlerTitle);
+    // DEBUG: console base64Data
+    console.log(`base64Data`, base64Data);
     if (base64Data) {
       return `data:image/png;base64,${base64Data}`;
     }
