@@ -3,33 +3,36 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 \rules except horizrule dash italic
 \whitespace trim
 
+
 <!-- 参考 TextBox.tsx 里的 compileSentence 方法，拆行。暂时不支持注音用法（复用 markdown 链接语法的，https://github.com/OpenWebGAL/WebGAL/discussions/498） -->
-<$list filter="[{$:/temp/tidgal/default/StageState##showText}split[|]]" counter="counter" variable="currentLine">
-  <div class="TextBox_Container">
+<div class="TextBox_Container">
+  <$list filter="[{$:/temp/tidgal/default/StageState##showText}split[|]]" counter="counter" variable="currentLine">
     <div
       class="TextBox_main TextBox_Background"
-      style=`opacity: ${[{$:/temp/tidgal/default/UserData##textboxOpacity}divide[100]]}; left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}match[true]then[25]else[]]};`
-    />
-    <div id="textBoxMain" class="TextBox_main" style=`left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}match[true]then[25]else[]]};`>
+      style=`opacity: ${[{$:/temp/tidgal/default/UserData}jsonget[optionData],[textboxOpacity]divide[100]]}$; left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$; display: ${[<currentLine>match[]then[none]else[]]}$`
+    >
+      <<currentLine>>
+    </div>
+    <div id="textBoxMain" class="TextBox_main" style=`left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$;`>
       <div id="miniAvatar" class="miniAvatarContainer">
-        <% if [{$:/temp/tidgal/default/StageState##miniAvatar}!match[]] %>
-          <$image source={{$:/temp/tidgal/default/StageState##miniAvatar}} alt="miniAvatar" class="miniAvatarImg"> 
-        <% endif %>
+        <$list filter="[{$:/temp/tidgal/default/StageState##miniAvatar}]" variable="miniAvatar">
+          <$image source=<<miniAvatar>> alt="miniAvatar" class="miniAvatarImg" /> 
+        </$list>
       </div>
-      <% if [{$:/temp/tidgal/default/StageState##showName}!match[]] %>
-        <!-- // TODO: 这里分为 innerName 和 outerName，现只保留一半，待补上 -->
+      <!-- TODO: 这里分为 innerName 和 outerName，现只保留一半，待补上 -->
+      <!-- TODO: 这里去掉了拆字的逻辑，待补上 -->
+      <$list filter="[{$:/temp/tidgal/default/StageState##showName}]" variable="name">
         <div class="TextBox_showName" style="font-size: 200%;">
-          <!-- // TODO: 这里去掉了拆字的逻辑，待补上 -->
-          {{$:/temp/tidgal/default/StageState##showName}}
+          <<name>>
         </div>
-      <% endif %>
-      <div class="text" style="font-size: $(fontSize); flex-flow: column; overflow: hidden; padding-left: 0.1em;">
-        <!-- // TODO: 没有逐字播放的简易版文本框，逐字播放待实现 -->
-        {{$:/temp/tidgal/default/StageState##showText}}
+      </$list>
+      <div class="TextBox_text" style="font-size: $(fontSize); flex-flow: column; overflow: hidden; padding-left: 0.1em;">
+        <!-- TODO: 没有逐字播放的简易版文本框，逐字播放待实现 -->
+        <<currentLine>>
       </div>
     </div>
-  </div>
-</$list>
+  </$list>
+</div>
 
 <style>
   .TextBox_EventHandler {
@@ -39,12 +42,6 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     z-index: 6;
     top: 0;
   }
-
-  @mixin text_shadow_textElement {
-    //text-shadow: 0 0 3px rgba(81,168,221,1);
-  }
-
-  $height: 330px;
 
   .TextBox_Container {
     position: absolute;
@@ -57,13 +54,13 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
   .TextBox_main {
     z-index: 3;
     position: absolute;
-    right: 25px;
-    min-height: $height;
-    max-height: $height;
+    min-height: 50px;
+    max-height: 330px;
     background-blend-mode: darken;
-    border-radius: calc($height / 2) 20px 20px calc($height / 2);
+    border-radius: 20px;
     bottom: 20px;
-    left: 275px;
+    //right: 25px;
+    left: 30px;
     font-weight: bold;
     color: white;
     padding: 1em 50px 70px 200px;
@@ -77,7 +74,8 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
   .TextBox_Background {
     z-index: 2;
-    background: linear-gradient(rgba(245, 247, 250, 1) 0%, rgba(189, 198, 222, 1) 100%);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.25) 25%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.6)), linear-gradient(90deg, transparent 0px, rgba(0, 0, 0, 0.35) 25%, rgba(0, 0, 0, 0.35) 75%, transparent);
+    color: transparent;
   }
 
   @keyframes showSoftly {
@@ -89,11 +87,6 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
       opacity: 1;
     }
   }
-
-  //.TextBox_textElement {
-  //  opacity: 0;
-  //  animation: showSoftly 1000ms forwards;
-  //}
 
 
   .TextBox_textElement_start {
@@ -108,11 +101,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     white-space: nowrap;
     left: 0;
     top: 0;
-    //background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgb(225, 237, 255) 100%);
-    background-image: linear-gradient(#0B346E 0%,
-      //#f5f7fa 45%,
-      #141423 100%);
-    //background: rgba(255, 255, 255, 1);
+    background-image: linear-gradient(#0B346E 0%, #141423 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -126,7 +115,6 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     top: 0;
     -webkit-text-stroke: 0.1em rgba(255, 255, 255, 1);
     z-index: 1;
-    //text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
   }
 
   .zhanwei {
@@ -134,47 +122,22 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     white-space: nowrap;
   }
 
-  //
-  //.TextBox_textElement_start::before{
-  //  animation: TextDelayShow 700ms ease-out forwards;
-  //  opacity: 0;
-  //  content:attr(data-text);
-  //  position: absolute;
-  //}
-
   .TextBox_textElement_Settled {
     position: absolute;
     @include text_shadow_textElement;
     opacity: 1;
   }
 
-  //
-  //.TextBox_textElement_Settled::before{
-  //  content:attr(data-text);
-  //  position: absolute;
-  //  opacity: 1;
-  //  -webkit-text-stroke: 1px red;
-  //  z-index: 1;
-  //}
-
   .TextBox_showName {
     @include text_shadow_textElement;
     font-size: 85%;
-    //border-bottom: 3px solid rgb(176, 176, 176);
-    //min-width: 25%;
     padding: 0 2em 0 2em;
-    //margin: 0 0 0 0;
     position: absolute;
     left: 150px;
     top: -68px;
     height: 80px;
     line-height: 68px;
-    //display: flex;
-    //align-items: center;
-    // background: rgba(11, 52, 110, 0.9);
     border-radius: 40px;
-    // border: 4px solid rgba(255, 255, 255, 0.75);
-    // box-shadow: 3px 3px 10px rgba(100, 100, 100, 0.5);
     z-index: 3;
     border: 4px solid rgba(255, 255, 255, 0);
   }
@@ -224,14 +187,7 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     position: absolute;
     left: 0;
     top: 0;
-    //background-image: linear-gradient(rgba(255, 255, 255, 1) 0%, rgb(225, 237, 255) 100%);
-    //background-image: linear-gradient(
-    //    #bfd8ff 0%,
-    //    //#f5f7fa 45%,
-    //    #bfbfc7 100%
-    //);
     background: linear-gradient(150deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 35%, rgb(165, 212, 228) 100%);
-    //background: rgba(255, 255, 255, 1);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -242,13 +198,10 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
     position: absolute;
     left: 0;
     top: 0;
-    //-webkit-text-stroke: 0.1em rgba(0, 0, 0, 0.25);
-    //-webkit-text-stroke: 0.1em rgba(255, 255, 255, 1);
     z-index: 1;
-    //text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.75);
   }
 
-  .text {
+  .TextBox_text {
     line-height: 1.9em;
     overflow: hidden;
   }
