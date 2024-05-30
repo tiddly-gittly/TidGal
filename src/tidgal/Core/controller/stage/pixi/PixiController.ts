@@ -93,8 +93,8 @@ export default class PixiStage {
       preserveDrawingBuffer: true,
     });
     // window.PIXIapp = this;
-    // window.__PIXI_APP__ = app;
     // enable this for debugging with https://github.com/bfanger/pixi-inspector
+    // window.__PIXI_APP__ = app;
     // 清空原节点
     const pixiContainer = getContainer()?.querySelector?.('#pixiContainer');
     if (pixiContainer) {
