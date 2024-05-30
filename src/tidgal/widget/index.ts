@@ -3,6 +3,7 @@ import { IChangedTiddlers } from 'tiddlywiki';
 
 import { startGame } from '../Core/controller/gamePlay/startContinueGame';
 import { initializeScript } from '../Core/initializeScript';
+import { updateDisplayAreaWH } from '../Core/util/constants';
 import { onBgChange } from '../Stage/MainStage/useSetBg';
 import { setStageObjectEffects } from '../Stage/MainStage/useSetEffects';
 import { onFigureChange } from '../Stage/MainStage/useSetFigure';
@@ -98,6 +99,7 @@ class GalGameWidget extends Widget {
     }
     try {
       await initializeScript({ assetBase, container: this.containerElement });
+      updateDisplayAreaWH(this.containerElement);
       await startGame();
     } catch (error) {
       $tw.utils.error(error as Error);

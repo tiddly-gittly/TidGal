@@ -29,7 +29,7 @@ const pixicherryBlossoms = (cherryBlossomsSpeed: number) => {
   container.scale.x = 1;
   container.scale.y = 1;
   // container.rotation = -0.2;
-  const bunnyList: any = [];
+  const bunnyList: PIXI.Sprite[] = [];
   // アニメーションの更新を監視
   // 监听动画更新
   function tickerFunction(delta: number) {
