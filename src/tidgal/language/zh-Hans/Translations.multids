@@ -1,8 +1,8 @@
 title: $:/plugins/linonetwo/tidgal/language/zh-Hans/
 
-Name: 未命名插件
-Description: 未填描述
-Configs/Description: 通过这些设置，您可以自定义「未命名插件」插件的行为。
+Name: 太美
+Description: 在太微笔记系统里玩 GalGame（美少女恋爱游戏）！记你太美！
+Configs/Description: 通过这些设置，您可以自定义「太美」插件的行为。
 Configs/PluginConfigs/Caption: 插件设置
 Configs/XXX/Caption: 配置甲
 Configs/XXX/Description: 配置甲是甲

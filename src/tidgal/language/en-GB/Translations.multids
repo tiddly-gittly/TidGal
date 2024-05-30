@@ -1,8 +1,8 @@
 title: $:/plugins/linonetwo/tidgal/language/en-GB/
 
-Name: Unnamed Plugin
-Description: Unfilled Description
-Configs/Description: These settings let you customise the behaviour of "Unnamed Plugin" plugin.
+Name: TidGAL
+Description: Play GalGame (Girl And Love) on your note system!
+Configs/Description: These settings let you customise the behaviour of "TidGAL" plugin.
 Configs/PluginConfigs/Caption: Plugin Configs
 Configs/XXX/Caption: XXX
 Configs/XXX/Description: XXX is XXX
