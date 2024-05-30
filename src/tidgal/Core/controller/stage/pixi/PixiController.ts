@@ -413,10 +413,6 @@ export default class PixiStage {
            */
           const originalWidth = texture.width;
           const originalHeight = texture.height;
-          // DEBUG: console SCREEN_CONSTANTS.width / originalWidth, SCREEN_CONSTANTS.width / originalWidth
-          console.log(`SCREEN_CONSTANTS.width / originalWidth, SCREEN_CONSTANTS.width, originalWidth`, SCREEN_CONSTANTS.width / originalWidth, SCREEN_CONSTANTS.width, originalWidth);
-          // DEBUG: console SCREEN_CONSTANTS.height / originalHeight, SCREEN_CONSTANTS.height / originalHeight
-          console.log(`SCREEN_CONSTANTS.height / originalHeight, SCREEN_CONSTANTS.height, originalHeight`, SCREEN_CONSTANTS.height / originalHeight, SCREEN_CONSTANTS.height, originalHeight);
           const scaleX = SCREEN_CONSTANTS.width / originalWidth;
           const scaleY = SCREEN_CONSTANTS.height / originalHeight;
           const targetScale = Math.max(scaleX, scaleY);
