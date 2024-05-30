@@ -78,7 +78,13 @@ export function getBase64URL(urlOrTiddlerTitle: string): string {
   } else {
     // DEBUG: console urlOrTiddlerTitle
     console.log(`urlOrTiddlerTitle`, urlOrTiddlerTitle);
-    const base64Data = $tw.wiki.getTiddlerText(urlOrTiddlerTitle);
+    const tiddler = $tw.wiki.getTiddler(urlOrTiddlerTitle);
+    if (tiddler?.fields?._canonical_uri) {
+      // DEBUG: console tiddler.fields._canonical_uri
+      console.log(`tiddler.fields._canonical_uri`, tiddler.fields._canonical_uri);
+      return tiddler.fields._canonical_uri as string;
+    }
+    const base64Data = tiddler?.fields?.text;
     // DEBUG: console base64Data
     console.log(`base64Data`, base64Data);
     if (base64Data) {
