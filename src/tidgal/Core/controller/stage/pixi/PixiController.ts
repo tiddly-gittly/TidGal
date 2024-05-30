@@ -12,7 +12,7 @@ import 'pixi-spine'; // Do this once at the very start of your code. This regist
 import { Spine } from 'pixi-spine';
 import { SCREEN_CONSTANTS } from 'src/tidgal/Core/util/constants';
 import { getContainer } from 'src/tidgal/Core/util/coreInitialFunction/container';
-import { createBase64UrlFromTiddler } from './textureFromTiddler';
+import { getBase64URL } from 'src/tidgal/Core/util/gameAssetsAccess/assetSetter';
 // import { figureCash } from 'src/tidgal/Core/gameScripts/vocal/conentsCash'; // 如果要使用 Live2D，取消这里的注释
 // import { Live2DModel, SoundManager } from 'pixi-live2d-display'; // 如果要使用 Live2D，取消这里的注释
 
@@ -909,7 +909,7 @@ export default class PixiStage {
                 });
               } else if ($tw.wiki.getTiddler(front.url)) {
                 // allow load base64 resource from tiddlywiki
-                const base64String = createBase64UrlFromTiddler(front.url);
+                const base64String = getBase64URL(front.url);
                 if (!base64String) return;
                 this.assetLoader.add(front.url, base64String).load(() => {
                   front.callback();
