@@ -12,6 +12,8 @@ import { savesUpdated } from '../store/savesReducer';
 import { IStageState } from '../store/stageInterface';
 import { getStage, initStageState, stageUpdated } from '../store/stageReducer';
 import { userDataUpdated } from '../store/userDataReducer';
+import { stopAll } from '../Core/controller/gamePlay/fastSkip';
+import { nextSentence } from '../Core/controller/gamePlay/nextSentence';
 
 class GalGameWidget extends Widget {
   refresh(changedTiddlers: IChangedTiddlers) {
@@ -65,7 +67,7 @@ class GalGameWidget extends Widget {
       document,
       parentWidget: this,
       recursionMarker: 'yes',
-      mode: 'block',
+      mode: 'inline',
       importPageMacros: true,
     });
     transcludeWidgetNode.render(containerElement, null);
@@ -97,6 +99,11 @@ class GalGameWidget extends Widget {
       $tw.utils.error('No container element in galgame widget!');
       return;
     }
+    this.addEventListener('click-next', () => {
+      stopAll();
+      nextSentence();
+      return false;
+    });
     try {
       await initializeScript({ assetBase, container: this.containerElement });
       updateDisplayAreaWH(this.containerElement);
