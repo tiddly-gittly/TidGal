@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /**
  * @file 资源的引入可能是绝对链接，也可能是文件名，必须做必要的处理。
  */
 
+import { logger } from 'src/tidgal/Core/util/logger';
 import type { IInitializeScriptOptions } from '../../initializeScript';
 
 /**
@@ -77,12 +79,16 @@ export function getBase64URL(urlOrTiddlerTitle: string): string {
     return urlOrTiddlerTitle;
   } else {
     const tiddler = $tw.wiki.getTiddler(urlOrTiddlerTitle);
-    if (tiddler?.fields?._canonical_uri) {
-      return tiddler.fields._canonical_uri as string;
+    const _canonical_uri = tiddler?.fields?._canonical_uri as string | undefined;
+    if (_canonical_uri) {
+      logger.log(`Lazy-loading tiddler from ${_canonical_uri}`);
+      return _canonical_uri;
     }
     const base64Data = tiddler?.fields?.text;
     if (base64Data) {
-      return `data:${tiddler?.fields?.type ?? 'image/png'};base64,${base64Data}`;
+      const tiddlerType = tiddler?.fields?.type;
+      logger.log(`Loading base64 string from ${urlOrTiddlerTitle} with type ${tiddlerType || '(fallback to image/png)'}`);
+      return `data:${tiddlerType || 'image/png'};base64,${base64Data}`;
     }
     return '';
   }
