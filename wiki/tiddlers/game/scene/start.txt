@@ -9,3 +9,4 @@ changeFigure:stand.png -left -next;
 WebGAL:欢迎使用 WebGAL！这是一款全新的网页端视觉小说引擎。 -v1.wav -fontSize=default;
 ;
 pixiPerform:snow;
+WebGAL:这是太微（Tiddlywiki）笔记系统里的WebGAL启动器|可以执行 v4.5.1 版本拥有的部分功能……

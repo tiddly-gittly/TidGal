@@ -6,32 +6,36 @@ title: $:/plugins/linonetwo/tidgal/Stage/TextBox/TextBoxSimple
 
 <!-- 参考 TextBox.tsx 里的 compileSentence 方法，拆行。暂时不支持注音用法（复用 markdown 链接语法的，https://github.com/OpenWebGAL/WebGAL/discussions/498） -->
 <div class="TextBox_Container">
-  <$list filter="[{$:/temp/tidgal/default/StageState##showText}split[|]]" counter="counter" variable="currentLine">
-    <div
-      class="TextBox_main TextBox_Background"
-      style=`opacity: ${[{$:/temp/tidgal/default/UserData}jsonget[optionData],[textboxOpacity]divide[100]]}$; left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$; display: ${[<currentLine>match[]then[none]else[]]}$`
-    >
+  <div
+    class="TextBox_main TextBox_Background"
+    style=`opacity: ${[{$:/temp/tidgal/default/UserData}jsonget[optionData],[textboxOpacity]divide[100]]}$; left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$; display: ${[{$:/temp/tidgal/default/StageState##showText}match[]then[none]else[]]}$`
+  >
+    <$list filter="[{$:/temp/tidgal/default/StageState##showText}split[|]]" counter="counter" variable="currentLine">
+      
       <<currentLine>>
-    </div>
-    <div id="textBoxMain" class="TextBox_main" style=`left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$;`>
-      <div id="miniAvatar" class="miniAvatarContainer">
-        <$list filter="[{$:/temp/tidgal/default/StageState##miniAvatar}]" variable="miniAvatar">
-          <$image source=<<miniAvatar>> alt="miniAvatar" class="miniAvatarImg" /> 
-        </$list>
-      </div>
-      <!-- TODO: 这里分为 innerName 和 outerName，现只保留一半，待补上 -->
-      <!-- TODO: 这里去掉了拆字的逻辑，待补上 -->
-      <$list filter="[{$:/temp/tidgal/default/StageState##showName}]" variable="name">
-        <div class="TextBox_showName" style="font-size: 200%;">
-          <<name>>
-        </div>
+    
+    </$list>
+  </div>
+  <div id="textBoxMain" class="TextBox_main" style=`left: ${[{$:/temp/tidgal/default/StageState##miniAvatar}!match[]then[25]else[]]}$;`>
+    <div id="miniAvatar" class="miniAvatarContainer">
+      <$list filter="[{$:/temp/tidgal/default/StageState##miniAvatar}]" variable="miniAvatar">
+        <$image source=<<miniAvatar>> alt="miniAvatar" class="miniAvatarImg" /> 
       </$list>
+    </div>
+    <!-- TODO: 这里分为 innerName 和 outerName，现只保留一半，待补上 -->
+    <!-- TODO: 这里去掉了拆字的逻辑，待补上 -->
+    <$list filter="[{$:/temp/tidgal/default/StageState##showName}]" variable="name">
+      <div class="TextBox_showName" style="font-size: 200%;">
+        <<name>>
+      </div>
+    </$list>
+    <$list filter="[{$:/temp/tidgal/default/StageState##showText}split[|]]" counter="counter" variable="currentLine">
       <div class="TextBox_text" style="font-size: $(fontSize); flex-flow: column; overflow: hidden; padding-left: 0.1em;">
         <!-- TODO: 没有逐字播放的简易版文本框，逐字播放待实现 -->
         <<currentLine>>
       </div>
-    </div>
-  </$list>
+    </$list>
+  </div>
 </div>
 
 <style>
