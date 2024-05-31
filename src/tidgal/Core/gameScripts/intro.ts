@@ -7,6 +7,7 @@ import { WebGAL } from 'src/tidgal/Core/WebGAL';
 import { IPerform } from '../Modules/perform/performInterface';
 import { getContainer } from '../util/coreInitialFunction/container';
 import { objectToInlineStyle } from '../util/css';
+import { withoutTextNode } from '../util/withoutTextNode';
 /**
  * 显示一小段黑屏演示
  * @param sentence
@@ -108,9 +109,9 @@ export const intro = (sentence: ISentence): IPerform => {
       isBlocking = false;
     }, baseDuration);
     if (introContainer) {
-      const children = introContainer.childNodes[0].childNodes[0].childNodes as unknown as HTMLDivElement[];
+      const children = withoutTextNode(withoutTextNode(introContainer.childNodes)[0].childNodes)[0].childNodes as unknown as HTMLDivElement[];
       const len = children.length;
-      children.forEach((node: HTMLDivElement, index: number) => {
+      withoutTextNode(children).forEach((node: HTMLDivElement, index: number) => {
         // 当前语句的延迟显示时间
         const currentDelay = Number(node.style.animationDelay.split('ms')[0]);
         // 当前语句还没有显示，降低显示延迟，因为现在时间因为用户操作，相当于向前推进了
