@@ -1,7 +1,7 @@
 {
   "title": "$:/plugins/linonetwo/tidgal",
-  "author": "Your Name",
-  "description": "Description of this plugin",
+  "author": "LinOnetwo",
+  "description": "Play GalGame (Girl And Love) on your note system! 在太微笔记系统里玩 GalGame（美少女恋爱游戏）！记你太美！",
   "core-version": ">=5.1.22",
   "plugin-type": "plugin",
   "version": "0.0.1",
