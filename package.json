@@ -71,7 +71,8 @@
   },
   "pnpm": {
     "overrides": {
-      "@pixi/mesh-extras": "6.5.10"
+      "@pixi/mesh-extras": "6.5.10",
+      "esbuild-plugin-browserslist": "1.0.2"
     }
   }
 }
