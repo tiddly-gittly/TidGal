@@ -64,14 +64,15 @@
     "pixi-spine": "^3.1.2",
     "pixi.js": "^6.3.0",
     "popmotion": "^11.0.5",
-    "tiddlywiki": "^5.3.3",
-    "tiddlywiki-plugin-dev": "^0.2.1",
+    "tiddlywiki": "^5.3.8",
+    "tiddlywiki-plugin-dev": "^0.4.4",
     "uuid": "^9.0.1",
     "webgal-parser": "^4.4.15"
   },
   "pnpm": {
     "overrides": {
-      "@pixi/mesh-extras": "6.5.10"
+      "@pixi/mesh-extras": "6.5.10",
+      "esbuild-plugin-browserslist": "1.0.2"
     }
   }
 }
