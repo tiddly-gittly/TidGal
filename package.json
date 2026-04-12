@@ -10,7 +10,7 @@
     "publish": "npm run clean && tiddlywiki-plugin-dev publish",
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
-    "prepare": "husky install",
+    "prepare": "husky",
     "update": "npm-check-updates -u",
     "new": "tiddlywiki-plugin-dev new",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
@@ -65,7 +65,7 @@
     "pixi.js": "^6.3.0",
     "popmotion": "^11.0.5",
     "tiddlywiki": "^5.3.8",
-    "tiddlywiki-plugin-dev": "^0.4.4",
+    "tiddlywiki-plugin-dev": "^0.5.3",
     "uuid": "^9.0.1",
     "webgal-parser": "^4.4.15"
   },
